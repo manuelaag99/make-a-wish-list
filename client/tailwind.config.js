@@ -8,7 +8,8 @@ export default {
     extend: {
       backgroundColor: {
         "var-1": "#E1FFE4",
-        "var-2": "#FF5372"
+        "var-2": "#FF5372",
+        "var-2-hovered": "#FF7594"
       },
       width: {
         "1/10": "10%",

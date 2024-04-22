@@ -8,7 +8,14 @@ export default function App() {
       <div className='flex w-full fixed bg-var-2 shadow-2xl h-20 top-0 '></div>
       <div className='flex flex-row justify-between w-6/10 h-fit p-10'>
         <SmallCard />
-        <LargeCard />
+        <div className='flex flex-col w-6/10 justify-center'>
+          <LargeCard />
+          <div className='flex justify-center w-full bg-var-2 hover:bg-var-2-hovered h-fit py-3 cursor-pointer rounded-md shadow-2xl'>
+            <p className='text-center text-white font-bold concert-font'>
+              Agregar
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   )
