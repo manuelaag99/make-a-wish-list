@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='flex w-screen h-screen justify-center items-center bg-var-1'>
+      <div className='flex w-full fixed bg-var-2 shadow-2xl h-20 top-0 '></div>
+      <div className='flex flex-row justify-between w-6/10 h-fit p-10'>
+        <div className='flex flex-col w-3/10 bg-white h-fit p-10 shadow-2xl rounded-md'>
+
+        </div>
+        <div className='flex flex-col w-6/10 bg-white h-fit shadow-2xl rounded-md'>
+          <div className='flex flex-row w-full justify-center'>
+            <button className='flex w-1/2 h-fit py-4 justify-center'>
+              <p className='text-center'>
+                Publicaciones
+              </p>
+            </button>
+            <button className='flex w-1/2 h-fit py-4 justify-center'>
+              <p className='text-center'>
+                Listas
+              </p>
+            </button>
+          </div>
+          <div className='flex flex-col w-full'>
+
+          </div>
+          <div className='flex flex-col w-full'>
+
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
-
-export default App
