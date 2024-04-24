@@ -4,9 +4,9 @@ import SmallCard from './Components/SmallCard'
 
 export default function App() {
   return (
-    <div className='flex w-screen h-screen justify-center items-center bg-var-1'>
+    <div className='flex w-screen h-screen justify-center items-center bg-var-1 inter-font'>
       <div className='flex w-full fixed bg-var-2 shadow-2xl h-20 top-0 '></div>
-      <div className='flex flex-row justify-between w-6/10 h-fit p-10'>
+      <div className='flex flex-row justify-between items-start w-6/10 h-fit p-10'>
         <SmallCard />
         <div className='flex flex-col w-6/10 justify-center'>
           <LargeCard />

@@ -1,6 +1,6 @@
 export default function LargeCard ({}) {
     return (
-        <div className='flex flex-col w-full bg-white h-fit shadow-2xl rounded-md pb-8 '>
+        <div className='flex flex-col items-start w-full bg-white h-fit shadow-2xl rounded-md pb-8 '>
           <div className='flex flex-row w-full justify-center'>
             <div className='flex w-1/2 bg-white hover:bg-gray-300 duration-200 h-fit py-4 justify-center rounded-tl-md cursor-pointer'>
               <p className='text-center font-bold concert-font'>
