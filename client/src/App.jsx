@@ -10,8 +10,8 @@ export default function App() {
         <SmallCard />
         <div className='flex flex-col w-full sm:w-6/10 justify-center mt-5 sm:mt-0'>
           <LargeCard />
-          <div className='flex justify-center w-full bg-var-2 hover:bg-var-2-hovered h-fit py-3 cursor-pointer rounded-md shadow-2xl'>
-            <p className='text-center text-white font-bold concert-font'>
+          <div className='flex justify-center w-full bg-var-2 hover:bg-var-2-hovered h-fit py-3 cursor-pointer rounded-md shadow-2xl mt-5'>
+            <p className='text-center text-white font-bold concert-font overflow-hidden'>
               Agregar
             </p>
           </div>

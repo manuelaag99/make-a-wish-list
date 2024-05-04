@@ -6,12 +6,12 @@ export default function SmallCard ({}) {
             </div>
             <div className="flex flex-col w-full my-4">
                 <div className="flex w-full">
-                    <p className="text-left text-black font-bold">
+                    <p className="text-left text-black font-bold overflow-hidden">
                         Nombre de usuario
                     </p>
                 </div>
                 <div className="flex w-full">
-                    <p className="text-left text-black">
+                    <p className="text-left text-black overflow-hidden">
                         Biografía
                     </p>
                 </div>
