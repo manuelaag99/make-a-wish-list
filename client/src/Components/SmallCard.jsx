@@ -1,6 +1,6 @@
 export default function SmallCard ({}) {
     return (
-        <div className='flex flex-col w-35 justify-center items-start bg-white h-fit p-10 shadow-2xl rounded-md'>
+        <div className='flex flex-col w-full sm:w-35 justify-center items-start bg-white h-fit p-10 shadow-2xl rounded-md'>
             <div className="flex w-full aspect-square">
                 <img className="w-full" src="" alt="" />
             </div>
