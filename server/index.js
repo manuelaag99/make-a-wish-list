@@ -4,9 +4,11 @@ const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
 const port = process.env.PORT || 8000
 const app = express();
+const connectDB = require("./config/db")
 
 console.log(process.env.PORT)
 
+connectDB();
 // app.all("/graphql", createHandler({
 //     schema,
 //     graphiql: process.env.NODE_ENV === "development"
