@@ -1,6 +1,11 @@
 const { listItems, lists, posts, users } = require("../sampleData");
 const { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLString, GraphQLSchema } = require("graphql");
 
+const User = require("../models/User");
+const List = require("../models/List");
+const ListItem = require("../models/ListItem");
+const Post = require("../models/Post");
+
 // import { listItems, lists, posts, users } from "../sampleData";
 // import { GraphQLID, GraphQLList, GraphQLObjectType, GraphQLSchema, GraphQLString } from "graphql";
 
@@ -73,57 +78,66 @@ const RootQuery = new GraphQLObjectType({
         users: {
             type: new GraphQLList(UserType),
             resolve(parent, args) {
-                return users;
+                return User;
+                // return users;
             }
         },
         user: {
             type: UserType,
             args: { id: { type: GraphQLID }},
             resolve(parent, args) {
-                return users.find(user => user.id === args.id);
+                return User.findById(args.id);
+                // return users.find(user => user.id === args.id);
             }
         },
         lists: {
             type: new GraphQLList(ListType),
             resolve(parent, args) {
-                return lists;
+                return List;
+                // return lists;
             }
         },
         list: {
             type: ListType,
             args: { id: { type: GraphQLID }},
             resolve(parent, args) {
-                return lists.find(list => list.id === args.id);
+                return List.findById(args.id);
+                // return lists.find(list => list.id === args.id);
             }
         },
         listItems: {
             type: new GraphQLList(ListItemType),
             resolve(parent, args) {
-                return listItems;
+                return ListItem;
+                // return listItems;
             }
         },
         listItem: {
             type: ListItemType,
             args: { id: { type: GraphQLID }},
             resolve(parent, args) {
-                return listItems.find(listItem => listItem.id === args.id);
+                return ListItem.findById(args.id);
+                // return listItems.find(listItem => listItem.id === args.id);
             }
         },
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args) {
-                return posts;
+                return Post;
+                // return posts;
             }
         },
         post: {
             type: PostType,
             args: { id: { type: GraphQLID }},
             resolve(parent, args) {
-                return posts.find(listItem => listItem.id === args.id);
+                return Post.findById(args.id);
+                // return posts.find(listItem => listItem.id === args.id);
             }
         }
     }
 })
+
 
 // export default new GraphQLSchema({ query: RootQuery });
 module.exports = new GraphQLSchema({ query: RootQuery });
