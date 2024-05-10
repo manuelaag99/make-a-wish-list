@@ -1,5 +1,5 @@
 const { listItems, lists, posts, users } = require("../sampleData");
-const { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLString, GraphQLSchema } = require("graphql");
+const { GraphQLObjectType, GraphQLID, GraphQLList, GraphQLString, GraphQLSchema, GraphQLNonNull } = require("graphql");
 
 const User = require("../models/User");
 const List = require("../models/List");
@@ -29,6 +29,7 @@ const ListType = new GraphQLObjectType({
     fields: () => ({
         id: { type: GraphQLID },
         listName: { type: GraphQLString },
+        listDescription: { type: GraphQLString },
         creator: {
             type: UserType,
             resolve(parent, args) {
@@ -138,6 +139,36 @@ const RootQuery = new GraphQLObjectType({
     }
 })
 
+const mutation = new GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        addUser: {
+            type: UserType,
+            args: {
+                // id: { type: GraphQLNonNull(GraphQLString) },
+                displayName: { type: GraphQLNonNull(GraphQLString) },
+                username: { type: GraphQLNonNull(GraphQLString) },
+                email: { type: GraphQLNonNull(GraphQLString) },
+                password: { type: GraphQLNonNull(GraphQLString) },
+                creationDate: { type: GraphQLNonNull(GraphQLString) },
+                birthDate: { type: GraphQLNonNull(GraphQLString) }
+            },
+            resolve(parent, args) {
+                const user = new User({
+                    // id: args.id,
+                    displayName: args.displayName,
+                    username: args.username,
+                    email: args.email,
+                    password: args.password,
+                    creationDate: args.creationDate,
+                    birthDate: args.birthDate
+                })
+
+                return user.save();
+            }
+        }
+    }
+})
 
 // export default new GraphQLSchema({ query: RootQuery });
-module.exports = new GraphQLSchema({ query: RootQuery });
+module.exports = new GraphQLSchema({ query: RootQuery, mutation });

@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const ListSchema = new mongoose.Schema({
-    id: { 
+    listName: { 
         type: String
     },
-    listName: { 
+    listDescription: {
         type: String
     },
     creatorId: { 
