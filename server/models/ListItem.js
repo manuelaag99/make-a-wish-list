@@ -13,7 +13,7 @@ const ListItemSchema = new mongoose.Schema({
     itemPhotoUrl: {
         type: String
     },
-    list: {
+    listId: {
         type: mongoose.Schema.Types.ObjectId
     }
 })

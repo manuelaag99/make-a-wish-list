@@ -32,7 +32,7 @@ const ListType = new GraphQLObjectType({
         creator: {
             type: UserType,
             resolve(parent, args) {
-                return users.find(user => user.id === parent.creatorId);
+                return User.findById(parent.creatorId);
             }
         }
     })
@@ -49,7 +49,7 @@ const ListItemType = new GraphQLObjectType({
         list: {
             type: ListType,
             resolve(parent, args) {
-                return lists.find(list => list.id === parent.listId);
+                return List.findById(parent.listId);
             }
         }
     })
@@ -66,7 +66,7 @@ const PostType = new GraphQLObjectType({
         creator: {
             type: UserType,
             resolve(parent, args) {
-                return users.find(user => user.id === parent.creatorId);
+                return User.findById(parent.creatorId);
             }
         }
     })
@@ -78,7 +78,7 @@ const RootQuery = new GraphQLObjectType({
         users: {
             type: new GraphQLList(UserType),
             resolve(parent, args) {
-                return User;
+                return User.find();
                 // return users;
             }
         },
@@ -93,7 +93,7 @@ const RootQuery = new GraphQLObjectType({
         lists: {
             type: new GraphQLList(ListType),
             resolve(parent, args) {
-                return List;
+                return List.find();
                 // return lists;
             }
         },
@@ -108,7 +108,7 @@ const RootQuery = new GraphQLObjectType({
         listItems: {
             type: new GraphQLList(ListItemType),
             resolve(parent, args) {
-                return ListItem;
+                return ListItem.find();
                 // return listItems;
             }
         },
@@ -123,7 +123,7 @@ const RootQuery = new GraphQLObjectType({
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args) {
-                return Post;
+                return Post.find();
                 // return posts;
             }
         },
