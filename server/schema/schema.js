@@ -166,6 +166,15 @@ const mutation = new GraphQLObjectType({
 
                 return user.save();
             }
+        },
+        deleteUser: {
+            type: UserType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID)}
+            },
+            resolve(parent, args) {
+                return User.findByIdAndRemove(args.id);
+            }
         }
     }
 })
