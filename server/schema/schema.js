@@ -175,6 +175,23 @@ const mutation = new GraphQLObjectType({
             resolve(parent, args) {
                 return User.findByIdAndRemove(args.id);
             }
+        },
+        addList: {
+            type: ListType,
+            args: {
+                listName: { type: GraphQLNonNull(GraphQLString) },
+                listDescription: { type: GraphQLNonNull(GraphQLString) },
+                creatorId: { type: GraphQLNonNull(GraphQLID) }
+            },
+            resolve(parent, args) {
+                const list = new List({
+                    listName: args.listName,
+                    listDescription: args.listDescription,
+                    creatorId: args.creatorId
+                });
+
+                return list.save();
+            }
         }
     }
 })
