@@ -145,7 +145,6 @@ const mutation = new GraphQLObjectType({
         addUser: {
             type: UserType,
             args: {
-                // id: { type: GraphQLNonNull(GraphQLString) },
                 displayName: { type: GraphQLNonNull(GraphQLString) },
                 username: { type: GraphQLNonNull(GraphQLString) },
                 email: { type: GraphQLNonNull(GraphQLString) },
@@ -174,6 +173,34 @@ const mutation = new GraphQLObjectType({
             },
             resolve(parent, args) {
                 return User.findByIdAndRemove(args.id);
+            }
+        },
+        updateUser: {
+            type: UserType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                displayName: { type: GraphQLString },
+                username: { type: GraphQLString },
+                email: { type: GraphQLString },
+                password: { type: GraphQLString },
+                creationDate: { type: GraphQLString },
+                birthDate: { type: GraphQLString }
+            },
+            resolve(parent, args) {
+                return User.findByIdAndUpdate(
+                    args.id,
+                    {
+                        $set: {
+                            displayName: args.displayName,
+                            username: args.username,
+                            email: args.email,
+                            password: args.password,
+                            creationDate: args.creationDate,
+                            birthDate: args.birthDate,
+                        }
+                    },
+                    { new: true }
+                );
             }
         },
         addList: {
