@@ -229,6 +229,28 @@ const mutation = new GraphQLObjectType({
                 return List.findByIdAndRemove(args.id);
             }
         },
+        updateList: {
+            type: ListType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                listName: { type: GraphQLString },
+                listDescription: { type: GraphQLString },
+                creatorId: { type: GraphQLID }
+            },
+            resolve(parent, args) {
+                return List.findByIdAndUpdate(
+                    args.id,
+                    {
+                        $set: {
+                            listName: args.listName,
+                            listDescription: args.listDescription,
+                            creatorId: args.creatorId
+                        }
+                    },
+                    { new: true }
+                )
+            }
+        },
         addListItem: {
             type: ListItemType,
             args: {
