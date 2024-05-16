@@ -292,7 +292,7 @@ const mutation = new GraphQLObjectType({
                 return ListItem.findByIdAndUpdate(
                     args.id,
                     {
-                        $set: {
+                        $set: { 
                             itemName: args.itemName,
                             itemDescription: args.itemDescription,
                             itemPhotoUrl: args.itemPhotoUrl,
@@ -303,7 +303,58 @@ const mutation = new GraphQLObjectType({
                 )
             
             }
-        }
+        },
+        addPost: {
+            type: PostType,
+            args: {
+                postTitle: { type: GraphQLNonNull(GraphQLString) },
+                postBody: { type: GraphQLNonNull(GraphQLString) },
+                creationDate: { type: GraphQLNonNull(GraphQLString) },
+                creatorId: { type: GraphQLNonNull(GraphQLID) }
+            },
+            resolve(parent, args) {
+                const post = new Post({
+                    postTitle: args.postTitle,
+                    postBody: args.postBody,
+                    creationDate: args.creationDate,
+                    creatorId: args.creatorId
+                });
+
+                return post.save();
+            }
+        },
+        deletePost: {
+            type: PostType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) }
+            },
+            resolve(parent, args) {
+                return Post.findByIdAndRemove(args.id);
+            }
+        },
+        updatePost: {
+            type: PostType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                postTitle: { type: GraphQLString },
+                postBody: { type: GraphQLString },
+                creationDate: { type: GraphQLString },
+                creatorId: { type: GraphQLID }
+            },
+            resolve(parent, args) {
+                return Post.findByIdAndUpdate(
+                    args.id,
+                    {
+                        $set: {
+                            postTitle: args.postTitle,
+                            postBody: args.postBody,
+                            creationDate: args.creationDate,
+                            creatorId: args.creatorId
+                        }
+                    },
+                    { new: true }
+                )
+            }
     }
 })
 
