@@ -1,3 +1,5 @@
+import PostBox from "./PostBox";
+
 export default function PostsSection () {
     return (
         <div className="flex flex-col w-full">
@@ -7,18 +9,8 @@ export default function PostsSection () {
 				</p>
 			</div>
 
-			<div className="flex flex-col w-full p-5">
-				<div className="flex w-full py-0.5">
-					<p className="text-black font-bold">
-						Nombre de usuario
-					</p>
-				</div>
-				<div className="flex w-full py-0.5">
-					<p>
-						Publicacion
-					</p>
-				</div>
-			</div>
+			<PostBox postBody="Contenido de la publicacion" userDisplayName="Nombre e usuario" />
+
 		</div>
     )
 }
