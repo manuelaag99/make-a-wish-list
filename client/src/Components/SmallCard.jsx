@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 
 const GET_USER = gql`
 	query getUsers {
-		user (id: "663eb12306ec274d4c1195ca") {
+		user (id: "6660935f2e128966078f032c") {
 			displayName
 			email
 		}
@@ -16,9 +16,10 @@ export default function SmallCard ({}) {
 	
 	if (error) return <p>Error</p>
 
+    console.log(data)
 	if (!loading && !error) console.log(data) 
     
-    if (data) return (
+    if (!error && !loading && data) return (
         <div className='flex flex-col w-full sm:w-35 justify-center items-start bg-white h-fit p-10 shadow-2xl rounded-md'>
             <div className="flex w-full aspect-square">
                 <img className="w-full" src="" alt="" />

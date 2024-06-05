@@ -1,9 +1,19 @@
 import { useState } from "react"
-import { useQuery } from '@apollo/client';
-import { GET_USERS } from "../queries/UserQueries"
+import { gql, useQuery } from '@apollo/client';
+// import { GET_USERS } from "../queries/UserQueries"
 
 import ListsSection from "./ListsSection"
 import PostsSection from "./PostsSection"
+
+const GET_USERS = gql`
+	query getUsers {
+		users {
+			id
+			username
+			email
+		}
+	}
+`
 
 export default function LargeCard ({}) {
 	const [contentToDisplay, setContentToDisplay] = useState({ postsSection: false, listsSection: true })

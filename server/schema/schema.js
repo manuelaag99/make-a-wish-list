@@ -153,9 +153,10 @@ const RootQuery = new GraphQLObjectType({
         },
         postsByCreator: {
             type: new GraphQLList(PostType),
-            args: { creatorId: { type: GraphQLID }},
+            args: { creatorId: { type: GraphQLID } },
             resolve(parent, args) {
                 return Post.find({ creatorId: args.creatorId });
+            }
         }
     }
 })

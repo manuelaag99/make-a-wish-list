@@ -1,4 +1,4 @@
-const { gql } = require("@apollo/client");
+import { gql } from "@apollo/client";
 
 const GET_USERS = gql`
 	query getUsers {
@@ -9,3 +9,5 @@ const GET_USERS = gql`
 		}
 	}
 `
+
+export { GET_USERS }
