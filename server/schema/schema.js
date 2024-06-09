@@ -30,6 +30,7 @@ const ListType = new GraphQLObjectType({
         id: { type: GraphQLID },
         listName: { type: GraphQLString },
         listDescription: { type: GraphQLString },
+        listPrivacy: { type: GraphQLString },
         creator: {
             type: UserType,
             resolve(parent, args) {
@@ -230,12 +231,14 @@ const mutation = new GraphQLObjectType({
             args: {
                 listName: { type: GraphQLNonNull(GraphQLString) },
                 listDescription: { type: GraphQLNonNull(GraphQLString) },
+                listPrivacy: { type: GraphQLNonNull(GraphQLString) },
                 creatorId: { type: GraphQLNonNull(GraphQLID) }
             },
             resolve(parent, args) {
                 const list = new List({
                     listName: args.listName,
                     listDescription: args.listDescription,
+                    listPrivacy: args.listPrivacy,
                     creatorId: args.creatorId
                 });
 
@@ -257,6 +260,7 @@ const mutation = new GraphQLObjectType({
                 id: { type: GraphQLNonNull(GraphQLID) },
                 listName: { type: GraphQLString },
                 listDescription: { type: GraphQLString },
+                listPrivacy: { type: GraphQLString },
                 creatorId: { type: GraphQLID }
             },
             resolve(parent, args) {
@@ -266,6 +270,7 @@ const mutation = new GraphQLObjectType({
                         $set: {
                             listName: args.listName,
                             listDescription: args.listDescription,
+                            listPrivacy: args.listPrivacy,
                             creatorId: args.creatorId
                         }
                     },

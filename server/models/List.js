@@ -7,6 +7,9 @@ const ListSchema = new mongoose.Schema({
     listDescription: {
         type: String
     },
+    listPrivacy: {
+        type: String
+    },
     creatorId: { 
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
