@@ -5,6 +5,7 @@ import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 import LargeCard from './Components/LargeCard';
 import SmallCard from './Components/SmallCard';
 import AddButtonSection from './Components/AddButtonSection';
+import AddContentModal from './Components/Modals/AddContentModal';
 
 const client = new ApolloClient({
 	uri: 'http://localhost:5000/graphql',
@@ -45,6 +46,7 @@ export default function App () {
 					</div>
 				</div>
 			</div>
+			<AddContentModal />
 		</ApolloProvider>
 	)
 }
