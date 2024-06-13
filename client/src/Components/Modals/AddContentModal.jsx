@@ -4,28 +4,36 @@ export default function AddContentModal ({}) {
     return (
         <div>
             <div className="fixed top-0 left-o w-full h-full bg-black opacity-35 z-20"></div>
-            <div className="flex flex-col w-6/10 h-fit px-14 bg-white absolute top-[25%] left-[20%] z-30">
-                <div className="flex justify-center items-center w-full my-8">
-                    <p className="text-black text-2xl font-bold">Agregar contenido</p>
+            <div className="flex flex-col sm:w-6/10 w-95 h-fit sm:px-14 px-3 bg-white absolute top-[25%] left-[2.5%] sm:left-[20%] z-30 rounded-md">
+                <div className="flex justify-center items-center w-full sm:mt-8 mt-5 sm:mb-8 mb-2">
+                    <p className="text-black text-3xl concert-font text-center">Agregar contenido</p>
                 </div>
-                <div className="flex flex-row w-full my-2 items-center">
-                    <p className="text-black mr-2 w-fit whitespace-nowrap">Nombre de la lista: </p>
-                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" placeholder="Título" />
+                <div className="flex flex-col sm:flex-row w-full my-2 items-center ">
+                    <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Nombre de la lista: </p>
+                    <input className="bg-gray-300 px-2 py-1 sm:w-full" type="text" placeholder="Título" />
                 </div>
-                <div className="flex flex-row w-full my-2 items-center">
-                    <p className="text-black mr-2 w-fit whitespace-nowrap">Descripcion de la lista: </p>
-                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" placeholder="Título" />
+                <div className="flex flex-col sm:flex-row w-full my-2 items-center ">
+                    <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Descripcion de la lista: </p>
+                    <input className="bg-gray-300 px-2 py-1 sm:w-full" type="text" placeholder="Título" />
                 </div>
-                <div className="flex flex-row w-full my-2 items-center py-1">
-                    <p className="text-black mr-2 w-fit whitespace-nowrap">Privacidad de la lista: </p>
-                    <input className="mx-2" name="privacy" id="public" type="radio" placeholder="Título" />
-                    <label htmlFor="private" >Publico</label>
-                    <input className="mx-2" name="privacy" id="private" type="radio" placeholder="Título" />
-                    <label htmlFor="private" >Privado</label>
+                <div className="flex flex-col sm:flex-row sm:w-full my-2 items-center py-1">
+                    <div className="">
+                        <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Privacidad de la lista: </p>
+                    </div>
+                    <div className="flex flex-col">
+                        <div>
+                            <input className="mx-2" name="privacy" id="public" type="radio" placeholder="Título" />
+                            <label htmlFor="private" >Publico</label>
+                        </div>
+                        <div>
+                            <input className="mx-2" name="privacy" id="private" type="radio" placeholder="Título" />
+                            <label htmlFor="private" >Privado</label>
+                        </div>
+                    </div>
+                    
+                    
                 </div>
-                
-                <AddButtonSection additionalClassNames=" my-10" hasDisplayMenu={false} />
-                
+                <AddButtonSection additionalClassNames=" sm:my-10 my-3" hasDisplayMenu={false} />
             </div>
         </div>
     )

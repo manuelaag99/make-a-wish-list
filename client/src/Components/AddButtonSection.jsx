@@ -6,7 +6,7 @@ export default function AddButtonSection ({ additionalClassNames, hasDisplayMenu
 
     return (
         <div classname="flex absolute ">
-            <div className={'flex justify-center w-full bg-var-2 hover:bg-var-2-hovered h-fit py-3 cursor-pointer rounded-md shadow-2xl mt-5 ' + additionalClassNames} onClick={(prevValue) => setIsButtonClicked(prevValue => !prevValue)}>
+            <div className={'flex justify-center w-full bg-var-2 hover:bg-var-2-hovered h-fit py-3 cursor-pointer rounded-md shadow-2xl ' + additionalClassNames} onClick={(prevValue) => setIsButtonClicked(prevValue => !prevValue)}>
                 <p className='text-center text-white concert-font overflow-hidden'>
                     Agregar
                 </p>
