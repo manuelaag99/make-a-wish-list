@@ -1,12 +1,15 @@
 import AddButtonSection from "../AddButtonSection";
 
 export default function AddContentModal ({}) {
+    const [typeOfContent, setTypeOfContent] = useState('list')
     return (
         <div>
             <div className="fixed top-0 left-o w-full h-full bg-black opacity-35 z-20"></div>
             <div className="flex flex-col sm:w-6/10 w-95 h-fit sm:px-14 px-3 bg-white absolute top-[25%] left-[2.5%] sm:left-[20%] z-30 rounded-md">
                 <div className="flex justify-center items-center w-full sm:mt-8 mt-5 sm:mb-8 mb-2">
-                    <p className="text-black text-3xl concert-font text-center">Agregar contenido</p>
+                    {(typeOfContent === 'list') && <p className="text-black text-3xl concert-font text-center">Agregar lista</p>}
+                    {(typeOfContent === 'element') && <p className="text-black text-3xl concert-font text-center">Agregar elemento</p>}
+                    {(typeOfContent === 'post') && <p className="text-black text-3xl concert-font text-center">Agregar publicacion</p>}
                 </div>
                 <div className="flex flex-col sm:flex-row w-full my-2 items-center ">
                     <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Nombre de la lista: </p>
