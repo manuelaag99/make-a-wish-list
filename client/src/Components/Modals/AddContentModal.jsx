@@ -1,5 +1,8 @@
 import { useState } from "react";
 import AddButtonSection from "../AddButtonSection";
+import PopUpWindowModal from "./PopUpWindowModal";
+
+
 
 export default function AddContentModal ({}) {
     const [typeOfContent, setTypeOfContent] = useState('post')
@@ -47,6 +50,7 @@ export default function AddContentModal ({}) {
 
                 <AddButtonSection additionalClassNames=" sm:my-10 my-3" hasDisplayMenu={false} />
             </div>
+            <PopUpWindowModal typeOfContent={typeOfContent} />
         </div>
     )
 }
