@@ -5,7 +5,7 @@ import PopUpWindowModal from "./PopUpWindowModal";
 
 
 export default function AddContentModal ({ onClose }) {
-    const [typeOfContent, setTypeOfContent] = useState('post')
+    const [typeOfContent, setTypeOfContent] = useState('list')
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
 
     function addButtonFunction () {
@@ -15,6 +15,15 @@ export default function AddContentModal ({ onClose }) {
     function popUpWindowButtonFunction () {
         onClose();
     }
+
+    const [formState, setFormState] = useState({});
+
+    function inputChangeHandler (e) {
+        const { name, value } = e.target;
+        setFormState({ ...formState, [name]: value });
+    }
+
+    console.log(formState)
 
     return (
         <div>
@@ -30,15 +39,15 @@ export default function AddContentModal ({ onClose }) {
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Nombre de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Nombre del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-2 ">Título de publicación: </p>}
-                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" placeholder="Título" />
+                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="title" placeholder="Título" onChange={(e) => inputChangeHandler(e)} />
                 </div>
 
                 <div className={"flex w-full my-2 items-center " + (((typeOfContent === 'list') || (typeOfContent === 'element')) && " sm:flex-row" ) + (!((typeOfContent === 'list') || (typeOfContent === 'element')) && " sm:flex-col" )}>
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Descripcion de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Descripcion del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-2 ">Contenido: </p>}
-                    {((typeOfContent === 'list') || (typeOfContent === 'element')) && <input className="bg-gray-300 px-2 py-1 w-full" type="text" placeholder="Título" />}
-                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" placeholder="Título" />}
+                    {((typeOfContent === 'list') || (typeOfContent === 'element')) && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="description" placeholder="Título" onChange={(e) => inputChangeHandler(e)} />}
+                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" name="content" placeholder="Título" onChange={(e) => inputChangeHandler(e)} />}
                 </div>
 
                 {((typeOfContent === 'list') || (typeOfContent === 'element')) && <div className="flex flex-col sm:flex-row sm:w-full my-2 items-center py-1">
@@ -48,11 +57,11 @@ export default function AddContentModal ({ onClose }) {
                     </div>
                     <div className="flex flex-col">
                         <div>
-                            <input className="mx-2" name="privacy" id="public" type="radio" placeholder="Título" />
+                            <input className="mx-2" name="privacy" id="public" type="radio" placeholder="Título" value="public" onChange={(e) => inputChangeHandler(e)} />
                             <label htmlFor="private" >Publico</label>
                         </div>
                         <div>
-                            <input className="mx-2" name="privacy" id="private" type="radio" placeholder="Título" />
+                            <input className="mx-2" name="privacy" id="private" type="radio" placeholder="Título" value="private" onChange={(e) => inputChangeHandler(e)} />
                             <label htmlFor="private" >Privado</label>
                         </div>
                     </div>
