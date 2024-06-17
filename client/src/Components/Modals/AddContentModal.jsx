@@ -6,6 +6,9 @@ import PopUpWindowModal from "./PopUpWindowModal";
 
 export default function AddContentModal ({}) {
     const [typeOfContent, setTypeOfContent] = useState('post')
+    const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
+
+
     return (
         <div>
             <div className="fixed top-0 left-o w-full h-full bg-black opacity-35 z-20"></div>
@@ -50,7 +53,7 @@ export default function AddContentModal ({}) {
 
                 <AddButtonSection additionalClassNames=" sm:my-10 my-3" hasDisplayMenu={false} />
             </div>
-            <PopUpWindowModal typeOfContent={typeOfContent} />
+            {isPopUpWindowVisible && <PopUpWindowModal typeOfContent={typeOfContent} />}
         </div>
     )
 }

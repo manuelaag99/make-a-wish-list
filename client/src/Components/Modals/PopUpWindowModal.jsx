@@ -1,6 +1,6 @@
 import AddButtonSection from "../AddButtonSection";
 
-export default function PopUpWindowModal ({ typeOfContent }) {
+export default function PopUpWindowModal ({ onButtonClick, onClose, typeOfContent }) {
     return (
         <div>
             <div className="fixed top-0 left-o w-full h-full bg-black opacity-35 z-40"></div>
