@@ -4,10 +4,17 @@ import PopUpWindowModal from "./PopUpWindowModal";
 
 
 
-export default function AddContentModal ({}) {
+export default function AddContentModal ({ onClose }) {
     const [typeOfContent, setTypeOfContent] = useState('post')
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
 
+    function addButtonFunction () {
+        setIsPopUpWindowVisible(true);
+    }
+
+    function popUpWindowButtonFunction () {
+        onClose();
+    }
 
     return (
         <div>
@@ -51,9 +58,9 @@ export default function AddContentModal ({}) {
                     </div>
                 </div>}
 
-                <AddButtonSection additionalClassNames=" sm:my-10 my-3" hasDisplayMenu={false} />
+                <AddButtonSection additionalClassNames=" sm:my-10 my-3" clickButtonFunction={addButtonFunction} hasDisplayMenu={false} />
             </div>
-            {isPopUpWindowVisible && <PopUpWindowModal typeOfContent={typeOfContent} />}
+            {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} typeOfContent={typeOfContent} />}
         </div>
     )
 }

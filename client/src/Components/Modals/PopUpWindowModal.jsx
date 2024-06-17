@@ -11,7 +11,7 @@ export default function PopUpWindowModal ({ onButtonClick, onClose, typeOfConten
                     {(typeOfContent === 'post') && <p className="text-black text-center">Exitosamente agregaste una publicación</p>}
                 </div>
 
-                <AddButtonSection additionalClassNames=" sm:my-8 my-5 " hasDisplayMenu={false} />
+                <AddButtonSection additionalClassNames=" sm:my-8 my-5 " clickButtonFunction={onButtonClick} hasDisplayMenu={false} />
             </div>
         </div>
     )

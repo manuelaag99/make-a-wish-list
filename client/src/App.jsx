@@ -31,7 +31,7 @@ export default function App () {
 					</div>
 				</div>
 			</div>
-			{isAddContentModalVisible && <AddContentModal />}
+			{isAddContentModalVisible && <AddContentModal onClose={() => setIsAddContentModalVisible(false)} />}
 		</ApolloProvider>
 	)
 }
