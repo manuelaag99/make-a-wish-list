@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function AddButtonSection ({ additionalClassNames, clickButtonFunction, hasDisplayMenu, onAddList, onAddListElement, onAddPost }) {
+export default function AddButtonSection ({ additionalClassNames, clickButtonFunction, hasDisplayMenu, isButtonActive, onAddList, onAddListElement, onAddPost }) {
     const [isDisplayMenuVisible, setIsDisplayMenuVisible] = useState(false);
 
     function buttonFunction () {
@@ -13,14 +13,14 @@ export default function AddButtonSection ({ additionalClassNames, clickButtonFun
     }
 
     return (
-        <div classname={"block relative h-22 "}>
-            <div className={'flex justify-center w-full bg-var-2 hover:bg-var-2-hovered h-fit py-3 cursor-pointer rounded-md shadow-2xl ' + additionalClassNames} onClick={buttonFunction}>
+        <div className={"block relative h-22 "}>
+            <button disabled={isButtonActive} className={'flex justify-center w-full disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered h-fit py-3 cursor-pointer rounded-md shadow-2xl ' + additionalClassNames} onClick={buttonFunction}>
                 <p className='text-center text-white concert-font overflow-hidden'>
                     Agregar
                 </p>
-            </div>
+            </button>
 
-            {hasDisplayMenu && isDisplayMenuVisible && <div classname="flex flex-col absplute top-0 bg-white ">
+            {hasDisplayMenu && isDisplayMenuVisible && <div className="flex flex-col absolute top-0 bg-white ">
                 <div onClick={onAddList} className='flex justify-center w-full bg-white hover:bg-gray-300 duration-200 h-fit py-3 cursor-pointer hover:shadow-2xl'>
                     <p className='text-center text-black concert-font overflow-hidden'>
                         Agregar lista

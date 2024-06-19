@@ -9,7 +9,8 @@ export default {
       backgroundColor: {
         "var-1": "#E1FFE4",
         "var-2": "#FF5372",
-        "var-2-hovered": "#FF7594"
+        "var-2-hovered": "#FF7594",
+        "var-2-disabled": "#FFA3B3",
       },
       width: {
         "1/10": "10%",

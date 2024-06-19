@@ -17,7 +17,7 @@ const client = new ApolloClient({
 
 
 export default function App () {
-	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(true);
+	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
 
 	return (
 		<ApolloProvider client={client}>
