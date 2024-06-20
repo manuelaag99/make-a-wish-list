@@ -41,6 +41,10 @@
   color: #888;
 } */
 
+body {
+  background-color: #E1FFE4;
+}
+
 .concert-font {
   font-family: "Concert One", sans-serif;
 }

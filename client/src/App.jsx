@@ -13,10 +13,6 @@ const client = new ApolloClient({
 	cache: new InMemoryCache
 })
 
-
-
-
-
 export default function App () {
 	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
 
