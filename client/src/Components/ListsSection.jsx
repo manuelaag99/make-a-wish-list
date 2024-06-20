@@ -1,5 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import ListBox from "./ListBox";
+import { useState } from "react";
 
 const GET_USER_LISTS = gql`
 	query getUserLists {
@@ -11,12 +12,19 @@ const GET_USER_LISTS = gql`
 	}
 `
 
-export default function ListsSection ({}) {
+export default function ListsSection ({ selectList  }) {
 	const { loading, error, data } = useQuery(GET_USER_LISTS);
+	const [selectedListId, setSelectedListId] = useState(null);
 
 	if (error) return <p>Error</p>
 
 	if (!error && !data && loading) return <p>Loading...</p>
+
+
+	function clickBoxHandleFunction (list) {
+		setSelectedListId(list.id)
+		selectList(list.id)
+	}
 	
     if (!error && !loading && data && data.listsByCreator.length) {
 		return (
@@ -30,7 +38,7 @@ export default function ListsSection ({}) {
 				</div>
 	
 				{data && (data.listsByCreator) && (data.listsByCreator.length > 0) && data.listsByCreator.map((list) => {
-					return <ListBox key={list.id} listName={list.listName} listDescription={list.listDescription} listPrivacy="Privacidad de lista" />
+					return <ListBox onClickBox={() => clickBoxHandleFunction(list)} key={list.id} listName={list.listName} listDescription={list.listDescription} listPrivacy="Privacidad de lista" />
 				})}
 			</div>
 		)

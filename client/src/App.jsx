@@ -15,7 +15,15 @@ const client = new ApolloClient({
 
 export default function App () {
 	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
+	const [isListWindowModalVisible, setIsListWindowModalVisible] = useState(false);
+	const [idOfList, setIdOfList] = useState(null);
 
+	console.log(idOfList)
+
+	function openListWindow (listId) {
+		setIdOfList(listId);
+		setIsListWindowModalVisible(true);
+	} 
 	return (
 		<ApolloProvider client={client}>
 			<div className='flex sm:h-screen h-full w-full justify-center items-start bg-var-1 inter-font py-32'>
@@ -23,13 +31,13 @@ export default function App () {
 				<div className='flex flex-col sm:flex-row justify-between items-start w-9/10 sm:w-6/10 sm:p-10'>
 					<SmallCard />
 					<div className='flex flex-col w-full sm:w-6/10 justify-center mt-5 sm:mt-0'>
-						<LargeCard />
+						<LargeCard sendIdOfList={(listId) => openListWindow(listId)} />
 						<AddButtonSection additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
 					</div>
 				</div>
 			</div>
 			{isAddContentModalVisible && <AddContentModal onClose={() => setIsAddContentModalVisible(false)} />}
-			<ListWindowModal />
+			{isListWindowModalVisible && idOfList && <ListWindowModal listId={idOfList} onClose={() => setIsListWindowModalVisible(false)} />}
 		</ApolloProvider>
 	)
 }

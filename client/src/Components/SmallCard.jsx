@@ -18,8 +18,6 @@ export default function SmallCard ({}) {
 	
 	if (error) return <p>Error</p>
 
-    console.log(data)
-	if (!loading && !error) console.log(data) 
     
     if (!error && !loading && data) return (
         <div className='flex flex-col w-full sm:w-35 justify-center items-start bg-white h-fit p-5 shadow-2xl rounded-md'>

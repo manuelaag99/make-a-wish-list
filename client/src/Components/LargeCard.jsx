@@ -15,8 +15,8 @@ const GET_USERS = gql`
 	}
 `
 
-export default function LargeCard ({}) {
-	const [contentToDisplay, setContentToDisplay] = useState({ postsSection: false, listsSection: true })
+export default function LargeCard ({ sendIdOfList }) {
+	const [contentToDisplay, setContentToDisplay] = useState({ postsSection: false, listsSection: true });
 
 	const { loading, error, data } = useQuery(GET_USERS);
 	
@@ -24,9 +24,12 @@ export default function LargeCard ({}) {
 	
 	if (error) return <p>Error</p>
 
-	if (!loading && !error) console.log(data)
 
 
+	function sendId (listId) {
+		sendIdOfList(listId);
+	}
+	
 	
     return (
         <div className='flex flex-col items-start w-full bg-white h-fit shadow-2xl rounded-md pb-8 '>
@@ -48,7 +51,7 @@ export default function LargeCard ({}) {
 					{!contentToDisplay.listsSection && <div className='w-full h-0.5 float-left bg-black'></div>}
 				</div>
 			</div>
-			{contentToDisplay.listsSection && <ListsSection /> }
+			{contentToDisplay.listsSection && <ListsSection selectList={(listId) => sendId(listId)} /> }
 			{contentToDisplay.postsSection && <PostsSection /> }
         </div>
     )
