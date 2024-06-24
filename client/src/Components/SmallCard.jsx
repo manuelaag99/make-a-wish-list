@@ -7,7 +7,8 @@ import { DELETE_USER } from "../mutations/UserMutations";
 
 export default function SmallCard ({ userId }) {
     const [deleteUser] = useMutation(DELETE_USER, {
-        variables: { id: "6679ee76aca5c3f01cfc0080" }
+        variables: { id: "6679ee76aca5c3f01cfc0080" },
+        refetchQueries: [{ query: GET_USER, variables: { id: "6679ee76aca5c3f01cfc0080" } }]
     });
 
     const [profilePicPathway, setProfilePicPathway] = useState(null);

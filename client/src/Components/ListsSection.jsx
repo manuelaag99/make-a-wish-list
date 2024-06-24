@@ -1,16 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import ListBox from "./ListBox";
 import { useState } from "react";
-
-const GET_USER_LISTS = gql`
-	query getUserLists {
-		listsByCreator (creatorId: "6660935f2e128966078f032c") {
-			id
-			listName
-			listDescription
-		}
-	}
-`
+import { DELETE_USER } from "../mutations/UserMutations";
+import { GET_USER_LISTS } from "../queries/ListQueries";
 
 export default function ListsSection ({ selectList  }) {
 	const { loading, error, data } = useQuery(GET_USER_LISTS);
@@ -19,7 +11,6 @@ export default function ListsSection ({ selectList  }) {
 	if (error) return <p>Error</p>
 
 	if (!error && !data && loading) return <p>Loading...</p>
-
 
 	function clickBoxHandleFunction (list) {
 		setSelectedListId(list.id)
@@ -38,7 +29,7 @@ export default function ListsSection ({ selectList  }) {
 				</div>
 	
 				{data && (data.listsByCreator) && (data.listsByCreator.length > 0) && data.listsByCreator.map((list) => {
-					return <ListBox onClickBox={() => clickBoxHandleFunction(list)} key={list.id} listName={list.listName} listDescription={list.listDescription} listPrivacy="Privacidad de lista" />
+					return <ListBox onDeleteList={() => deleteListFromDataBase(list)} onClickBox={() => clickBoxHandleFunction(list)} key={list.id} listId={list.id} listName={list.listName} listDescription={list.listDescription} listPrivacy="Privacidad de lista" />
 				})}
 			</div>
 		)

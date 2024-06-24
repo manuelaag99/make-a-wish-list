@@ -1,7 +1,18 @@
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { GET_USER_LISTS } from "../queries/ListQueries";
+import { DELETE_LIST } from "../mutations/ListMutations";
 
-export default function ListBox ({ listName, listDescription, listPrivacy, onClickBox }) {
+export default function ListBox ({ listName, listDescription, listId, listPrivacy, onClickBox }) {
+	const [deleteListFromDataBase] = useMutation(DELETE_LIST, {
+        variables: { id: listId },
+        refetchQueries: [{ query: GET_USER_LISTS, variables: { id: "6679ee76aca5c3f01cfc0080" } }]
+    });
+
+	function onDeleteList () {
+		deleteListFromDataBase();
+	}
 
 	function onClickThreeDots () {
 		setAreThreeDotsClicked((prev) => (!prev));
@@ -38,9 +49,9 @@ export default function ListBox ({ listName, listDescription, listPrivacy, onCli
 					<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center ">
 						Editar
 					</div>
-					<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center ">
+					<button className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center " onClick={onDeleteList}>
 						Borrar
-					</div>
+					</button>
 				</div>}
 			</div>
 		</>
