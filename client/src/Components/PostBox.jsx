@@ -1,16 +1,42 @@
+import { useState } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
+
 export default function PostBox ({ postBody, userDisplayName }) {
+
+	function onClickThreeDots () {
+		setAreThreeDotsClicked((prev) => (!prev));
+	}
+
+	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
+
     return (
         <div className="flex flex-col w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200">
-			<div className="flex w-full py-0.5">
-				<p className="text-black font-bold">
-					{userDisplayName}
-				</p>
+			<div className="flex flex-col w-9/10 justify-center items-center">
+				<div className="flex w-full py-0.5">
+					<p className="text-black font-bold">
+						{userDisplayName}
+					</p>
+				</div>
+				<div className="flex w-full py-0.5">
+					<p>
+						{postBody}
+					</p>
+				</div>
 			</div>
-			<div className="flex w-full py-0.5">
-				<p>
-					{postBody}
-				</p>
+			
+			<div className="flex w-1/10 justify-center items-center" onClick={onClickThreeDots}>
+				<button className="flex w-full justify-center items-center text-black hover:text-white">
+					<BsThreeDotsVertical />
+				</button>
 			</div>
+			{areThreeDotsClicked && <div className="absolute flex flex-col bg-white w-24 h-fit right-0 top-[60%] shadow-2xl z-20">
+				<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center ">
+					Editar
+				</div>
+				<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center ">
+					Borrar
+				</div>
+			</div>}
 		</div>
     )
 }

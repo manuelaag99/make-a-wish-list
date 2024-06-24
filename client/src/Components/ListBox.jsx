@@ -11,8 +11,8 @@ export default function ListBox ({ listName, listDescription, listPrivacy, onCli
 
     return (
 		<>
-			<div className="flex flex-row w-full px-7 cursor-pointer bg-white hover:bg-gray-300 duration-200 relative" >
-				<div className="flex flex-col w-9/10 py-4" onClick={onClickBox}>
+			<div className="flex flex-row w-full px-6 cursor-pointer bg-white hover:bg-gray-300 duration-200 relative" >
+				<div className="flex flex-col w-9/10 py-4 pr-3" onClick={onClickBox}>
 					<div>
 						<p className="text-left text-black font-bold overflow-hidden">
 							{listName}

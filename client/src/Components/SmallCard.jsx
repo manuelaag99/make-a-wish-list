@@ -1,18 +1,19 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 
-const GET_USER = gql`
-	query getUsers {
-		user (id: "6660935f2e128966078f032c") {
-			displayName
-			email
-		}
-	}
-`
+import { GET_USER } from "../queries/UserQueries";
+import { DELETE_USER } from "../mutations/UserMutations";
 
-export default function SmallCard ({}) {
+
+export default function SmallCard ({ userId }) {
+    const [deleteUser] = useMutation(DELETE_USER, {
+        variables: { id: "6679ee76aca5c3f01cfc0080" }
+    });
+
     const [profilePicPathway, setProfilePicPathway] = useState(null);
-	const { loading, error, data } = useQuery(GET_USER);
+	const { loading, error, data } = useQuery(GET_USER, {
+        variables: { id: userId }
+    });
 	
 	if (loading) return <p>Loading...</p>
 	
@@ -36,6 +37,11 @@ export default function SmallCard ({}) {
                         Biografía
                     </p>
                 </div>
+                <button className="flex w-full" onClick={deleteUser}>
+                    <p className="text-left text-black overflow-hidden">
+                        Borrar usuario
+                    </p>
+                </button>
             </div>
         </div>
     )
