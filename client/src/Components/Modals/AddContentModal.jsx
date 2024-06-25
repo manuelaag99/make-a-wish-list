@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import AddButtonSection from "../AddButtonSection";
 import PopUpWindowModal from "./PopUpWindowModal";
+import ActionButton from "../ActionButton";
 
 
 
-export default function AddContentModal ({ onClose }) {
-    const [typeOfContent, setTypeOfContent] = useState('list')
+export default function AddContentModal ({ onClose, typeOfContent }) {
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
 
     function addButtonFunction () {
@@ -17,7 +17,7 @@ export default function AddContentModal ({ onClose }) {
     }
 
     const [formState, setFormState] = useState({});
-    const [isButtonActive, setIsButtonActive] = useState(false);
+    const [isButtonInactive, setIsButtonInactive] = useState(false);
     function inputChangeHandler (e) {
         const { name, value } = e.target;
         setFormState({ ...formState, [name]: value });
@@ -26,9 +26,9 @@ export default function AddContentModal ({ onClose }) {
     function checkFormValidity () {
         if ((typeOfContent === 'list') || (typeOfContent === 'element')) {
             if (formState.title && formState.description && formState.privacy) {
-                setIsButtonActive(false);
+                setIsButtonInactive(false);
             } else {
-                setIsButtonActive(true);
+                setIsButtonInactive(true);
             }
         }
     }
@@ -36,8 +36,6 @@ export default function AddContentModal ({ onClose }) {
     useEffect(() => {
         checkFormValidity();
     }, [formState, typeOfContent])
-
-    console.log(formState)
 
     return (
         <div>
@@ -81,7 +79,7 @@ export default function AddContentModal ({ onClose }) {
                     </div>
                 </div>}
 
-                <AddButtonSection additionalClassNames=" sm:my-10 my-6" clickButtonFunction={addButtonFunction} hasDisplayMenu={false} isButtonActive={isButtonActive} />
+                <ActionButton additionalClassNames=" my-8" isButtondDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
             </div>
             {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} typeOfContent={typeOfContent} />}
         </div>

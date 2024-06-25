@@ -1,4 +1,5 @@
 import { useState } from "react"
+import ActionButton from "./ActionButton";
 
 export default function AddButtonSection ({ additionalClassNames, clickButtonFunction, hasDisplayMenu, isButtonActive, onAddList, onAddListElement, onAddPost }) {
     const [isDisplayMenuVisible, setIsDisplayMenuVisible] = useState(false);
@@ -32,13 +33,8 @@ export default function AddButtonSection ({ additionalClassNames, clickButtonFun
                 </div>
             </div>}
 
-            <button disabled={isButtonActive} className={'flex justify-center w-full disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered h-18 py-3 cursor-pointer rounded-md shadow-2xl ' + additionalClassNames} onClick={buttonFunction}>
-                <p className='text-center text-white concert-font overflow-hidden'>
-                    Agregar
-                </p>
-            </button>
+            <ActionButton additionalClassNames="mt-8" isButtondDisabled={isButtonActive} onClickButtonFunction={buttonFunction} />
 
-                    
         </div>
     )
 }

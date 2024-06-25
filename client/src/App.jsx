@@ -16,14 +16,21 @@ const client = new ApolloClient({
 })
 
 export default function App () {
-	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
 	const [isListWindowModalVisible, setIsListWindowModalVisible] = useState(false);
 	const [idOfList, setIdOfList] = useState(null);
 
 	function openListWindow (listId) {
 		setIdOfList(listId);
 		setIsListWindowModalVisible(true);
-	} 
+	}
+
+	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
+	const [typeOfContent, setTypeOfContent] = useState('list');
+
+	function openAddContentModal (type) {
+		setTypeOfContent(type);
+		setIsAddContentModalVisible(true);
+	}
 	
 	return (
 		<ApolloProvider client={client}>
@@ -33,11 +40,11 @@ export default function App () {
 					<SmallCard userId="6660935f2e128966078f032c" />
 					<div className='flex flex-col w-full sm:w-6/10 justify-center mt-5 sm:mt-0'>
 						<LargeCard sendIdOfList={(listId) => openListWindow(listId)} />
-						<AddButtonSection additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
+						<AddButtonSection onAddList={() => openAddContentModal("list")} additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
 					</div>
 				</div>
 			</div>
-			{isAddContentModalVisible && <AddContentModal onClose={() => setIsAddContentModalVisible(false)} />}
+			{isAddContentModalVisible && <AddContentModal typeOfContent={typeOfContent} onClose={() => setIsAddContentModalVisible(false)} />}
 			{isListWindowModalVisible && idOfList && <ListWindowModal listId={idOfList} onClose={() => setIsListWindowModalVisible(false)} />}
 		</ApolloProvider>
 	)
