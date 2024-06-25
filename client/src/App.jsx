@@ -4,7 +4,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import LargeCard from './Components/LargeCard';
 import SmallCard from './Components/SmallCard';
 import AddButtonSection from './Components/AddButtonSection';
-import AddContentModal from './Components/Modals/AddContentModal';
+import AddOrUpdateContentModal from './Components/Modals/AddOrUpdateContentModal';
 import { useState } from 'react';
 import ListWindowModal from './Components/Modals/ListWindowModal';
 
@@ -24,10 +24,12 @@ export default function App () {
 		setIsListWindowModalVisible(true);
 	}
 
+	const [isAddContent, setIsAddContent] = useState(true);
 	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
 	const [typeOfContent, setTypeOfContent] = useState('list');
 
 	function openAddContentModal (type) {
+		setIsAddContent(true);
 		setTypeOfContent(type);
 		setIsAddContentModalVisible(true);
 	}
@@ -40,11 +42,11 @@ export default function App () {
 					<SmallCard userId="6660935f2e128966078f032c" />
 					<div className='flex flex-col w-full sm:w-6/10 justify-center mt-5 sm:mt-0'>
 						<LargeCard sendIdOfList={(listId) => openListWindow(listId)} />
-						<AddButtonSection onAddList={() => openAddContentModal("list")} additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
+						<AddButtonSection onAddList={() => openAddContentModal("list")} onAddListElement={() => openAddContentModal("element")} onAddPost={() => openAddContentModal("post")} additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
 					</div>
 				</div>
 			</div>
-			{isAddContentModalVisible && <AddContentModal typeOfContent={typeOfContent} onClose={() => setIsAddContentModalVisible(false)} />}
+			{isAddContentModalVisible && <AddOrUpdateContentModal isAdd={isAddContent} typeOfContent={typeOfContent} onClose={() => setIsAddContentModalVisible(false)} />}
 			{isListWindowModalVisible && idOfList && <ListWindowModal listId={idOfList} onClose={() => setIsListWindowModalVisible(false)} />}
 		</ApolloProvider>
 	)

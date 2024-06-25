@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { GET_USER_LISTS } from "../queries/ListQueries";
 import { DELETE_LIST } from "../mutations/ListMutations";
+import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
 export default function ListBox ({ listName, listDescription, listId, listPrivacy, onClickBox }) {
 	const [deleteListFromDataBase] = useMutation(DELETE_LIST, {
@@ -22,11 +23,17 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 		deleteListFromDataBase();
 	}
 
+	function onUpdateList () {
+		setIsAddContentModalVisible(true);
+	}
+
 	function onClickThreeDots () {
 		setAreThreeDotsClicked((prev) => (!prev));
 	}
 
 	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
+	
+	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
 
     return (
 		<>
@@ -57,7 +64,7 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 					</button>
 				</div>
 				{areThreeDotsClicked && <div className="absolute flex flex-col bg-white w-24 h-fit right-0 top-[60%] shadow-2xl z-20">
-					<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center ">
+					<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center " onClick={onUpdateList}>
 						Editar
 					</div>
 					<button className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center " onClick={onDeleteList}>
@@ -65,6 +72,7 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 					</button>
 				</div>}
 			</div>
+			{isAddContentModalVisible && <AddOrUpdateContentModal isAdd={false} typeOfContent="list" onClose={() => setIsAddContentModalVisible(false)} />}
 		</>
     )
 }

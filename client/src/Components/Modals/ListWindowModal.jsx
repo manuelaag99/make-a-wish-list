@@ -5,24 +5,11 @@ import { GET_LIST } from "../../queries/ListQueries";
 
 import { IoMdClose } from "react-icons/io";
 
-// const GET_LIST_BY_ID = gql`
-// 	query getListById {
-// 		list(id: "6660935f2e128966078f032c") {
-// 		  creator {
-// 			id
-// 		  }
-// 		  listName
-// 		  listPrivacy
-// 		  listDescription
-// 		}
-// 	}
-// `
 
 export default function ListWindowModal ({ listId, onClose }) {
 	const { loading, error, data } = useQuery(GET_LIST,
         { variables: { id: listId } }
     );
-	const [selectedListId, setSelectedListId] = useState(null);
 
 	if (error) return <p>Error</p>
 
