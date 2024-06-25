@@ -28,7 +28,7 @@ export default function ListsSection ({ selectList  }) {
 				</div>
 	
 				{data && (data.listsByCreator) && (data.listsByCreator.length > 0) && data.listsByCreator.map((list) => {
-					return <ListBox onClickBox={() => clickBoxHandleFunction(list)} key={list.id} listId={list.id} listName={list.listName} listDescription={list.listDescription} listPrivacy="Privacidad de lista" />
+					return <ListBox onClickBox={() => clickBoxHandleFunction(list)} key={list.id} listId={list.id} listName={list.listName} listDescription={list.listDescription} listPrivacy={list.listPrivacy} />
 				})}
 			</div>
 		)

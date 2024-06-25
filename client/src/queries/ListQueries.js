@@ -1,11 +1,25 @@
 import { gql } from "@apollo/client";
 
+const GET_LIST = gql`
+	query getList($id: ID!) {
+		list (id: $id) {
+			id
+			listName
+			listDescription
+			listPrivacy
+		}
+	}
+`
+
+export { GET_LIST };
+
 const GET_LISTS = gql`
-	query getUsers {
+	query getLists {
 		lists {
 			id
 			listName
 			listDescription
+			listPrivacy
 		}
 	}
 `
@@ -18,6 +32,7 @@ const GET_USER_LISTS = gql`
 			id
 			listName
 			listDescription
+			listPrivacy
 		}
 	}
 `

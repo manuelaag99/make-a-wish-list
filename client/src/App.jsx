@@ -8,28 +8,11 @@ import AddContentModal from './Components/Modals/AddContentModal';
 import { useState } from 'react';
 import ListWindowModal from './Components/Modals/ListWindowModal';
 
-const cache = new InMemoryCache({
-	typePolicies: {
-		Query: {
-			fields: {
-				users: {
-					merge(existing, incoming) {
-						return incoming;
-					}
-				},
-				lists: {
-					merge(existing, incoming) {
-						return incoming;
-					}
-				}
-			}
-		}
-	}
-});
+const cache = new InMemoryCache({});
 
 const client = new ApolloClient({
 	uri: 'http://localhost:5000/graphql',
-	cache: cache
+	cache: new InMemoryCache()
 })
 
 export default function App () {

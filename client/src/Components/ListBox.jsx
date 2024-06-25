@@ -43,13 +43,16 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 						</p>
 					</div>
 					<div>
-						<p className="text-left text-gray-500 overflow-hidden">
-							{listPrivacy}
-						</p>
+						{(listPrivacy === "private") && <p className="text-left text-gray-500 overflow-hidden">
+							Lista Privada
+						</p>}
+						{(listPrivacy === "public") && <p className="text-left text-gray-500 overflow-hidden">
+							Lista Publica
+						</p>}
 					</div>
 				</div>
-				<div className="flex w-1/10 justify-center items-center" onClick={onClickThreeDots}>
-					<button className="flex w-full justify-center items-center text-black hover:text-white">
+				<div className="flex w-1/10 justify-center items-center text-black hover:text-white" onClick={onClickThreeDots}>
+					<button className="flex w-full justify-center items-center ">
 						<BsThreeDotsVertical />
 					</button>
 				</div>

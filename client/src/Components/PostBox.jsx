@@ -10,22 +10,22 @@ export default function PostBox ({ postBody, userDisplayName }) {
 	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
 
     return (
-        <div className="flex flex-col w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200">
-			<div className="flex flex-col w-9/10 justify-center items-center">
+        <div className="flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative ">
+			<div className="flex flex-col w-9/10 justify-center items-center relative ">
 				<div className="flex w-full py-0.5">
 					<p className="text-black font-bold">
 						{userDisplayName}
 					</p>
 				</div>
 				<div className="flex w-full py-0.5">
-					<p>
+					<p className="text-black font-normal">
 						{postBody}
 					</p>
 				</div>
 			</div>
 			
-			<div className="flex w-1/10 justify-center items-center" onClick={onClickThreeDots}>
-				<button className="flex w-full justify-center items-center text-black hover:text-white">
+			<div className="flex w-1/10 justify-center items-center relative text-black hover:text-white" onClick={onClickThreeDots}>
+				<button className="flex w-full justify-center items-center ">
 					<BsThreeDotsVertical />
 				</button>
 			</div>
