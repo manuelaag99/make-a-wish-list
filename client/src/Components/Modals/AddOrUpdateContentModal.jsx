@@ -54,14 +54,14 @@ export default function AddOrUpdateContentModal ({ isAdd, onClose, typeOfContent
                     {(!isAdd) && (typeOfContent === 'post') && <p className="text-black text-3xl concert-font text-center">Modificar publicación</p>}
                 </div>
 
-                <div className={"flex flex-col w-full my-2 items-center " + (((typeOfContent === 'list') || (typeOfContent === 'element')) && " sm:flex-row" ) + (!((typeOfContent === 'list') || (typeOfContent === 'element')) && " sm:flex-col" )}>
+                <div className={"flex flex-col w-full my-2 items-center " + (typeOfContent === "post" ? " sm:flex-col" : " sm:flex-row" )}>
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Nombre de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Nombre del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-2 ">Título de publicación: </p>}
                     <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="title" placeholder="Título" onChange={(e) => inputChangeHandler(e)}  />
                 </div>
 
-                <div className={"flex flex-col w-full my-2 items-center " + (((typeOfContent === 'list') || (typeOfContent === 'element')) && " sm:flex-row" ) + (!((typeOfContent === 'list') || (typeOfContent === 'element')) && " sm:flex-col" )}>
+                <div className={"flex flex-col w-full my-2 items-center " + (typeOfContent === "post" ? " sm:flex-col" : " sm:flex-row" )}>
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Descripcion de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-0 ">Descripcion del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit sm:whitespace-nowrap mb-2 sm:mb-2 ">Contenido: </p>}
