@@ -5,9 +5,9 @@ import { GET_USER_LISTS } from "../queries/ListQueries";
 import { DELETE_LIST } from "../mutations/ListMutations";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
-export default function ListBox ({ listName, listDescription, listId, listPrivacy, onClickBox }) {
+export default function ListBox ({ list, onClickBox }) {
 	const [deleteListFromDataBase] = useMutation(DELETE_LIST, {
-        variables: { id: listId },
+        variables: { id: list.listId },
         // refetchQueries: [{ query: GET_USER_LISTS, variables: { id: "6679ee76aca5c3f01cfc0080" } }]
 		update(cache, { data: { deleteList } }) {
 			const { listsByCreator } = cache.readQuery({ query: GET_USER_LISTS });
@@ -23,8 +23,11 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 		deleteListFromDataBase();
 	}
 
+	const [isAddOrUpdateContentModalVisible, setIsAddOrUpdateContentModalVisible] = useState(false);
+	const [listToUpdate, setListToUpdate] = useState(null);
 	function onUpdateList () {
-		setIsAddContentModalVisible(true);
+		setListToUpdate(list);
+		setIsAddOrUpdateContentModalVisible(true);
 	}
 
 	function onClickThreeDots () {
@@ -32,8 +35,6 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 	}
 
 	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
-	
-	const [isAddContentModalVisible, setIsAddContentModalVisible] = useState(false);
 
     return (
 		<>
@@ -41,19 +42,19 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 				<div className="flex flex-col w-9/10 py-4 pr-3" onClick={onClickBox}>
 					<div>
 						<p className="text-left text-black font-bold overflow-hidden">
-							{listName}
+							{list.listName}
 						</p>
 					</div>
 					<div>
 						<p className="text-left text-black overflow-hidden">
-							{listDescription}
+							{list.listDescription}
 						</p>
 					</div>
 					<div>
-						{(listPrivacy === "private") && <p className="text-left text-gray-500 overflow-hidden">
+						{(list.listPrivacy === "private") && <p className="text-left text-gray-500 overflow-hidden">
 							Lista Privada
 						</p>}
-						{(listPrivacy === "public") && <p className="text-left text-gray-500 overflow-hidden">
+						{(list.listPrivacy === "public") && <p className="text-left text-gray-500 overflow-hidden">
 							Lista Publica
 						</p>}
 					</div>
@@ -72,7 +73,8 @@ export default function ListBox ({ listName, listDescription, listId, listPrivac
 					</button>
 				</div>}
 			</div>
-			{isAddContentModalVisible && <AddOrUpdateContentModal isAdd={false} typeOfContent="list" onClose={() => setIsAddContentModalVisible(false)} />}
+
+			{isAddOrUpdateContentModalVisible && <AddOrUpdateContentModal contentToUpdate={listToUpdate} isAdd={false} typeOfContent="list" onClose={() => setIsAddOrUpdateContentModalVisible(false)} />}
 		</>
     )
 }

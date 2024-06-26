@@ -6,7 +6,8 @@ import { useMutation } from "@apollo/client";
 import { ADD_LIST } from "../../mutations/ListMutations";
 import { GET_LISTS } from "../../queries/ListQueries";
 
-export default function AddOrUpdateContentModal ({ isAdd, onClose, typeOfContent, userId }) {
+export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClose, typeOfContent, userId }) {
+    console.log(contentToUpdate)
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
 
     function addButtonFunction () {
@@ -72,15 +73,15 @@ export default function AddOrUpdateContentModal ({ isAdd, onClose, typeOfContent
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Nombre de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Nombre del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-2 ">Título de publicación: </p>}
-                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="title" placeholder="Título" onChange={(e) => inputChangeHandler(e)}  />
+                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="title" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={contentToUpdate ? ((typeOfContent === "list") ?  contentToUpdate.listName : (typeOfContent === "element") ? contentToUpdate.itemName : (typeOfContent  === "post") ? contentToUpdate.postTitle : null )  : null} />
                 </div>
 
                 <div className={"flex flex-col w-full my-2 items-center " + (typeOfContent === "post" ? " md:flex-col" : " md:flex-row" )}>
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Descripcion de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Descripcion del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-2 ">Contenido: </p>}
-                    {((typeOfContent === 'list') || (typeOfContent === 'element')) && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="description" placeholder="Título" onChange={(e) => inputChangeHandler(e)} />}
-                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" name="content" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={formState.content} />}
+                    {((typeOfContent === 'list') || (typeOfContent === 'element')) && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="description" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={contentToUpdate ? ((typeOfContent === "list") ?  contentToUpdate.listDescription : (typeOfContent === "element") ? contentToUpdate.itemDescription : null )  : null } />}
+                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" name="content" placeholder="Título" onChange={(e) => inputChangeHandler(e)}  value={contentToUpdate ? contentToUpdate.postContent : null}  />}
                 </div>
 
                 {((typeOfContent === 'list') || (typeOfContent === 'element')) && <div className="flex flex-col md:flex-row md:w-full my-2 items-center py-1">
@@ -88,16 +89,18 @@ export default function AddOrUpdateContentModal ({ isAdd, onClose, typeOfContent
                         {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Privacidad de la lista: </p>}
                         {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Enlace de foto del elemento: </p>}
                     </div>
-                    <div className="flex flex-col md:flex-row">
+                    {(typeOfContent === 'list') && <div className="flex flex-col md:flex-row">
                         <div>
-                            <input className="md:ml-3 mr-1" name="privacy" id="public" type="radio" placeholder="Título" value="public" onChange={(e) => inputChangeHandler(e)} />
+                            <input className="md:ml-3 mr-1" defaultChecked={(contentToUpdate && (contentToUpdate.listPrivacy === "public")) ? true : false } name="privacy" id="public" type="radio" placeholder="Título" value="public" onChange={(e) => inputChangeHandler(e)} />
                             <label htmlFor="private" >Publico</label>
                         </div>
                         <div>
-                            <input className="md:ml-3 mr-1" name="privacy" id="private" type="radio" placeholder="Título" value="private" onChange={(e) => inputChangeHandler(e)} />
+                            <input className="md:ml-3 mr-1" defaultChecked={(contentToUpdate && (contentToUpdate.listPrivacy === "private")) ? true : false } name="privacy" id="private" type="radio" placeholder="Título" value="private" onChange={(e) => inputChangeHandler(e)} />
                             <label htmlFor="private" >Privado</label>
                         </div>
-                    </div>
+                    </div>}
+                    {(typeOfContent === 'element') && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="photoUrl" placeholder="Enlace" onChange={(e) => inputChangeHandler(e)}  />}
+
                 </div>}
 
                 <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtondDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
