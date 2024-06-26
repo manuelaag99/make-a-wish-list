@@ -21,7 +21,7 @@ export default function SmallCard ({ userId }) {
 
     
     if (!error && !loading && data) return (
-        <div className='flex flex-col w-full sm:w-35 justify-center items-start bg-white h-fit p-5 shadow-2xl rounded-md'>
+        <div className='flex flex-col w-full md:w-35 justify-center items-start bg-white h-fit p-5 shadow-2xl rounded-md'>
             <div className="flex w-full aspect-square">
                 {profilePicPathway && <img className="w-full" src="" alt="" />}
                 {!profilePicPathway && <div className="w-full h-full bg-gray-300 rounded-md"></div>}
