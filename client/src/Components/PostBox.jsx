@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
-export default function PostBox ({ post, postBody, userDisplayName }) {
+export default function PostBox ({ post, userDisplayName }) {
 
 	function onClickThreeDots () {
 		setAreThreeDotsClicked((prev) => (!prev));
