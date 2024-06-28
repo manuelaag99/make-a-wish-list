@@ -9,7 +9,7 @@ export default function PostsSection () {
 				</p>
 			</div>
 
-			<PostBox postBody="Contenido de la publicacion" userDisplayName="Nombre e usuario" />
+			<PostBox post={{ postTitle: "bbbb", postBody: "aaaa" }} postBody="Contenido de la publicacion" userDisplayName="Nombre e usuario" />
 
 		</div>
     )
