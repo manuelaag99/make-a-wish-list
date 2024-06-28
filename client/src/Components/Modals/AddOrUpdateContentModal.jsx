@@ -5,14 +5,22 @@ import { IoMdClose } from "react-icons/io";
 import { useMutation } from "@apollo/client";
 import { ADD_LIST } from "../../mutations/ListMutations";
 import { GET_LISTS } from "../../queries/ListQueries";
+import { ADD_POST } from "../../mutations/PostMutations";
+import { GET_POSTS } from "../../queries/PostQueries";
 
 export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClose, typeOfContent, userId }) {
-    console.log(contentToUpdate)
+    let newCreationDate = new Date().toISOString();
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
 
     function addButtonFunction () {
-        console.log(formState.title, formState.privacy, formState.description, userId)
-        addList(formState.title, formState.privacy, formState.description, userId);
+        console.log(formState.title, formState.body, userId)
+        if (typeOfContent === 'list') {
+            addList(formState.title, formState.privacy, formState.description, userId);
+        } else if (typeOfContent === 'post') {
+            addPost(formState.title, formState.body, userId, newCreationDate);
+        } else if (typeOfContent === 'element') {
+            console.log("Element added")
+        }
         // setIsPopUpWindowVisible(true);
     }
 
@@ -55,6 +63,18 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
             cache.writeQuery({
                 query: GET_LISTS,
                 data: { lists: lists.concat([addList]) }
+            })
+        }
+    })
+
+    const [addPost] = useMutation(ADD_POST, {
+        variables: { postTitle: formState.title, postBody: formState.body, creatorId: userId, creationDate: newCreationDate },
+        update(cache, { data: { addPost }}) {
+            const { posts } = cache.readQuery({ query: GET_POSTS });
+
+            cache.writeQuery({
+                query: GET_POSTS,
+                data: { posts: posts.concat([addPost]) }
             })
         }
     })
