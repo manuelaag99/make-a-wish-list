@@ -34,6 +34,12 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
             } else {
                 setIsButtonInactive(true);
             }
+        } else {
+            if (formState.title && formState.body) {
+                setIsButtonInactive(false);
+            } else {
+                setIsButtonInactive(true);
+            }
         }
     }
 
@@ -81,7 +87,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Descripcion del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-2 ">Contenido: </p>}
                     {((typeOfContent === 'list') || (typeOfContent === 'element')) && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="description" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={contentToUpdate ? ((typeOfContent === "list") ?  contentToUpdate.listDescription : (typeOfContent === "element") ? contentToUpdate.itemDescription : null )  : null } />}
-                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" name="content" placeholder="Título" onChange={(e) => inputChangeHandler(e)}  value={contentToUpdate ? contentToUpdate.postBody : null}  />}
+                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" name="body" placeholder="Título" onChange={(e) => inputChangeHandler(e)}  value={contentToUpdate ? contentToUpdate.postBody : null}  />}
                 </div>
 
                 {((typeOfContent === 'list') || (typeOfContent === 'element')) && <div className="flex flex-col md:flex-row md:w-full my-2 items-center py-1">
