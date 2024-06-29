@@ -1,14 +1,27 @@
 import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
+import { GET_USER_POSTS } from "../queries/PostQueries";
+import { DELETE_POST } from "../mutations/PostMutations";
+import { useMutation } from "@apollo/client";
 
 export default function PostBox ({ post, userDisplayName }) {
+	const [deletePostFromDataBase] = useMutation(DELETE_POST, {
+		variables: { id: post.id },
+		// refetchQueries: [{ query: GET_USER_POSTS }]
+		update(cache, { data: { deletePost } }) {
+			const { postsByCreator } = cache.readQuery({ query: GET_USER_POSTS });
+			const newPostsByCreator = postsByCreator.filter((post) => post.id !== deletePost.id);
+			cache.writeQuery({
+				query: GET_USER_POSTS,
+				data: { postsByCreator: newPostsByCreator }
+			});
+		}
+	})
 
-	function onClickThreeDots () {
-		setAreThreeDotsClicked((prev) => (!prev));
+	function onDeletePost () {
+		deletePostFromDataBase();
 	}
-
-	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
 
 	const [isAddOrUpdateContentModalVisible, setIsAddOrUpdateContentModalVisible] = useState(false);
 	const [postToUpdate, setPostToUpdate] = useState(null);
@@ -16,6 +29,12 @@ export default function PostBox ({ post, userDisplayName }) {
 		setPostToUpdate(post);
 		setIsAddOrUpdateContentModalVisible(true);
 	}
+
+	function onClickThreeDots () {
+		setAreThreeDotsClicked((prev) => (!prev));
+	}
+
+	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
 
     return (
         <div className="flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative ">
@@ -41,7 +60,7 @@ export default function PostBox ({ post, userDisplayName }) {
 				<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center " onClick={onUpdatePost}>
 					Editar
 				</div>
-				<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center ">
+				<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-300 text-center " onClick={onDeletePost}>
 					Borrar
 				</div>
 			</div>}
