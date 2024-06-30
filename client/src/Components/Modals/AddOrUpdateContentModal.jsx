@@ -8,6 +8,9 @@ import { GET_LISTS } from "../../queries/ListQueries";
 import { ADD_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
 
+import { MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+
 export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClose, typeOfContent, userId }) {
     let newCreationDate = new Date().toISOString();
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
@@ -92,7 +95,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     return (
         <div>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
-            <div className="flex flex-col md:w-6/10 w-95 h-fit md:px-14 px-6 bg-white fixed top-[25%] left-[2.5%] md:left-[20%] z-30 rounded-md">
+            <div className="flex flex-col md:w-6/10 w-95 h-fit md:px-14 px-6 bg-white fixed top-[15%] left-[2.5%] md:left-[20%] z-30 rounded-md">
                 <button className="absolute top-2 right-2 text-black hover:text-gray-300 duration-200" onClick={onClose}>
                     <IoMdClose fontSize={18} />
                 </button>
@@ -136,6 +139,71 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                         </div>
                     </div>}
                     {(typeOfContent === 'element') && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="photoUrl" placeholder="Enlace" onChange={(e) => inputChangeHandler(e)}  />}
+
+                </div>}
+
+                {(typeOfContent === 'list') && <div className="flex flex-col w-full justify-start overflow-auto h-28 mt-3">
+                    
+                    <div className="flex flex-row w-full bg-white hover:bg-gray-300 duration-200 cursor-pointer py-1 px-1">
+                        <div className="flex w-2/10 px-2 py-1 ">
+                            <img src="" />
+                        </div>
+                        <div className="flex flex-col w-6/10 text-black text-left ">
+                            <div className="flex w-full font-bold">
+                                Nombre de elemento
+                            </div>
+                            <div className="flex w-full font-normal">
+                                Descripcion de elemento
+                            </div>
+                        </div>
+                        <button className="flex w-1/10 justify-center items-center text-black hover:text-white duration-200">
+                            <MdEdit fontSize={20} />
+                        </button>
+                        <button className="flex w-1/10 justify-center items-center text-black hover:text-white duration-200">
+                            <MdDelete fontSize={20} />
+                        </button>
+                    </div>
+
+                    <div className="flex flex-row w-full bg-white hover:bg-gray-300 duration-200 cursor-pointer py-1 px-1">
+                        <div className="flex w-2/10 ">
+                            
+                        </div>
+                        <div className="flex flex-col w-6/10 text-black text-left ">
+                            <div className="flex w-full font-bold">
+                                Nombre de elemento
+                            </div>
+                            <div className="flex w-full font-normal">
+                                Descripcion de elemento
+                            </div>
+                        </div>
+                        <button className="flex w-1/10 justify-center items-center text-black hover:text-white duration-200">
+                            <MdEdit fontSize={20} />
+                        </button>
+                        <button className="flex w-1/10 justify-center items-center text-black hover:text-white duration-200">
+                            <MdDelete fontSize={20} />
+                        </button>
+                    </div>
+
+                    <div className="flex flex-row w-full bg-white hover:bg-gray-300 duration-200 cursor-pointer py-1 px-1">
+                        <div className="flex w-2/10 ">
+                            
+                        </div>
+                        <div className="flex flex-col w-6/10 text-black text-left ">
+                            <div className="flex w-full font-bold">
+                                Nombre de elemento
+                            </div>
+                            <div className="flex w-full font-normal">
+                                Descripcion de elemento
+                            </div>
+                        </div>
+                        <button className="flex w-1/10 justify-center items-center text-black hover:text-white duration-200">
+                            <MdEdit fontSize={20} />
+                        </button>
+                        <button className="flex w-1/10 justify-center items-center text-black hover:text-white duration-200">
+                            <MdDelete fontSize={20} />
+                        </button>
+                    </div>
+                    
 
                 </div>}
 
