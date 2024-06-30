@@ -29,6 +29,16 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     }
 
     const [formState, setFormState] = useState({});
+    useEffect(() => {
+        if (typeOfContent === 'list') {
+            setFormState({ title: contentToUpdate ? contentToUpdate.listName : null, description: contentToUpdate ? contentToUpdate.listDescription : null, privacy: contentToUpdate ? contentToUpdate.listPrivacy : null });
+        } else if (typeOfContent === 'post') {
+            setFormState({ title: contentToUpdate ? contentToUpdate.postTitle : null, body: contentToUpdate ? contentToUpdate.postBody : null });
+        } else if (typeOfContent === 'element') {
+            setFormState({ title: contentToUpdate ? contentToUpdate.itemName : null, description: contentToUpdate ? contentToUpdate.itemDescription : null, photoUrl: contentToUpdate ? contentToUpdate.photoUrl : null });
+        }
+    }, [contentToUpdate, typeOfContent])
+
     const [isButtonInactive, setIsButtonInactive] = useState(false);
     function inputChangeHandler (e) {
         const { name, value } = e.target;
@@ -99,15 +109,15 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Nombre de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Nombre del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-2 ">Título de publicación: </p>}
-                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="title" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={contentToUpdate ? ((typeOfContent === "list") ?  contentToUpdate.listName : (typeOfContent === "element") ? contentToUpdate.itemName : (typeOfContent  === "post") ? contentToUpdate.postTitle : null )  : null} />
+                    <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="title" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={formState.title} />
                 </div>
 
                 <div className={"flex flex-col w-full my-2 items-center " + (typeOfContent === "post" ? " md:flex-col" : " md:flex-row" )}>
                     {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Descripcion de la lista: </p>}
                     {(typeOfContent === 'element') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Descripcion del elemento: </p>}
                     {(typeOfContent === 'post') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-2 ">Contenido: </p>}
-                    {((typeOfContent === 'list') || (typeOfContent === 'element')) && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="description" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={contentToUpdate ? ((typeOfContent === "list") ?  contentToUpdate.listDescription : (typeOfContent === "element") ? contentToUpdate.itemDescription : null )  : null } />}
-                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" name="body" placeholder="Título" onChange={(e) => inputChangeHandler(e)}  value={contentToUpdate ? contentToUpdate.postBody : null}  />}
+                    {((typeOfContent === 'list') || (typeOfContent === 'element')) && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="description" placeholder="Título" onChange={(e) => inputChangeHandler(e)} value={formState.description} />}
+                    {(typeOfContent === 'post') && <textarea className="bg-gray-300 px-2 py-1 w-full" type="text" name="body" placeholder="Título" onChange={(e) => inputChangeHandler(e)}  value={formState.body} />}
                 </div>
 
                 {((typeOfContent === 'list') || (typeOfContent === 'element')) && <div className="flex flex-col md:flex-row md:w-full my-2 items-center py-1">
