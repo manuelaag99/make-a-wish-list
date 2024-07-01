@@ -7,7 +7,7 @@ import { ADD_LIST } from "../../mutations/ListMutations";
 import { GET_LISTS } from "../../queries/ListQueries";
 import { ADD_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
-import ListOfElements from "../ListOfElements";
+import ListOfElements from "../ListOfElementsToUpdate";
 
 
 
