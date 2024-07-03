@@ -7,7 +7,7 @@ import { ADD_LIST } from "../../mutations/ListMutations";
 import { GET_LISTS } from "../../queries/ListQueries";
 import { ADD_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
-import ListOfElements from "../ListOfElementsToUpdate";
+import ListOfElementsToUpdate from "../ListOfElementsToUpdate";
 
 
 
@@ -142,7 +142,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
 
                 </div>}
 
-                {(typeOfContent === 'list') && (!isAdd) && <ListOfElements />}
+                {(typeOfContent === 'list') && (!isAdd) && <ListOfElementsToUpdate listId="6660960e2e128966078f0339" />}
 
                 <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtondDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
             </div>
