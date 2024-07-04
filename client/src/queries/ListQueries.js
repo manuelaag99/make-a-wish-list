@@ -27,8 +27,8 @@ const GET_LISTS = gql`
 export { GET_LISTS };
 
 const GET_USER_LISTS = gql`
-	query getUserLists {
-		listsByCreator (creatorId: "6660935f2e128966078f032c") {
+	query getUserLists($creatorId: ID!) {
+		listsByCreator (creatorId: $creatorId) {
 			id
 			listName
 			listDescription

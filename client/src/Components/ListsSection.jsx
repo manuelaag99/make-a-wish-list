@@ -5,7 +5,9 @@ import { GET_USER_LISTS } from "../queries/ListQueries";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
 export default function ListsSection ({ selectList  }) {
-	const { loading, error, data } = useQuery(GET_USER_LISTS);
+	const { loading, error, data } = useQuery(GET_USER_LISTS, {
+		variables: { creatorId: "6660935f2e128966078f032c" }
+	});
 	const [isAddOrUpdateContentModalVisible, setIsAddOrUpdateContentModalVisible] = useState(false);
 	const [selectedListId, setSelectedListId] = useState(null);
 

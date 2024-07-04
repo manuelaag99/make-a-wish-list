@@ -137,6 +137,14 @@ const RootQuery = new GraphQLObjectType({
                 // return listItems;
             }
         },
+        listItemsByCreator: {
+            type: new GraphQLList(ListItemType),
+            args: { creatorId: { type: GraphQLID }},
+            resolve(parent, args) {
+                return ListItem.find({ creatorId: args.creatorId });
+                // return listItems;
+            }
+        },
         posts: {
             type: new GraphQLList(PostType),
             resolve(parent, args) {
