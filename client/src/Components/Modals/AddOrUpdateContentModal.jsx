@@ -138,7 +138,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                             <label htmlFor="private" >Privado</label>
                         </div>
                     </div>}
-                    {(typeOfContent === 'item') && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="photoUrl" placeholder="Enlace" onChange={(e) => inputChangeHandler(e)}  />}
+                    {(typeOfContent === 'item') && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="photoUrl" placeholder="Enlace" onChange={(e) => inputChangeHandler(e)} value={formState.photoUrl} />}
 
                 </div>}
 

@@ -6,7 +6,7 @@ const GET_LIST_ITEM = gql`
             id
             itemName
             itemDescription
-            photoUrl
+            itemPhotoUrl
         }
     }
 `
@@ -19,7 +19,7 @@ const GET_LIST_ITEMS = gql`
             id
             itemName
             itemDescription
-            photoUrl
+            itemPhotoUrl
         }
     }
 `
@@ -32,7 +32,7 @@ const GET_USER_LIST_ITEMS = gql`
             id
             itemName
             itemDescription
-            photoUrl
+            itemPhotoUrl
         }
     }
 `
@@ -45,7 +45,7 @@ const GET_LIST_ITEMS_BY_LIST = gql`
             id
             itemName
             itemDescription
-            photoUrl
+            itemPhotoUrl
         }
     }
 `

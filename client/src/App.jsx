@@ -1,5 +1,5 @@
 import './App.css';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache, useQuery } from '@apollo/client';
 
 import LargeCard from './Components/LargeCard';
 import SmallCard from './Components/SmallCard';
@@ -7,6 +7,7 @@ import AddButtonSection from './Components/AddButtonSection';
 import AddOrUpdateContentModal from './Components/Modals/AddOrUpdateContentModal';
 import { useState } from 'react';
 import ListWindowModal from './Components/Modals/ListWindowModal';
+import { GET_LIST_ITEMS } from './queries/ListItemQueries';
 
 const cache = new InMemoryCache({});
 

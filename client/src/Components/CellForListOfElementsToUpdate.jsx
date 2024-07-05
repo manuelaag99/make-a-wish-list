@@ -1,22 +1,22 @@
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
-export default function CellForListOfElementsToUpdate ({}) {
+export default function CellForListOfElementsToUpdate ({ listItem }) {
     return (
         <div className="flex flex-col sm:flex-row w-full bg-white hover:bg-gray-300 duration-200 cursor-pointer py-1 px-1">
-            <div className="flex flex-row w-full sm:w-8/10 my-2 sm:my-0 ">
-                <div className="flex w-1/4 px-2 py-1 ">
-                    <img src="" />
+            <div className="flex flex-row w-full sm:w-8/10 my-2 sm:my-0 h-24  ">
+                <div className="flex justify-center h-full w-1/4 px-3 py-1 object-contain">
+                    <img className=" object-fit aspect-auto " src={listItem.itemPhotoUrl} />
                 </div>
-                <div className="flex flex-col w-3/4 text-black text-left whitespace-nowrap overflow-hidden ">
+                <div className="flex flex-col w-6/10 text-black justify-center text-left whitespace-nowrap overflow-hidden ml-2 ">
                     <div className="flex w-full font-bold">
                         <p className="">
-                            Nombre de elemento
+                            {listItem.itemName}
                         </p>
                     </div>
                     <div className="flex w-full font-normal">
                         <p className="">
-                            Descripcion de elemento
+                            {listItem.itemDescription}
                         </p>
                     </div>
                 </div>

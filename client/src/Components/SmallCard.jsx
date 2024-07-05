@@ -4,6 +4,8 @@ import { useState } from "react";
 import { GET_USER } from "../queries/UserQueries";
 import { DELETE_USER } from "../mutations/UserMutations";
 
+import { IoSettingsSharp } from "react-icons/io5";
+
 
 export default function SmallCard ({ userId }) {
     const [deleteUser] = useMutation(DELETE_USER, {
@@ -11,6 +13,9 @@ export default function SmallCard ({ userId }) {
     });
 
     const [profilePicPathway, setProfilePicPathway] = useState(null);
+
+    const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
+
 	const { loading, error, data } = useQuery(GET_USER, {
         variables: { id: userId }
     });
@@ -26,23 +31,29 @@ export default function SmallCard ({ userId }) {
                 {profilePicPathway && <img className="w-full" src="" alt="" />}
                 {!profilePicPathway && <div className="w-full h-full bg-gray-300 rounded-md"></div>}
             </div>
-            <div className="flex flex-col w-full my-4">
-                <div className="flex w-full">
-                    <p className="text-left text-black font-bold overflow-hidden">
-                        {data.user.displayName}
-                    </p>
+            <div className="flex flex-row w-full my-4">
+                <div className="flex flex-col w-9/10">
+                    <div className="flex w-full">
+                        <p className="text-left text-black font-bold overflow-hidden">
+                            {data.user.displayName}
+                        </p>
+                    </div>
+                    <div className="flex w-full">
+                        <p className="text-left text-black overflow-hidden">
+                            Biografía
+                        </p>
+                    </div>
+                    <button className="flex w-full" onClick={deleteUser}>
+                        <p className="text-left text-black overflow-hidden">
+                            Borrar usuario
+                        </p>
+                    </button>
                 </div>
-                <div className="flex w-full">
-                    <p className="text-left text-black overflow-hidden">
-                        Biografía
-                    </p>
-                </div>
-                <button className="flex w-full" onClick={deleteUser}>
-                    <p className="text-left text-black overflow-hidden">
-                        Borrar usuario
-                    </p>
+                <button onClick={() => setIsEditProfileModalVisible(true)} className="flex w-1/10 justify-center items-start text-black hover:text-gray-400 duration-200">
+                    <IoSettingsSharp fontSize={20} />
                 </button>
             </div>
+            
         </div>
     )
 }
