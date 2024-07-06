@@ -49,18 +49,28 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     }
 
     function checkFormValidity () {
-        if ((typeOfContent === 'list') || (typeOfContent === 'item')) {
-            if (formState.title && formState.description && formState.privacy) {
-                setIsButtonInactive(false);
-            } else {
-                setIsButtonInactive(true);
+        if (formState.title && formState.description) {
+            if (typeOfContent === 'list') {
+                if (formState.privacy) {
+                    setIsButtonInactive(false);
+                } else {
+                    setIsButtonInactive(true);
+                }
+            } else if (typeOfContent === 'item') {
+                if (formState.photoUrl) {
+                    setIsButtonInactive(false);
+                } else {
+                    setIsButtonInactive(true);
+                }
+            } else if (typeOfContent === 'post') {
+                if (formState.body) {
+                    setIsButtonInactive(false);
+                } else {
+                    setIsButtonInactive(true);
+                }
             }
         } else {
-            if (formState.title && formState.body) {
-                setIsButtonInactive(false);
-            } else {
-                setIsButtonInactive(true);
-            }
+            setIsButtonInactive(true);
         }
     }
 

@@ -43,7 +43,7 @@ export default function App () {
 					<SmallCard userId={userid} />
 					<div className='flex flex-col w-full md:w-6/10 justify-center mt-5 md:mt-0'>
 						<LargeCard sendIdOfList={(listId) => openListWindow(listId)} />
-						<AddButtonSection onAddList={() => openAddContentModal("list")} onAddListElement={() => openAddContentModal("element")} onAddPost={() => openAddContentModal("post")} additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
+						<AddButtonSection onAddList={() => openAddContentModal("list")} onAddListElement={() => openAddContentModal("item")} onAddPost={() => openAddContentModal("post")} additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
 					</div>
 				</div>
 			</div>
