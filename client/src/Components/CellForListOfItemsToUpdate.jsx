@@ -1,7 +1,7 @@
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
-export default function CellForListOfElementsToUpdate ({ listItem }) {
+export default function CellForListOfItemsToUpdate ({ listItem }) {
     return (
         <div className="flex flex-col sm:flex-row w-full bg-white hover:bg-gray-300 duration-200 cursor-pointer py-1 px-1">
             <div className="flex flex-row w-full sm:w-8/10 my-2 sm:my-0 h-24  ">

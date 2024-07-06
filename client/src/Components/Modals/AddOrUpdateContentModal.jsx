@@ -7,7 +7,7 @@ import { ADD_LIST } from "../../mutations/ListMutations";
 import { GET_LISTS } from "../../queries/ListQueries";
 import { ADD_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
-import ListOfElementsToUpdate from "../ListOfElementsToUpdate";
+import ListOfItemsToUpdate from "../ListOfItemsToUpdate";
 
 
 
@@ -92,6 +92,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         }
     })
 
+
     return (
         <div>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
@@ -142,7 +143,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
 
                 </div>}
 
-                {(typeOfContent === 'list') && (!isAdd) && <ListOfElementsToUpdate listId="6660960e2e128966078f0339" />}
+                {(typeOfContent === 'list') && (!isAdd) && (contentToUpdate) && <ListOfItemsToUpdate listId={contentToUpdate.id} />}
 
                 <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtondDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
             </div>

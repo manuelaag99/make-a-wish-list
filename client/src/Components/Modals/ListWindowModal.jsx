@@ -1,13 +1,14 @@
 import { useState } from "react";
-import CellForListElement from "../CellForListElement";
 import { gql, useQuery } from "@apollo/client";
-import { GET_LIST } from "../../queries/ListQueries";
+import { GET_LIST_INFO } from "../../queries/ListQueries";
 
 import { IoMdClose } from "react-icons/io";
+import CellForListItem from "../CellForListItem";
+import ListOfItems from "../ListOfItems";
 
 
 export default function ListWindowModal ({ listId, onClose }) {
-	const { loading, error, data } = useQuery(GET_LIST,
+	const { loading, error, data } = useQuery(GET_LIST_INFO,
         { variables: { id: listId } }
     );
 
@@ -15,6 +16,7 @@ export default function ListWindowModal ({ listId, onClose }) {
 
 	if (!error && !data && loading) return <p>Loading...</p>
 
+    console.log(data)
     if (!error && !loading && data) {
         return (
             <>
@@ -27,6 +29,9 @@ export default function ListWindowModal ({ listId, onClose }) {
                         <p className="text-gray-300 text-center">
                             {(data.list.listPrivacy === "public") ? "Lista Pública" : "Lista Privada"}
                         </p>
+                        <p className="text-gray-300 text-center">
+                            de {(data.list.creator.displayName)}
+                        </p>
                         <button className="absolute top-2 right-2 text-black hover:text-gray-300 duration-200" onClick={onClose}>
                             <IoMdClose fontSize={18} />
                         </button>
@@ -37,10 +42,8 @@ export default function ListWindowModal ({ listId, onClose }) {
                             {data.list.listDescription}
                         </p>
                     </div>
-    
-                    <div className="flex flex-col justify-start items-center w-full h-4/10 overflow-auto">
-                        <CellForListElement />
-                    </div>
+                        
+                    <ListOfItems listId={listId} />
                 </div>
             </>
         )
