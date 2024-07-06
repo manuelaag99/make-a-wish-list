@@ -2,16 +2,26 @@ import { useEffect, useState } from "react";
 import PopUpWindowModal from "./PopUpWindowModal";
 import ActionButton from "../ActionButton";
 import { IoMdClose } from "react-icons/io";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_LIST } from "../../mutations/ListMutations";
-import { GET_LISTS } from "../../queries/ListQueries";
+import { GET_LISTS, GET_USER_LISTS } from "../../queries/ListQueries";
 import { ADD_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
 import ListOfItemsToUpdate from "../ListOfItemsToUpdate";
+import { ADD_LIST_ITEM } from "../../mutations/ListItemMutations";
+import { GET_LIST_ITEMS_BY_LIST } from "../../queries/ListItemQueries";
 
 
 
 export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClose, typeOfContent, userId }) {
+    const { loading, error, data } = useQuery(GET_USER_LISTS,
+        {
+            variables: { creatorId: userId }
+        }
+    )
+
+    console.log(data)
+
     let newCreationDate = new Date().toISOString();
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
 
@@ -22,7 +32,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         } else if (typeOfContent === 'post') {
             addPost(formState.title, formState.body, userId, newCreationDate);
         } else if (typeOfContent === 'item') {
-            console.log("Item added")
+            // addListItem(contentToUpdate.id, formState.title, formState.description, formState.photoUrl);
         }
         // setIsPopUpWindowVisible(true);
     }
@@ -57,7 +67,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                     setIsButtonInactive(true);
                 }
             } else if (typeOfContent === 'item') {
-                if (formState.photoUrl) {
+                if (formState.photoUrl && formState.list) {
                     setIsButtonInactive(false);
                 } else {
                     setIsButtonInactive(true);
@@ -102,12 +112,25 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         }
     })
 
+    // const [addListItem] = useMutation(ADD_LIST_ITEM, {
+    //     variables: { listId: contentToUpdate.id, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl },
+    //     update(cache, { data: { addListItem }}) {
+    //         const { listItemsByList } = cache.readQuery({ query: GET_LIST_ITEMS_BY_LIST, variables: { listId: contentToUpdate.id } });
+
+    //         cache.writeQuery({
+    //             query: GET_LIST_ITEMS_BY_LIST,
+    //             data: { listItemsByList: listItemsByList.concat([addListItem]) }
+    //         })
+    //     }
+    // })
+
+    console.log(formState)
 
     return (
         <div>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
             <div className="flex flex-col md:w-6/10 w-95 h-fit md:px-14 px-6 bg-white fixed top-[15%] left-[2.5%] md:left-[20%] z-30 rounded-md">
-                <button className="absolute top-2 right-2 text-black hover:text-gray-300 duration-200" onClick={onClose}>
+                <button className="absolute top-4 right-4 md:top-2 md:right-2 text-black hover:text-gray-300 duration-200" onClick={onClose}>
                     <IoMdClose fontSize={18} />
                 </button>
                 <div className="flex justify-center items-center w-full md:mt-8 mt-5 md:mb-8 mb-2">
@@ -152,6 +175,19 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                     {(typeOfContent === 'item') && <input className="bg-gray-300 px-2 py-1 w-full" type="text" name="photoUrl" placeholder="Enlace" onChange={(e) => inputChangeHandler(e)} value={formState.photoUrl} />}
 
                 </div>}
+
+                {(typeOfContent === 'item') && data && (data.listsByCreator) && (data.listsByCreator.length > 0) && <div className="flex flex-col md:flex-row md:w-full my-2 items-center py-1">
+                    <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Lista a la que pertenece: </p>
+                    <select className="bg-gray-300 px-2 py-1 w-full" id="list" name="list" onChange={(e) => inputChangeHandler(e)} > 
+                        <option value={null}>----</option>
+                        {data.listsByCreator.map((list, index) => {
+                            return (
+                                <option className="" key={index} value={list.id}>{list.listName}</option>
+                            )
+                        })}
+                    </select>
+                </div>}
+                {(typeOfContent === 'item') && data && (data.listsByCreator) && (data.listsByCreator.length === 0) && <p className="text-gray-500 text-center mt-3">No puedes agregar elementos porque no has creado ninguna lista</p>}
 
                 {(typeOfContent === 'list') && (!isAdd) && (contentToUpdate) && <ListOfItemsToUpdate listId={contentToUpdate.id} />}
 
