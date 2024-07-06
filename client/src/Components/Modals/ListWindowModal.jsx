@@ -3,7 +3,6 @@ import { gql, useQuery } from "@apollo/client";
 import { GET_LIST_INFO } from "../../queries/ListQueries";
 
 import { IoMdClose } from "react-icons/io";
-import CellForListItem from "../CellForListItem";
 import ListOfItems from "../ListOfItems";
 
 
