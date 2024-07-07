@@ -9,7 +9,6 @@ import { ADD_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
 import ListOfItemsToUpdate from "../ListOfItemsToUpdate";
 import { ADD_LIST_ITEM } from "../../mutations/ListItemMutations";
-import { GET_LIST_ITEMS_BY_LIST } from "../../queries/ListItemQueries";
 
 
 
@@ -20,8 +19,6 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         }
     )
 
-    console.log(data)
-
     let newCreationDate = new Date().toISOString();
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
 
@@ -30,9 +27,9 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         if (typeOfContent === 'list') {
             addList(formState.title, formState.privacy, formState.description, userId);
         } else if (typeOfContent === 'post') {
-            addPost(formState.title, formState.body, userId, newCreationDate);
+            addPost(formState.title, formState.body, newCreationDate, userId);
         } else if (typeOfContent === 'item') {
-            // addListItem(contentToUpdate.id, formState.title, formState.description, formState.photoUrl);
+            addListItem(formState.list, formState.title, formState.description, formState.photoUrl, userId);
         }
         // setIsPopUpWindowVisible(true);
     }
@@ -48,7 +45,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         } else if (typeOfContent === 'post') {
             setFormState({ title: contentToUpdate ? contentToUpdate.postTitle : null, body: contentToUpdate ? contentToUpdate.postBody : null });
         } else if (typeOfContent === 'item') {
-            setFormState({ title: contentToUpdate ? contentToUpdate.itemName : null, description: contentToUpdate ? contentToUpdate.itemDescription : null, photoUrl: contentToUpdate ? contentToUpdate.photoUrl : null });
+            setFormState({ title: contentToUpdate ? contentToUpdate.itemName : null, description: contentToUpdate ? contentToUpdate.itemDescription : null, photoUrl: contentToUpdate ? contentToUpdate.photoUrl : null, list: contentToUpdate ? contentToUpdate.listId : null });
         }
     }, [contentToUpdate, typeOfContent])
 
@@ -101,7 +98,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     })
 
     const [addPost] = useMutation(ADD_POST, {
-        variables: { postTitle: formState.title, postBody: formState.body, creatorId: userId, creationDate: newCreationDate },
+        variables: { postTitle: formState.title, postBody: formState.body, creationDate: newCreationDate, creatorId: userId },
         update(cache, { data: { addPost }}) {
             const { posts } = cache.readQuery({ query: GET_POSTS });
 
@@ -112,17 +109,27 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         }
     })
 
-    // const [addListItem] = useMutation(ADD_LIST_ITEM, {
-    //     variables: { listId: contentToUpdate.id, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl },
-    //     update(cache, { data: { addListItem }}) {
-    //         const { listItemsByList } = cache.readQuery({ query: GET_LIST_ITEMS_BY_LIST, variables: { listId: contentToUpdate.id } });
 
-    //         cache.writeQuery({
-    //             query: GET_LIST_ITEMS_BY_LIST,
-    //             data: { listItemsByList: listItemsByList.concat([addListItem]) }
-    //         })
-    //     }
-    // })
+
+
+
+
+
+
+
+    
+
+    const [addListItem] = useMutation(ADD_LIST_ITEM, {
+        variables: { listId: formState.list, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl, creatorId: userId },
+        update(cache, { data: { addListItem }}) {
+            const { listItems } = cache.readQuery({ query: GET_LISTS });
+
+            cache.writeQuery({
+                query: GET_LISTS,
+                data: { listItems: listItems.concat([addListItem]) }
+            })
+        }
+    })
 
     console.log(formState)
 
@@ -178,8 +185,8 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
 
                 {(typeOfContent === 'item') && data && (data.listsByCreator) && (data.listsByCreator.length > 0) && <div className="flex flex-col md:flex-row md:w-full my-2 items-center py-1">
                     <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Lista a la que pertenece: </p>
-                    <select className="bg-gray-300 px-2 py-1 w-full" id="list" name="list" onChange={(e) => inputChangeHandler(e)} > 
-                        <option value={null}>----</option>
+                    <select className="bg-gray-300 px-2 py-1 w-full" id="list" name="list" onChange={(e) => inputChangeHandler(e)} value={formState.list} > 
+                        <option value="">----</option>
                         {data.listsByCreator.map((list, index) => {
                             return (
                                 <option className="" key={index} value={list.id}>{list.listName}</option>

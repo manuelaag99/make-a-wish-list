@@ -10,8 +10,8 @@ const DELETE_POST = gql`
 `
 
 const ADD_POST = gql`
-    mutation addPost($postTitle: String!, $postBody: String!, $creatorId: ID!, $creationDate: String!) {
-        addPost(postTitle: $postTitle, postBody: $postBody, creatorId: $creatorId, creationDate: $creationDate) {
+    mutation addPost($postTitle: String!, $postBody: String!, $creationDate: String!, $creatorId: ID!) {
+        addPost(postTitle: $postTitle, postBody: $postBody, creationDate: $creationDate, creatorId: $creatorId) {
             id
             postTitle
             postBody

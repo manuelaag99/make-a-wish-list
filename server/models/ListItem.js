@@ -12,6 +12,9 @@ const ListItemSchema = new mongoose.Schema({
     },
     listId: {
         type: mongoose.Schema.Types.ObjectId
+    },
+    creatorId: {
+        type: mongoose.Schema.Types.ObjectId
     }
 })
 

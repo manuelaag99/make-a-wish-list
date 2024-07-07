@@ -53,6 +53,12 @@ const ListItemType = new GraphQLObjectType({
             resolve(parent, args) {
                 return List.findById(parent.listId);
             }
+        },
+        creator: {
+            type: UserType,
+            resolve(parent, args) {
+                return User.findById(parent.creatorId);
+            }
         }
     })
 });
@@ -293,6 +299,7 @@ const mutation = new GraphQLObjectType({
                 itemDescription: { type: GraphQLNonNull(GraphQLString) },
                 itemPhotoUrl: { type: GraphQLNonNull(GraphQLString) },
                 listId: { type: GraphQLNonNull(GraphQLID) },
+                creatorId: { type: GraphQLNonNull(GraphQLID) }
             },
             resolve(parent, args) {
                 const listItem = new ListItem({
@@ -300,6 +307,7 @@ const mutation = new GraphQLObjectType({
                     itemDescription: args.itemDescription,
                     itemPhotoUrl: args.itemPhotoUrl,
                     listId: args.listId,
+                    creatorId: args.creatorId
                 });
 
                 return listItem.save();
