@@ -2,11 +2,30 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 import { useState } from "react";
+import { useMutation } from "@apollo/client";
+import { DELETE_LIST_ITEM } from "../mutations/ListItemMutations";
+import { GET_LIST_ITEMS_BY_LIST } from "../queries/ListItemQueries";
 
 export default function CellForListOfItemsToUpdate ({ listItem }) {
     let userid = "6660935f2e128966078f032c";
 
     console.log(listItem)
+
+    const [deleteListItemFromDataBase] = useMutation(DELETE_LIST_ITEM, {
+        variables: { id: listItem.id },
+        update(cache, { data: { deleteListItem } }) {
+            const { listItemsByList } = cache.readQuery({ query: GET_LIST_ITEMS_BY_LIST });
+            const newItemsByList = listItemsByList.filter((item) => item.id !== deleteListItem.id);
+            cache.writeQuery({
+                query: GET_LIST_ITEMS_BY_LIST,
+                data: { listItemsByList: newItemsByList }
+            });
+        }
+    });
+
+    function onDeleteListItem () {
+        deleteListItemFromDataBase();
+    }
 
     const [isAddOrUpdateContentModalVisible, setIsAddOrUpdateContentModalVisible] = useState(false);
 
@@ -34,7 +53,7 @@ export default function CellForListOfItemsToUpdate ({ listItem }) {
                 <button className="flex w-1/2 py-1 justify-center items-center text-black hover:text-white duration-200" onClick={() => setIsAddOrUpdateContentModalVisible(true)}>
                     <MdEdit fontSize={20} />
                 </button>
-                <button className="flex w-1/2 py-1 justify-center items-center text-black hover:text-white duration-200">
+                <button className="flex w-1/2 py-1 justify-center items-center text-black hover:text-white duration-200" onClick={onDeleteListItem}>
                     <MdDelete fontSize={20} />
                 </button>
             </div>
