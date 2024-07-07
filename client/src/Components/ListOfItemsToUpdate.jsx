@@ -1,6 +1,7 @@
 import { GET_LIST_ITEMS_BY_LIST } from "../queries/ListItemQueries";
 import { useQuery } from "@apollo/client";
 import CellForListOfItemsToUpdate from "./CellForListOfItemsToUpdate";
+import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
 export default function ListOfItemsToUpdate ({ listId }) {
     let userid = "6660935f2e128966078f032c";

@@ -46,6 +46,9 @@ const GET_LIST_ITEMS_BY_LIST = gql`
             itemName
             itemDescription
             itemPhotoUrl
+            list {
+                id
+            }
         }
     }
 `
