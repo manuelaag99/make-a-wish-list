@@ -20,6 +20,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     )
 
     let newCreationDate = new Date().toISOString();
+    const [errorWithAddingOrUpdating, setErrorWithAddingOrUpdating] = useState(false);
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
     const [popUpWindowText, setPopUpWindowText] = useState('');
 
@@ -37,9 +38,22 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                 setPopUpWindowText("Elemento agregado con éxito")
             }
         } else if (!isAdd) {
-
+            if (typeOfContent === 'list') {
+                setPopUpWindowText("Lista actualizada con éxito")
+            } else if (typeOfContent === 'post') {
+                setPopUpWindowText("Publicación actualizada con éxito")
+            } else if (typeOfContent === 'item') {
+                setPopUpWindowText("Elemento actualizada con éxito")
+            }
         }
         setIsPopUpWindowVisible(true);
+    }
+
+    function closePopUpWindowFunction () {
+        if (errorWithAddingOrUpdating) {
+            setErrorWithAddingOrUpdating(false);
+            onClose();
+        }
     }
 
     function popUpWindowButtonFunction () {
@@ -199,8 +213,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     
                     <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
                 </div>
-                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} textForPopUp={popUpWindowText} typeOfContent={typeOfContent} />}
-                <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} textForPopUp="agresjsbdsbkifbv" typeOfContent={typeOfContent} />
+                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} textForPopUp={popUpWindowText} typeOfContent={typeOfContent} onClose={closePopUpWindowFunction} />}
             </div>
         )
 }
