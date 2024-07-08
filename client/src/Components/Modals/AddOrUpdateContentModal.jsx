@@ -21,17 +21,25 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
 
     let newCreationDate = new Date().toISOString();
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
+    const [popUpWindowText, setPopUpWindowText] = useState('');
 
     function addButtonFunction () {
         console.log(formState.title, formState.body, userId)
-        if (typeOfContent === 'list') {
-            addList(formState.title, formState.privacy, formState.description, userId);
-        } else if (typeOfContent === 'post') {
-            addPost(formState.title, formState.body, newCreationDate, userId);
-        } else if (typeOfContent === 'item') {
-            addListItem(formState.list, formState.title, formState.description, formState.photoUrl, userId);
+        if (isAdd) {
+            if (typeOfContent === 'list') {
+                addList(formState.title, formState.privacy, formState.description, userId);
+                setPopUpWindowText("Lista agregada con éxito")
+            } else if (typeOfContent === 'post') {
+                addPost(formState.title, formState.body, newCreationDate, userId);
+                setPopUpWindowText("Publicación agregada con éxito")
+            } else if (typeOfContent === 'item') {
+                addListItem(formState.list, formState.title, formState.description, formState.photoUrl, userId);
+                setPopUpWindowText("Elemento agregado con éxito")
+            }
+        } else if (!isAdd) {
+
         }
-        // setIsPopUpWindowVisible(true);
+        setIsPopUpWindowVisible(true);
     }
 
     function popUpWindowButtonFunction () {
@@ -189,9 +197,10 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     
                     {(typeOfContent === 'list') && (!isAdd) && (contentToUpdate) && <ListOfItemsToUpdate listId={contentToUpdate.id} />}
     
-                    <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtondDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
+                    <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
                 </div>
-                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} typeOfContent={typeOfContent} />}
+                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} textForPopUp={popUpWindowText} typeOfContent={typeOfContent} />}
+                <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} textForPopUp="agresjsbdsbkifbv" typeOfContent={typeOfContent} />
             </div>
         )
 }
