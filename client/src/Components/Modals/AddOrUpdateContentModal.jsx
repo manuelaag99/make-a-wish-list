@@ -3,7 +3,7 @@ import PopUpWindowModal from "./PopUpWindowModal";
 import ActionButton from "../ActionButton";
 import { IoMdClose } from "react-icons/io";
 import { useMutation, useQuery } from "@apollo/client";
-import { ADD_LIST } from "../../mutations/ListMutations";
+import { ADD_LIST, UPDATE_LIST } from "../../mutations/ListMutations";
 import { GET_LISTS, GET_USER_LISTS } from "../../queries/ListQueries";
 import { ADD_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
@@ -39,6 +39,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
             }
         } else if (!isAdd) {
             if (typeOfContent === 'list') {
+                updateList(formState.id, formState.title, formState.privacy, formState.description);
                 setPopUpWindowText("Lista actualizada con éxito")
             } else if (typeOfContent === 'post') {
                 setPopUpWindowText("Publicación actualizada con éxito")
@@ -50,26 +51,24 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     }
 
     function closePopUpWindowFunction () {
-        if (errorWithAddingOrUpdating) {
-            setErrorWithAddingOrUpdating(false);
+        if (!errorWithAddingOrUpdating) {
+            setIsPopUpWindowVisible(false);
             onClose();
         }
-    }
-
-    function popUpWindowButtonFunction () {
-        onClose();
     }
 
     const [formState, setFormState] = useState({});
     useEffect(() => {
         if (typeOfContent === 'list') {
-            setFormState({ title: contentToUpdate ? contentToUpdate.listName : null, description: contentToUpdate ? contentToUpdate.listDescription : null, privacy: contentToUpdate ? contentToUpdate.listPrivacy : null });
+            setFormState({ id: contentToUpdate ? contentToUpdate.id : null, title: contentToUpdate ? contentToUpdate.listName : null, description: contentToUpdate ? contentToUpdate.listDescription : null, privacy: contentToUpdate ? contentToUpdate.listPrivacy : null });
         } else if (typeOfContent === 'post') {
-            setFormState({ title: contentToUpdate ? contentToUpdate.postTitle : null, body: contentToUpdate ? contentToUpdate.postBody : null });
+            setFormState({ id: contentToUpdate ? contentToUpdate.id : null, title: contentToUpdate ? contentToUpdate.postTitle : null, body: contentToUpdate ? contentToUpdate.postBody : null });
         } else if (typeOfContent === 'item') {
-            setFormState({ title: contentToUpdate ? contentToUpdate.itemName : null, description: contentToUpdate ? contentToUpdate.itemDescription : null, photoUrl: contentToUpdate ? contentToUpdate.itemPhotoUrl : null, list: contentToUpdate ? contentToUpdate.list.id : null });
+            setFormState({ id: contentToUpdate ? contentToUpdate.id : null, title: contentToUpdate ? contentToUpdate.itemName : null, description: contentToUpdate ? contentToUpdate.itemDescription : null, photoUrl: contentToUpdate ? contentToUpdate.itemPhotoUrl : null, list: contentToUpdate ? contentToUpdate.list.id : null });
         }
     }, [contentToUpdate, typeOfContent])
+
+    console.log(formState) 
 
     const [isButtonInactive, setIsButtonInactive] = useState(false);
     function inputChangeHandler (e) {
@@ -119,6 +118,11 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         }
     })
 
+    const [updateList] = useMutation(UPDATE_LIST, {
+        variables: { listId: formState.id, listName: formState.title, listPrivacy: formState.privacy, listDescription: formState.description },
+        refetchQueries: [{ query: GET_LISTS }]
+    })
+
     const [addPost] = useMutation(ADD_POST, {
         variables: { postTitle: formState.title, postBody: formState.body, creationDate: newCreationDate, creatorId: userId },
         update(cache, { data: { addPost }}) {
@@ -142,9 +146,6 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
             })
         }
     })
-
-    console.log(contentToUpdate)
-    console.log(formState)
 
     return (
             <div>
@@ -179,8 +180,8 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     
                     {((typeOfContent === 'list') || (typeOfContent === 'item')) && <div className="flex flex-col md:flex-row md:w-full my-2 items-center py-1">
                         <div className="">
-                            {(typeOfContent === 'list') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Privacidad de la lista: </p>}
-                            {(typeOfContent === 'item') && <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Enlace de foto del elemento: </p>}
+                            {(typeOfContent === 'list') && <p className="text-black md:mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Privacidad de la lista: </p>}
+                            {(typeOfContent === 'item') && <p className="text-black md:mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Enlace de foto del elemento: </p>}
                         </div>
                         {(typeOfContent === 'list') && <div className="flex flex-col md:flex-row">
                             <div>
@@ -213,7 +214,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     
                     <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
                 </div>
-                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={popUpWindowButtonFunction} textForPopUp={popUpWindowText} typeOfContent={typeOfContent} onClose={closePopUpWindowFunction} />}
+                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={closePopUpWindowFunction} textForPopUp={popUpWindowText} typeOfContent={typeOfContent} onClose={closePopUpWindowFunction} />}
             </div>
         )
 }

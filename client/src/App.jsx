@@ -4,11 +4,42 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 
-const cache = new InMemoryCache({});
+const cache = new InMemoryCache({
+	typePolicies: {
+		Query: {
+			fields: {
+				users: {
+					keyArgs: false,
+					merge(existing = [], incoming = []) {
+						return [...existing, ...incoming];
+					}
+				},
+				lists: {
+					keyArgs: false,
+					merge(existing = [], incoming = []) {
+						return [...existing, ...incoming];
+					}
+				},
+				listItems: {
+					keyArgs: false,
+					merge(existing = [], incoming = []) {
+						return [...existing, ...incoming];
+					}
+				},
+				posts: {
+					keyArgs: false,
+					merge(existing = [], incoming = []) {
+						return [...existing, ...incoming];
+					}
+				}
+			}
+		}
+	}
+});
 
 const client = new ApolloClient({
 	uri: 'http://localhost:5000/graphql',
-	cache: new InMemoryCache()	
+	cache	
 })
 
 export default function App () {

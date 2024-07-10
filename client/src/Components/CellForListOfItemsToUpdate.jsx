@@ -9,8 +9,6 @@ import { GET_LIST_ITEMS_BY_LIST } from "../queries/ListItemQueries";
 export default function CellForListOfItemsToUpdate ({ listItem }) {
     let userid = "6660935f2e128966078f032c";
 
-    console.log(listItem)
-
     const [deleteListItemFromDataBase] = useMutation(DELETE_LIST_ITEM, {
         variables: { id: listItem.id },
         update(cache, { data: { deleteListItem } }) {
