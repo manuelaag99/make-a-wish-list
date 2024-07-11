@@ -5,7 +5,7 @@ import { IoMdClose } from "react-icons/io";
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_LIST, UPDATE_LIST } from "../../mutations/ListMutations";
 import { GET_LISTS, GET_USER_LISTS } from "../../queries/ListQueries";
-import { ADD_POST } from "../../mutations/PostMutations";
+import { ADD_POST, UPDATE_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
 import ListOfItemsToUpdate from "../ListOfItemsToUpdate";
 import { ADD_LIST_ITEM } from "../../mutations/ListItemMutations";
@@ -42,6 +42,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                 updateList(formState.id, formState.title, formState.privacy, formState.description);
                 setPopUpWindowText("Lista actualizada con éxito")
             } else if (typeOfContent === 'post') {
+                updatePost(formState.id, formState.title, formState.body);
                 setPopUpWindowText("Publicación actualizada con éxito")
             } else if (typeOfContent === 'item') {
                 setPopUpWindowText("Elemento actualizada con éxito")
@@ -133,6 +134,11 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                 data: { posts: posts.concat([addPost]) }
             })
         }
+    })
+
+    const [updatePost] = useMutation(UPDATE_POST, {
+        variables: { postId: formState.id, postTitle: formState.title, postBody: formState.body },
+        refetchQueries: [{ query: GET_POSTS }]
     })
 
     const [addListItem] = useMutation(ADD_LIST_ITEM, {
