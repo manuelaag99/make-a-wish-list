@@ -8,7 +8,7 @@ import { GET_LISTS, GET_USER_LISTS } from "../../queries/ListQueries";
 import { ADD_POST, UPDATE_POST } from "../../mutations/PostMutations";
 import { GET_POSTS } from "../../queries/PostQueries";
 import ListOfItemsToUpdate from "../ListOfItemsToUpdate";
-import { ADD_LIST_ITEM } from "../../mutations/ListItemMutations";
+import { ADD_LIST_ITEM, UPDATE_LIST_ITEM } from "../../mutations/ListItemMutations";
 
 
 
@@ -45,6 +45,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                 updatePost(formState.id, formState.title, formState.body);
                 setPopUpWindowText("Publicación actualizada con éxito")
             } else if (typeOfContent === 'item') {
+                updateListItem(formState.id, formState.title, formState.description, formState.photoUrl);
                 setPopUpWindowText("Elemento actualizada con éxito")
             }
         }
@@ -151,6 +152,11 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                 data: { listItems: listItems.concat([addListItem]) }
             })
         }
+    })
+
+    const [updateListItem] = useMutation(UPDATE_LIST_ITEM, {
+        variables: { itemId: formState.id, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl },
+        refetchQueries: [{ query: GET_LISTS }]
     })
 
     return (
