@@ -11,16 +11,10 @@ export default function CellForListOfItemsToUpdate ({ listItem }) {
 
     const [deleteListItemFromDataBase] = useMutation(DELETE_LIST_ITEM, {
         variables: { id: listItem.id },
-        update(cache, { data: { deleteListItem } }) {
-            const { listItemsByList } = cache.readQuery({ query: GET_LIST_ITEMS_BY_LIST });
-            const newItemsByList = listItemsByList.filter((item) => item.id !== deleteListItem.id);
-            cache.writeQuery({
-                query: GET_LIST_ITEMS_BY_LIST,
-                data: { listItemsByList: newItemsByList }
-            });
-        }
+        refetchQueries: [{ query: GET_LIST_ITEMS_BY_LIST }]
     });
 
+    console.log(listItem);
     function onDeleteListItem () {
         deleteListItemFromDataBase();
     }

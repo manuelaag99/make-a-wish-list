@@ -6,35 +6,19 @@ import ErrorPage from './pages/ErrorPage';
 
 const cache = new InMemoryCache({
 	typePolicies: {
-		Query: {
-			fields: {
-				users: {
-					keyArgs: false,
-					merge(existing = [], incoming = []) {
-						return [...existing, ...incoming];
-					}
-				},
-				lists: {
-					keyArgs: false,
-					merge(existing = [], incoming = []) {
-						return [...existing, ...incoming];
-					}
-				},
-				listItems: {
-					keyArgs: false,
-					merge(existing = [], incoming = []) {
-						return [...existing, ...incoming];
-					}
-				},
-				posts: {
-					keyArgs: false,
-					merge(existing = [], incoming = []) {
-						return [...existing, ...incoming];
-					}
-				}
-			}
+		User: {
+			keyFields: ['id']
+		},
+		List: {
+			keyFields: ['id']
+		},
+		ListItem: {
+			keyFields: ['id']
+		},
+		Post: {
+			keyFields: ['id']
 		}
-	}
+	},
 });
 
 const client = new ApolloClient({

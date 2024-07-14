@@ -7,17 +7,11 @@ import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
 export default function ListBox ({ list, onClickBox }) {
 	const [deleteListFromDataBase] = useMutation(DELETE_LIST, {
-        variables: { id: list.listId },
-        // refetchQueries: [{ query: GET_USER_LISTS, variables: { id: "6679ee76aca5c3f01cfc0080" } }]
-		update(cache, { data: { deleteList } }) {
-			const { listsByCreator } = cache.readQuery({ query: GET_USER_LISTS });
-			const newListsByCreator = listsByCreator.filter((list) => list.id !== deleteList.id);
-			cache.writeQuery({
-				query: GET_USER_LISTS,
-				data: { listsByCreator: newListsByCreator }
-			});
-		}
+        variables: { id: list.id },
+        refetchQueries: [{ query: GET_USER_LISTS }]
     });
+
+	console.log(list);
 
 	function onDeleteList () {
 		deleteListFromDataBase();

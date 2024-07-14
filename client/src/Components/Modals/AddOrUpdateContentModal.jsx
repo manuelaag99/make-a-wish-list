@@ -79,18 +79,20 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     }
 
     function checkFormValidity () {
-        if (formState.title && formState.description) {
-            if (typeOfContent === 'list') {
-                if (formState.privacy) {
-                    setIsButtonInactive(false);
-                } else {
-                    setIsButtonInactive(true);
-                }
-            } else if (typeOfContent === 'item') {
-                if (formState.photoUrl && formState.list) {
-                    setIsButtonInactive(false);
-                } else {
-                    setIsButtonInactive(true);
+        if (formState.title) {
+            if (formState.description) {
+                if (typeOfContent === 'list') {
+                    if (formState.privacy) {
+                        setIsButtonInactive(false);
+                    } else {
+                        setIsButtonInactive(true);
+                    }
+                } else if (typeOfContent === 'item') {
+                    if (formState.photoUrl && formState.list) {
+                        setIsButtonInactive(false);
+                    } else {
+                        setIsButtonInactive(true);
+                    }
                 }
             } else if (typeOfContent === 'post') {
                 if (formState.body) {
@@ -110,19 +112,20 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
 
     const [addList] = useMutation(ADD_LIST, {
         variables: { listName: formState.title, listPrivacy: formState.privacy, listDescription: formState.description, creatorId: userId },
-        update(cache, { data: { addList }}) {
-            const { lists } = cache.readQuery({ query: GET_LISTS });
+        // update(cache, { data: { addList }}) {
+        //     const { lists } = cache.readQuery({ query: GET_LISTS });
 
-            cache.writeQuery({
-                query: GET_LISTS,
-                data: { lists: lists.concat([addList]) }
-            })
-        }
+        //     cache.writeQuery({
+        //         query: GET_LISTS,
+        //         data: { lists: lists.concat([addList]) }
+        //     })
+        // }
+        refetchQueries: [{ query: GET_LISTS }]
     })
 
     const [updateList] = useMutation(UPDATE_LIST, {
-        variables: { listId: formState.id, listName: formState.title, listPrivacy: formState.privacy, listDescription: formState.description },
-        refetchQueries: [{ query: GET_LISTS }]
+        variables: { id: formState.id, listName: formState.title, listPrivacy: formState.privacy, listDescription: formState.description },
+        refetchQueries: [{ query: GET_LISTS, variables: { creatorId: userId } }]
     })
 
     const [addPost] = useMutation(ADD_POST, {
@@ -138,7 +141,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     })
 
     const [updatePost] = useMutation(UPDATE_POST, {
-        variables: { postId: formState.id, postTitle: formState.title, postBody: formState.body },
+        variables: { id: formState.id, postTitle: formState.title, postBody: formState.body },
         refetchQueries: [{ query: GET_POSTS }]
     })
 
@@ -155,7 +158,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     })
 
     const [updateListItem] = useMutation(UPDATE_LIST_ITEM, {
-        variables: { itemId: formState.id, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl },
+        variables: { id: formState.id, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl },
         refetchQueries: [{ query: GET_LISTS }]
     })
 
