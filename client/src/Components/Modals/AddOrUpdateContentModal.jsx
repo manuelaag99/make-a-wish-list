@@ -158,7 +158,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     })
 
     const [updateListItem] = useMutation(UPDATE_LIST_ITEM, {
-        variables: { id: formState.id, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl },
+        variables: { id: formState.id, listId: formState.list, itemName: formState.title, itemDescription: formState.description, itemPhotoUrl: formState.photoUrl },
         refetchQueries: [{ query: GET_LISTS }]
     })
 
