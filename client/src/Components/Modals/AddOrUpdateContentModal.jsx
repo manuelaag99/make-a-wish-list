@@ -227,7 +227,8 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     
                     {(typeOfContent === 'list') && (!isAdd) && (contentToUpdate) && <ListOfItemsToUpdate listId={contentToUpdate.id} />}
     
-                    <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} />
+                    {isAdd && <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} textForActionButton="Agregar" />}
+                    {!isAdd && <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6" isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} textForActionButton="Actualizar" />}
                 </div>
                 {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={closePopUpWindowFunction} textForPopUp={popUpWindowText} typeOfContent={typeOfContent} onClose={closePopUpWindowFunction} />}
             </div>

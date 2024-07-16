@@ -4,22 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 
-const cache = new InMemoryCache({
-	typePolicies: {
-		User: {
-			keyFields: ['id']
-		},
-		List: {
-			keyFields: ['id']
-		},
-		ListItem: {
-			keyFields: ['id']
-		},
-		Post: {
-			keyFields: ['id']
-		}
-	},
-});
+const cache = new InMemoryCache();
 
 const client = new ApolloClient({
 	uri: 'http://localhost:5000/graphql',
@@ -29,7 +14,7 @@ const client = new ApolloClient({
 export default function App () {
 	
 	return (
-		<ApolloProvider client={client}>
+		<ApolloProvider client={client} >
 			<Router>
 				<Routes>
 					<Route path='/profile' element={<ProfilePage />} />
