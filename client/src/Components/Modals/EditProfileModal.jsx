@@ -1,4 +1,10 @@
+import { useState } from "react";
+import { MdOutlineVisibility } from "react-icons/md";
+import { MdOutlineVisibilityOff } from "react-icons/md";
+
 export default function EditProfileModal ({ onClose}) {
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
     return (
         <>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
@@ -26,9 +32,10 @@ export default function EditProfileModal ({ onClose}) {
                     </p>
                     
                     <div className="flex flex-row bg-gray-300 w-full md:ml-3">
-                        <input className="bg-gray-300 w-full md:ml-3 p-1 outline-none " />
-                        <button className="bg-gray-300 p-1">
-                            
+                        <input className="bg-gray-300 w-full md:ml-3 p-1 outline-none " type="password" />
+                        <button className="bg-gray-300 px-2">
+                            {isPasswordVisible && <MdOutlineVisibility fontSize={20} />}
+                            {!isPasswordVisible && <MdOutlineVisibilityOff fontSize={20} />}
                         </button>
                     </div>
                     
