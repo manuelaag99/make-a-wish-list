@@ -5,6 +5,7 @@ import { GET_USER } from "../queries/UserQueries";
 import { DELETE_USER } from "../mutations/UserMutations";
 
 import { IoSettingsSharp } from "react-icons/io5";
+import EditProfileModal from "./Modals/EditProfileModal";
 
 
 export default function SmallCard ({ userId }) {
@@ -53,7 +54,7 @@ export default function SmallCard ({ userId }) {
                     <IoSettingsSharp fontSize={20} />
                 </button>
             </div>
-            
+            <EditProfileModal onClose={() => setIsEditProfileModalVisible(false)} isVisible={isEditProfileModalVisible} />
         </div>
     )
 }
