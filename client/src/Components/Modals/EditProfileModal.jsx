@@ -68,25 +68,25 @@ export default function EditProfileModal ({ onClose, userId }) {
                     </div>
 
                     <div className="flex flex-col justify-center items-center w-full mb-4 mt-4 md:mt-0">
-                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-2">
+                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                             <p className="w-fit md:text-left text-center">
                                 Nombre
                             </p>
                             <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="displayName" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.displayName} />
                         </div>
-                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-2">
+                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                             <p className="w-fit md:text-left text-center">
                                 Usuario
                             </p>
                             <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="username" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.username} />
                         </div>
-                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-2">
+                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                             <p className="w-fit md:text-left text-center whitespace-nowrap">
                                 E-mail
                             </p>
                             <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="email" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.email} />
                         </div>
-                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-2">
+                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                             <p className="w-fit md:text-left text-center">
                                 Contraseña
                             </p>
