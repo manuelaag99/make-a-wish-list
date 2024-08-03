@@ -50,7 +50,7 @@ export default function SmallCard ({ userId }) {
                         </p>
                     </button>
                 </div>
-                <button onClick={() => setIsEditProfileModalVisible(true)} className="flex w-1/10 justify-center items-start text-black hover:text-gray-400 duration-200">
+                <button onClick={() => setIsEditProfileModalVisible(true)} className="flex w-fit justify-center items-start text-black hover:text-gray-400 duration-200" >
                     <IoSettingsSharp fontSize={20} />
                 </button>
             </div>
