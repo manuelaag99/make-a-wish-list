@@ -15,7 +15,7 @@ export default function SmallCard ({ userId }) {
 
     const [profilePicPathway, setProfilePicPathway] = useState(null);
 
-    const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
+    const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(true);
 
 	const { loading, error, data } = useQuery(GET_USER, {
         variables: { id: userId }
@@ -54,7 +54,7 @@ export default function SmallCard ({ userId }) {
                     <IoSettingsSharp fontSize={20} />
                 </button>
             </div>
-            <EditProfileModal onClose={() => setIsEditProfileModalVisible(false)} isVisible={isEditProfileModalVisible} />
+            {isEditProfileModalVisible && <EditProfileModal onClose={() => setIsEditProfileModalVisible(false)} userId={userId} />}
         </div>
     )
 }

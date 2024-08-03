@@ -18,6 +18,9 @@ const UserSchema = new mongoose.Schema({
     },
     birthDate: {
         type: String
+    },
+    profilePhotoUrl: {
+        type: String
     }
 })
 

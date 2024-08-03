@@ -6,18 +6,43 @@ import { LuImagePlus } from "react-icons/lu";
 
 import ActionButton from "../ActionButton";
 
+import { UPDATE_USER } from "../../mutations/UserMutations";
+import { useMutation } from "@apollo/client";
+import { GET_USER } from "../../queries/UserQueries";
 
-export default function EditProfileModal ({ onClose}) {
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+export default function EditProfileModal ({ onClose, userId }) {
+    const [updateProfileFormState, setUpdateProfileFormState] = useState({
+        username: "",
+        email: "",
+        displayName: "",
+        password: "",
+        profilePhotoUrl: ""
+    });
 
-    function updateProfile () {
-        console.log('Profile updated');
+    const inputChangeHandler = (e) => {
+        setUpdateProfileFormState({
+            ...updateProfileFormState,
+            [e.target.name]: e.target.value
+        });
+
+
     }
 
+    const [updateUser] = useMutation(UPDATE_USER, {
+        variables: { id: userId, username: updateProfileFormState.username, email: updateProfileFormState.email, displayName: updateProfileFormState.displayName, password: updateProfileFormState.password, profilePhotoUrl: updateProfileFormState.profilePhotoUrl },
+        refetchQueries: [{ query: GET_USER, variables: { id: userId } }]
+    });
+
+    function updateProfile () {
+        updateUser(userId, updateProfileFormState.username, updateProfileFormState.email, updateProfileFormState.displayName, updateProfileFormState.password, updateProfileFormState.profilePhotoUrl);
+    }
+
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     function togglePasswordVisibility () {
         setIsPasswordVisible(!isPasswordVisible);
     }
 
+    console.log(updateProfileFormState);
     return (
         <>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
@@ -46,13 +71,19 @@ export default function EditProfileModal ({ onClose}) {
                             <p className="w-fit md:text-left text-center">
                                 Nombre
                             </p>
-                            <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " />
+                            <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="displayName" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.displayName} />
                         </div>
                         <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-2">
                             <p className="w-fit md:text-left text-center">
                                 Usuario
                             </p>
-                            <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " />
+                            <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="username" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.username} />
+                        </div>
+                        <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-2">
+                            <p className="w-fit md:text-left text-center">
+                                E-mail
+                            </p>
+                            <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="email" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.email} />
                         </div>
                         <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-2">
                             <p className="w-fit md:text-left text-center">
@@ -60,7 +91,7 @@ export default function EditProfileModal ({ onClose}) {
                             </p>
                             
                             <div className="flex flex-row bg-gray-300 w-full md:ml-3">
-                                <input className="bg-gray-300 w-full py-1 px-2 outline-none " type={isPasswordVisible ? "password" : "text"} />
+                                <input className="bg-gray-300 w-full py-1 px-2 outline-none " type={isPasswordVisible ? "password" : "text"} name="password" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.password} />
                                 <button className="bg-gray-300 px-2" onClick={togglePasswordVisibility}>
                                     {isPasswordVisible && <MdOutlineVisibility fontSize={20} />}
                                     {!isPasswordVisible && <MdOutlineVisibilityOff fontSize={20} />}

@@ -19,7 +19,8 @@ const UserType = new GraphQLObjectType({
         email: { type: GraphQLString },
         password: { type: GraphQLString },
         creationDate: { type: GraphQLString },
-        birthDate: { type: GraphQLString }
+        birthDate: { type: GraphQLString },
+        profilePhotoUrl: { type: GraphQLString }
     })
 });
 
@@ -187,7 +188,8 @@ const mutation = new GraphQLObjectType({
                 email: { type: GraphQLNonNull(GraphQLString) },
                 password: { type: GraphQLNonNull(GraphQLString) },
                 creationDate: { type: GraphQLNonNull(GraphQLString) },
-                birthDate: { type: GraphQLNonNull(GraphQLString) }
+                birthDate: { type: GraphQLNonNull(GraphQLString) },
+                profilePhotoUrl: { type: GraphQLString }
             },
             resolve(parent, args) {
                 const user = new User({
@@ -197,7 +199,8 @@ const mutation = new GraphQLObjectType({
                     email: args.email,
                     password: args.password,
                     creationDate: args.creationDate,
-                    birthDate: args.birthDate
+                    birthDate: args.birthDate,
+                    profilePhotoUrl: args.profilePhotoUrl
                 })
 
                 return user.save();
@@ -221,7 +224,8 @@ const mutation = new GraphQLObjectType({
                 email: { type: GraphQLString },
                 password: { type: GraphQLString },
                 creationDate: { type: GraphQLString },
-                birthDate: { type: GraphQLString }
+                birthDate: { type: GraphQLString },
+                profilePhotoUrl: { type: GraphQLString }
             },
             resolve(parent, args) {
                 return User.findByIdAndUpdate(
@@ -234,6 +238,7 @@ const mutation = new GraphQLObjectType({
                             password: args.password,
                             creationDate: args.creationDate,
                             birthDate: args.birthDate,
+                            profilePhotoUrl: args.profilePhotoUrl
                         }
                     },
                     { new: true }
