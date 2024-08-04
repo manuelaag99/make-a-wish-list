@@ -18,6 +18,9 @@ const GET_USER = gql`
 			id
 			displayName
 			email
+			username
+			password
+			profilePhotoUrl
 		}
 	}
 `

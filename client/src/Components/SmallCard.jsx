@@ -54,7 +54,7 @@ export default function SmallCard ({ userId }) {
                     <IoSettingsSharp fontSize={20} />
                 </button>
             </div>
-            {isEditProfileModalVisible && <EditProfileModal onClose={() => setIsEditProfileModalVisible(false)} userId={userId} />}
+            {isEditProfileModalVisible && <EditProfileModal onClose={() => setIsEditProfileModalVisible(false)} userId={userId} userInfo={data} />}
         </div>
     )
 }
