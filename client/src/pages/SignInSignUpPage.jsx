@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineVisibility } from "react-icons/md";
 import { MdOutlineVisibilityOff } from "react-icons/md";
 import ActionButton from "../Components/ActionButton";
@@ -9,12 +9,23 @@ export default function SignInSignUpPage ({}) {
         setIsSignUp(!isSignUp);
     }
 
-    const [updateProfileFormState, setUpdateProfileFormState] = useState({
-        username: "",
-        email: "",
-        displayName: "",
-        password: ""
-    });
+    const [updateProfileFormState, setUpdateProfileFormState] = useState({});
+
+    useEffect(() => {
+        if (isSignUp) {
+            setUpdateProfileFormState({
+                email: "",
+                password: ""
+            });
+        } else if (!isSignUp) {
+            setUpdateProfileFormState({
+                email: "",
+                password: "",
+                displayName: "",
+                username: ""
+            });
+        }
+    }, [isSignUp])
 
     const inputChangeHandler = (e) => {
         setUpdateProfileFormState({
@@ -28,7 +39,22 @@ export default function SignInSignUpPage ({}) {
         setIsPasswordVisible(!isPasswordVisible);
     }
 
-    
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    useEffect(() => {
+        if ((updateProfileFormState.email && updateProfileFormState.email.trim() !== "") && (updateProfileFormState.password && updateProfileFormState.password.trim() !== "")) {
+            if (isSignUp) {
+                if ((updateProfileFormState.displayName && updateProfileFormState.displayName.trim() !== "") && (updateProfileFormState.username && updateProfileFormState.username.trim() !== "")) {
+                    setIsButtonDisabled(false);
+                } else {
+                    setIsButtonDisabled(true);
+                }
+            } else if (!isSignUp) {
+                setIsButtonDisabled(false);
+            }
+        } else {
+            setIsButtonDisabled(true);
+        }
+    }, [updateProfileFormState, isSignUp]);
 
     return (
         <>
@@ -44,19 +70,19 @@ export default function SignInSignUpPage ({}) {
                                 <p className="w-fit md:text-left text-center">
                                     Nombre
                                 </p>
-                                <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="displayName" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.displayName} />
+                                <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="displayName" placeholder="Escribe tu nombre de usuario..." onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.displayName} />
                             </div>}
                             {isSignUp && <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                                 <p className="w-fit md:text-left text-center">
                                     Usuario
                                 </p>
-                                <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="username" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.username} />
+                                <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="username" placeholder="Escribe tu nombre..." onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.username} />
                             </div>}
                             <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                                 <p className="w-fit md:text-left text-center whitespace-nowrap">
                                     E-mail
                                 </p>
-                                <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="email" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.email} />
+                                <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="email" placeholder="Escribe tu e-mail..." onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.email} />
                             </div>
                             <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                                 <p className="w-fit md:text-left text-center">
@@ -64,7 +90,7 @@ export default function SignInSignUpPage ({}) {
                                 </p>
                                 
                                 <div className="flex flex-row bg-gray-300 w-full md:ml-3">
-                                    <input autoComplete="none" className="bg-gray-300 w-full py-1 px-2 outline-none " type={isPasswordVisible ? "password" : "text"} name="password" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.password} />
+                                    <input autoComplete="none" className="bg-gray-300 w-full py-1 px-2 outline-none " type={isPasswordVisible ? "password" : "text"} name="password" placeholder={isSignUp ? "Crea una contraseña..." : "Escribe tu contraseña..."} onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.password} />
                                     <button className="bg-gray-300 px-2" onClick={togglePasswordVisibility}>
                                         {isPasswordVisible && <MdOutlineVisibility fontSize={20} />}
                                         {!isPasswordVisible && <MdOutlineVisibilityOff fontSize={20} />}
@@ -75,7 +101,7 @@ export default function SignInSignUpPage ({}) {
                         </div>
 
                         <div className="flex w-9/10 my-3">
-                            <ActionButton additionalClassNames="text-2xl" textForActionButton={isSignUp ? "Registrarse" : "Iniciar sesión"} />
+                            <ActionButton additionalClassNames="text-2xl disabled:bg-var-2-disabled" isButtonDisabled={isButtonDisabled} onClickButtonFunction="" textForActionButton={isSignUp ? "Registrarse" : "Iniciar sesión"} />
                         </div>
 
                         <div className="flex flex-row w-full justify-center items-center px-5 my-2">
