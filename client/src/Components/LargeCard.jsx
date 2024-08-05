@@ -1,35 +1,17 @@
 import { useState } from "react"
-import { gql, useQuery } from '@apollo/client';
-// import { GET_USERS } from "../queries/UserQueries"
+import { useQuery } from '@apollo/client';
+import { GET_USERS } from "../queries/UserQueries"
 
 import ListsSection from "./ListsSection"
 import PostsSection from "./PostsSection"
 
-const GET_USERS = gql`
-	query getUsers {
-		users {
-			id
-			username
-			email
-		}
-	}
-`
 
 export default function LargeCard ({ sendIdOfList }) {
 	const [contentToDisplay, setContentToDisplay] = useState({ postsSection: false, listsSection: true });
-
-	const { loading, error, data } = useQuery(GET_USERS);
 	
-	if (loading) return <p>Loading...</p>
-	
-	if (error) return <p>Error</p>
-
-
-
 	function sendId (listId) {
 		sendIdOfList(listId);
 	}
-	
 	
     return (
         <div className='flex flex-col items-start w-full bg-white h-fit shadow-2xl rounded-md pb-8 '>

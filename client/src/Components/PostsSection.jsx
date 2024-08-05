@@ -8,27 +8,25 @@ export default function PostsSection () {
 	const { loading, error, data } = useQuery(GET_USER_POSTS);
 	const [isAddOrUpdateContentModalVisible, setIsAddOrUpdateContentModalVisible] = useState(false);
 
-	if (error) return <p>Error</p>
+	return (
+		<div className="flex flex-col w-full">
+			{(error) && <p className="flex flex-col justify-center items-center my-4 mx-auto">Error</p>}
 
-	if (!error && loading) return <p>Loading...</p>
+			{(!error && !data && loading) && <p className="flex flex-col justify-center items-center my-5 mx-auto">Cargando...</p>}
 
-	if (!error && !loading && data && data.postsByCreator.length) {
-		return (
-			<div className="flex flex-col w-full">
-				<div className='flex w-full justify-center items-center bg-white hover:bg-gray-300 duration-200 rounded-none py-4 cursor-pointer'>
-					<button onClick={() => setIsAddOrUpdateContentModalVisible(true)}>
-						<p className='text-center font-bold overflow-hidden'>
-							+ Agregar publicación nueva
-						</p>
-					</button>
-				</div>
-	
-				{data && (data.postsByCreator) && (data.postsByCreator.length > 0) && data.postsByCreator.map((post, index) => {
-					return <PostBox key={index} post={post} postBody="Contenido de la publicacion" userDisplayName="Nombre e usuario" />
-				})}
+			{(!error && !loading && data && data.listsByCreator) && <div className='flex w-full justify-center items-center bg-white hover:bg-gray-300 duration-200 rounded-none py-4 cursor-pointer'>
+				<button onClick={() => setIsAddOrUpdateContentModalVisible(true)}>
+					<p className='text-center font-bold overflow-hidden'>
+						+ Agregar publicación nueva
+					</p>
+				</button>
+			</div>}
 
-				{isAddOrUpdateContentModalVisible && <AddOrUpdateContentModal isAdd={true} contentToUpdate={null} typeOfContent="post" onClose={() => setIsAddOrUpdateContentModalVisible(false)} />}
-			</div>
-		)
-	}
+			{data && (data.postsByCreator) && (data.postsByCreator.length > 0) && data.postsByCreator.map((post, index) => {
+				return <PostBox key={index} post={post} postBody="Contenido de la publicacion" userDisplayName="Nombre e usuario" />
+			})}
+
+			{isAddOrUpdateContentModalVisible && <AddOrUpdateContentModal isAdd={true} contentToUpdate={null} typeOfContent="post" onClose={() => setIsAddOrUpdateContentModalVisible(false)} />}
+		</div>
+	)
 }

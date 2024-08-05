@@ -212,6 +212,8 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
     
                     </div>}
     
+                    {(typeOfContent === 'item') && loading && <p>Cargando...</p>}
+                    {(typeOfContent === 'item') && error && <p>Hubo un error obteniendo tus listas.</p>}
                     {(typeOfContent === 'item') && data && (data.listsByCreator) && (data.listsByCreator.length > 0) && <div className="flex flex-col md:flex-row md:w-full my-2 items-center py-1">
                         <p className="text-black mr-2 w-fit md:whitespace-nowrap mb-2 md:mb-0 ">Lista a la que pertenece: </p>
                         <select className="bg-gray-300 px-2 py-1 w-full" id="list" name="list" onChange={(e) => inputChangeHandler(e)} value={formState.list} > 

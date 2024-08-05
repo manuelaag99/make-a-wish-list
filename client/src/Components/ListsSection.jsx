@@ -24,7 +24,7 @@ export default function ListsSection ({ selectList  }) {
 				
 				{(error) && <p className="flex flex-col justify-center items-center my-4 mx-auto">Error</p>}
 
-				{(!error && !data && loading) && <p className="flex flex-col justify-center items-center my-5 mx-auto">Loading...</p>}
+				{(!error && !data && loading) && <p className="flex flex-col justify-center items-center my-5 mx-auto">Cargando...</p>}
 
 				{(!error && !loading && data && data.listsByCreator.length) && <button className='flex w-full justify-center items-center bg-white hover:bg-gray-300 duration-200 rounded-none py-4 cursor-pointer' onClick={() => setIsAddOrUpdateContentModalVisible(true)}>
 					<p className='text-center font-bold overflow-hidden'>
