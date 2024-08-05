@@ -21,6 +21,9 @@ const UserSchema = new mongoose.Schema({
     },
     profilePhotoUrl: {
         type: String
+    },
+    shortBio: {
+        type: String
     }
 })
 

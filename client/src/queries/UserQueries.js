@@ -21,6 +21,7 @@ const GET_USER = gql`
 			username
 			password
 			profilePhotoUrl
+			shortBio
 		}
 	}
 `

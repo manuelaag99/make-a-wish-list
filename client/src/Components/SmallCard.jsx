@@ -15,7 +15,7 @@ export default function SmallCard ({ userId }) {
 
     const [profilePicPathway, setProfilePicPathway] = useState(null);
 
-    const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(true);
+    const [isEditProfileModalVisible, setIsEditProfileModalVisible] = useState(false);
 
 	const { loading, error, data } = useQuery(GET_USER, {
         variables: { id: userId }
