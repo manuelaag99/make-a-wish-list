@@ -41,6 +41,13 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
         setIsPasswordVisible(!isPasswordVisible);
     }
 
+    function uploadImage (file) {
+        setUpdateProfileFormState({
+            ...updateProfileFormState,
+            profilePhotoUrl: file
+        });
+    }
+
     return (
         <>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
@@ -61,7 +68,7 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
                     <div className="flex flex-col md:flex-row w-full">
 
                         <div className="flex justify-center items-center w-full md:w-4/10 my-5 ">
-                            <ImageUpload />
+                            <ImageUpload sendFile={(file) => uploadImage(file)} />
                         </div>
 
                         <div className="flex flex-col justify-center items-center w-full mb-4 mt-4 md:mt-0">

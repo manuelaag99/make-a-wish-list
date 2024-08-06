@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LuImagePlus } from "react-icons/lu";
+import { IoMdClose } from "react-icons/io";
 
 export default function ImageUpload ({ existingSource, sendFile }) {
     const imageSelectorRef = useRef();
@@ -36,12 +37,18 @@ export default function ImageUpload ({ existingSource, sendFile }) {
     }
 
     return (
-        <div className="flex w-8/10 justify-center items-center aspect-square">
-            <div onClick={(e) => selectFileHandler(e)} className="flex flex-col w-full justify-center items-center aspect-square px-6 py-6 bg-gray-300 hover:bg-gray-400 duration-200 cursor-pointer rounded-md">
+        <div className="flex w-8/10 justify-center items-center aspect-square relative">
+            {!preview && <div onClick={(e) => selectFileHandler(e)} className="flex flex-col w-full justify-center items-center aspect-square px-6 py-6 bg-gray-300 hover:bg-gray-400 duration-200 cursor-pointer rounded-md">
                 <LuImagePlus fontSize={20} />
                 <input className="hidden" onChange={(e) => uploadImage(e)} ref={imageSelectorRef} type="file" />
                 <button className="mt-1">Upload</button>
-            </div>
+            </div>}
+            {preview && <img className="w-full h-full object-cover" src={preview || existingSource} alt="profile" />}
+            {preview && <div className="absolute top-4 right-4 md:top-2 md:right-2 text-black hover:text-gray-300 duration-200" onClick={cancelImageUpload}>
+                <button className="rounded-lg bg-black hover:bg-gray-500 text-white hover:text-gray-300 duration-200">
+                    <IoMdClose fontSize={18} />
+                </button>
+            </div>}
         </div>
     )
 }
