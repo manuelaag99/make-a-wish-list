@@ -9,6 +9,7 @@ import ActionButton from "../ActionButton";
 import { UPDATE_USER } from "../../mutations/UserMutations";
 import { useMutation } from "@apollo/client";
 import { GET_USER } from "../../queries/UserQueries";
+import ImageUpload from "../ImageUpload";
 
 export default function EditProfileModal ({ onClose, userId, userInfo }) {
     const [updateProfileFormState, setUpdateProfileFormState] = useState({
@@ -59,15 +60,8 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
 
                     <div className="flex flex-col md:flex-row w-full">
 
-                        <div className="flex justify-center items-center w-full md:w-3/10 my-2 ">
-                            <div className="flex justify-center items-center w-5/10 md:w-7/10 bg-gray-300 aspect-square rounded-lg cursor-pointer hover:bg-gray-400 duration-200">
-                                <div className="flex flex-col justify-center items-center p-2">
-                                    <LuImagePlus color="gray" fontSize={30} />
-                                    <p className="mt-2 text-gray-500 text-center whitespace-pre-wrap">
-                                        Subir foto de perfil
-                                    </p>
-                                </div>
-                            </div>
+                        <div className="flex justify-center items-center w-full md:w-4/10 my-5 ">
+                            <ImageUpload />
                         </div>
 
                         <div className="flex flex-col justify-center items-center w-full mb-4 mt-4 md:mt-0">
@@ -77,19 +71,19 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
                                 </p>
                                 <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="displayName" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.displayName} />
                             </div>
-                            <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
+                            <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-3">
                                 <p className="w-fit md:text-left text-center">
                                     Usuario
                                 </p>
                                 <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="username" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.username} />
                             </div>
-                            <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
+                            <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-3">
                                 <p className="w-fit md:text-left text-center whitespace-nowrap">
                                     E-mail
                                 </p>
                                 <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="email" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.email} />
                             </div>
-                            <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
+                            <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-3">
                                 <p className="w-fit md:text-left text-center">
                                     Contraseña
                                 </p>
