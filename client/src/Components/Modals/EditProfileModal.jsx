@@ -59,19 +59,19 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
                     <button className="absolute top-4 right-4 md:top-2 md:right-2 text-black hover:text-gray-300 duration-200" onClick={onClose}>
                         <IoMdClose fontSize={18} />
                     </button>
-                    <div className="flex flex-col w-full justify-center items-center text-center pt-2 pb-5">
+                    <div className="flex flex-col w-full justify-center items-center text-center pt-2">
                         <p className="text-center concert-font text-3xl">
                             Editar perfil
                         </p>
                     </div>
 
-                    <div className="flex flex-col md:flex-row w-full">
+                    <div className="flex flex-col justify-center md:flex-row w-full">
 
                         <div className="flex justify-center items-center w-full md:w-4/10 my-5 ">
                             <ImageUpload sendFile={(file) => uploadImage(file)} />
                         </div>
 
-                        <div className="flex flex-col justify-center items-center w-full mb-4 mt-4 md:mt-0">
+                        <div className="flex flex-col justify-center items-center w-full my-4 ">
                             <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
                                 <p className="w-fit md:text-left text-center">
                                     Nombre
