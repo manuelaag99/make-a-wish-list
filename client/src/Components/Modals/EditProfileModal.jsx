@@ -17,7 +17,8 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
         email: userInfo ? userInfo.user.email : "",
         displayName: userInfo ? userInfo.user.displayName : "",
         password: userInfo ? userInfo.user.password : "",
-        profilePhotoUrl: userInfo ? userInfo.user.profilePhotoUrl : ""
+        profilePhotoUrl: userInfo ? userInfo.user.profilePhotoUrl : "",
+        shortBio: userInfo ? userInfo.user.shortBio : ""
     });
 
     const inputChangeHandler = (e) => {
@@ -28,12 +29,12 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
     }
 
     const [updateUser] = useMutation(UPDATE_USER, {
-        variables: { id: userId, username: updateProfileFormState.username, email: updateProfileFormState.email, displayName: updateProfileFormState.displayName, password: updateProfileFormState.password, profilePhotoUrl: updateProfileFormState.profilePhotoUrl },
+        variables: { id: userId, username: updateProfileFormState.username, email: updateProfileFormState.email, displayName: updateProfileFormState.displayName, password: updateProfileFormState.password, profilePhotoUrl: updateProfileFormState.profilePhotoUrl, shortBio: updateProfileFormState.shortBio },
         refetchQueries: [{ query: GET_USER, variables: { id: userId } }]
     });
 
     function updateProfile () {
-        updateUser(userId, updateProfileFormState.username, updateProfileFormState.email, updateProfileFormState.displayName, updateProfileFormState.password, updateProfileFormState.profilePhotoUrl);
+        updateUser(userId, updateProfileFormState.username, updateProfileFormState.email, updateProfileFormState.displayName, updateProfileFormState.password, updateProfileFormState.profilePhotoUrl, updateProfileFormState.shortBio);
     }
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(true);
@@ -103,6 +104,12 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
                                     </button>
                                 </div>
                                 
+                            </div>
+                            <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-3">
+                                <p className="w-fit md:text-left text-center whitespace-nowrap">
+                                    Breve biografía
+                                </p>
+                                <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="shortBio" onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.shortBio} />
                             </div>
                         </div>
                     </div>
