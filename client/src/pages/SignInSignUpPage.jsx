@@ -101,7 +101,7 @@ export default function SignInSignUpPage ({}) {
                         </div>
 
                         <div className="flex w-9/10 my-3">
-                            <ActionButton additionalClassNames="text-2xl disabled:bg-var-2-disabled" isButtonDisabled={isButtonDisabled} onClickButtonFunction="" textForActionButton={isSignUp ? "Registrarse" : "Iniciar sesión"} />
+                            <ActionButton additionalClassNames="text-2xl disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={isButtonDisabled} onClickButtonFunction="" textForActionButton={isSignUp ? "Registrarse" : "Iniciar sesión"} />
                         </div>
 
                         <div className="flex flex-row w-full justify-center items-center px-5 my-2">

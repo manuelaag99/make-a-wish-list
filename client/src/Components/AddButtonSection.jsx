@@ -33,7 +33,7 @@ export default function AddButtonSection ({ additionalClassNames, clickButtonFun
                 </div>
             </div>}
 
-            <ActionButton additionalClassNames="mt-8" isButtonDisabled={isButtonActive} onClickButtonFunction={buttonFunction} textForActionButton="Agregar" />
+            <ActionButton additionalClassNames=" mt-8 disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={isButtonActive} onClickButtonFunction={buttonFunction} textForActionButton="Agregar" />
 
         </div>
     )

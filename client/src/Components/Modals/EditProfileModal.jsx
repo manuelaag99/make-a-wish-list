@@ -49,6 +49,10 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
         });
     }
 
+    function signOut () {
+        console.log("Sign out");
+    }
+
     return (
         <>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
@@ -115,7 +119,11 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
                     </div>
 
                     <div className="flex w-95 my-3">
-                        <ActionButton additionalClassNames='w-full' isButtonDisabled={false} onClickButtonFunction={updateProfile} textForActionButton="Guardar" />
+                        <ActionButton additionalClassNames='w-full disabled:bg-var-2-disabled bg-var-2 hover:bg-var-2-hovered ' isButtonDisabled={false} onClickButtonFunction={updateProfile} textForActionButton="Guardar" />
+                    </div>
+
+                    <div className="flex w-95 my-3">
+                        <ActionButton additionalClassNames='w-full bg-red-600 hover:bg-red-800 ' isButtonDisabled={false} onClickButtonFunction={signOut} textForActionButton="Cerrar sesión" />
                     </div>
                 </div>}
             </div>
