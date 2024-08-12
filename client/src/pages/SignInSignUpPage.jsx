@@ -67,25 +67,25 @@ export default function SignInSignUpPage ({}) {
 
                         <div className="flex flex-col w-full justify-center items-center my-3">
                             {isSignUp && <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
-                                <p className="w-fit md:text-left text-center">
+                                <p className="w-fit md:text-left text-center mb-1">
                                     Nombre
                                 </p>
                                 <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="displayName" placeholder="Escribe tu nombre de usuario..." onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.displayName} />
                             </div>}
                             {isSignUp && <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
-                                <p className="w-fit md:text-left text-center">
+                                <p className="w-fit md:text-left text-center mb-1">
                                     Usuario
                                 </p>
                                 <input autoComplete="none" className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="username" placeholder="Escribe tu nombre..." onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.username} />
                             </div>}
                             <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
-                                <p className="w-fit md:text-left text-center whitespace-nowrap">
+                                <p className="w-fit md:text-left text-center whitespace-nowrap mb-1">
                                     E-mail
                                 </p>
                                 <input className="bg-gray-300 w-full md:ml-3 py-1 px-2 outline-none " name="email" placeholder="Escribe tu e-mail..." onChange={(e) => inputChangeHandler(e)} value={updateProfileFormState.email} />
                             </div>
                             <div className="flex md:flex-row flex-col w-9/10 justify-center items-center my-4">
-                                <p className="w-fit md:text-left text-center">
+                                <p className="w-fit md:text-left text-center mb-1">
                                     Contraseña
                                 </p>
                                 
