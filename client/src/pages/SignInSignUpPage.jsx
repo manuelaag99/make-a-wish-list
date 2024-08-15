@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { MdOutlineVisibility } from "react-icons/md";
 import { MdOutlineVisibilityOff } from "react-icons/md";
 import ActionButton from "../Components/ActionButton";
+import TopBar from "../Components/TopBar";
 
 export default function SignInSignUpPage ({}) {
     const [isSignUp, setIsSignUp] = useState(true);
@@ -59,7 +60,7 @@ export default function SignInSignUpPage ({}) {
     return (
         <>
             <div className='flex md:h-screen h-full w-full justify-center items-start bg-var-1 inter-font pt-24 pb-36'>
-					<div className='flex w-full fixed bg-var-2 shadow-2xl h-20 top-0 z-100 '></div>
+					<TopBar />
 					<div className="flex flex-col w-95 md:w-6/10 justify-center items-center bg-white p-6 shadow-2xl rounded-md mt-12">
                         <div className="flex w-full justify-center items-center concert-font text-3xl">
                             {isSignUp ? "Registrarse" : "Iniciar sesión"}
