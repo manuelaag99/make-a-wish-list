@@ -19,7 +19,8 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         }
     )
 
-    let newCreationDate = new Date().toISOString();
+    let newCreationDate = new Date();
+
     const [errorWithAddingOrUpdating, setErrorWithAddingOrUpdating] = useState(false);
     const [isPopUpWindowVisible, setIsPopUpWindowVisible] = useState(false);
     const [popUpWindowText, setPopUpWindowText] = useState('');
@@ -70,7 +71,8 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
         }
     }, [contentToUpdate, typeOfContent])
 
-    console.log(formState) 
+    console.log(formState)
+    console.log(formState.title, formState.body, newCreationDate, userId)
 
     const [isButtonInactive, setIsButtonInactive] = useState(false);
     function inputChangeHandler (e) {
@@ -232,7 +234,7 @@ export default function AddOrUpdateContentModal ({ contentToUpdate, isAdd, onClo
                     {isAdd && <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6 disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} textForActionButton="Agregar" />}
                     {!isAdd && <ActionButton additionalClassNames=" md:mt-8 md:mb-10 my-6 disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={isButtonInactive} onClickButtonFunction={addButtonFunction} textForActionButton="Actualizar" />}
                 </div>
-                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={closePopUpWindowFunction} textForPopUp={popUpWindowText} typeOfContent={typeOfContent} onClose={closePopUpWindowFunction} />}
+                {isPopUpWindowVisible && <PopUpWindowModal onButtonClick={closePopUpWindowFunction} textForActionButtonInPopUpWindowModal="Aceptar" textForPopUp={popUpWindowText} typeOfContent={typeOfContent} onClose={closePopUpWindowFunction} />}
             </div>
         )
 }

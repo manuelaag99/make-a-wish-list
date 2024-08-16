@@ -6,7 +6,7 @@ import ListsSection from "./ListsSection"
 import PostsSection from "./PostsSection"
 
 
-export default function LargeCard ({ sendIdOfList }) {
+export default function LargeCard ({ sendIdOfList, userId }) {
 	const [contentToDisplay, setContentToDisplay] = useState({ postsSection: false, listsSection: true });
 	
 	function sendId (listId) {
@@ -34,7 +34,7 @@ export default function LargeCard ({ sendIdOfList }) {
 				</div>
 			</div>
 			{contentToDisplay.listsSection && <ListsSection selectList={(listId) => sendId(listId)} /> }
-			{contentToDisplay.postsSection && <PostsSection /> }
+			{contentToDisplay.postsSection && <PostsSection userId={userId} /> }
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import ActionButton from "../ActionButton";
 import { IoMdClose } from "react-icons/io";
 
-export default function PopUpWindowModal ({ onButtonClick, onClose, textForPopUp, typeOfContent }) {
+export default function PopUpWindowModal ({ onButtonClick, onClose, textForActionButtonInPopUpWindowModal, textForPopUp, typeOfContent }) {
     return (
         <div>
             <div className="fixed top-0 left-0 w-full h-full bg-black opacity-35 z-40" onClick={onClose}></div>
@@ -13,7 +13,7 @@ export default function PopUpWindowModal ({ onButtonClick, onClose, textForPopUp
                     <IoMdClose fontSize={18} />
                 </button>
 
-                <ActionButton additionalClassNames=" md:my-8 my-5 disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={false} onClickButtonFunction={onButtonClick} />
+                <ActionButton additionalClassNames=" md:my-8 my-5 disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={false} onClickButtonFunction={onButtonClick} textForActionButton={textForActionButtonInPopUpWindowModal} />
             </div>
         </div>
     )

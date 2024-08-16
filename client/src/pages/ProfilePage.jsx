@@ -32,7 +32,7 @@ export default function ProfilePage () {
 					<div className='flex flex-col md:flex-row justify-between items-start w-9/10 md:w-6/10 md:p-10'>
 						<SmallCard userId={userid} />
 						<div className='flex flex-col w-full md:w-6/10 justify-center mt-5 md:mt-0'>
-							<LargeCard sendIdOfList={(listId) => openListWindow(listId)} />
+							<LargeCard sendIdOfList={(listId) => openListWindow(listId)} userId={userid} />
 							<AddButtonSection onAddList={() => openAddContentModal("list")} onAddListElement={() => openAddContentModal("item")} onAddPost={() => openAddContentModal("post")} additionalClassNames=" mt-8 " onClickAction={() => setIsAddContentModalVisible(true)} hasDisplayMenu={true} />
 						</div>
 					</div>
