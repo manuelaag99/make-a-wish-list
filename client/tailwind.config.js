@@ -18,6 +18,9 @@ export default {
         "var-2-hovered": "#FF7594",
         "var-2-disabled": "#FFA3B3",
       },
+      fontSize: {
+        "date": "0.7rem",
+      },
       width: {
         "1/10": "10%",
         "2/10": "20%",

@@ -23,8 +23,8 @@ const GET_POSTS = gql`
 `
 
 const GET_USER_POSTS = gql`
-    query getUserPosts {
-        postsByCreator (creatorId: "6660935f2e128966078f032c") {
+    query getUserPosts($creatorId: ID!) {
+        postsByCreator (creatorId: $creatorId) {
             id
             postTitle
             postBody
