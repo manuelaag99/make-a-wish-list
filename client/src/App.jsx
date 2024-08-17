@@ -5,6 +5,7 @@ import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 import SignInSignUpPage from './pages/SignInSignUpPage';
 import FeedPage from './pages/FeedPage';
+import { SearchProvider } from './Context/SearchQueryContext';
 
 const cache = new InMemoryCache();
 
@@ -17,14 +18,16 @@ export default function App () {
 	
 	return (
 		<ApolloProvider client={client} >
-			<Router>
-				<Routes>
-					<Route path='/' element={<SignInSignUpPage />} />
-					<Route path='feed' element={<FeedPage />} />
-					<Route path='/profile' element={<ProfilePage />} />
-					<Route path='/error' element={<ErrorPage />} />
-				</Routes>
-			</Router>
+			<SearchProvider>
+				<Router>
+					<Routes>
+						<Route path='/' element={<SignInSignUpPage />} />
+						<Route path='feed' element={<FeedPage />} />
+						<Route path='/profile' element={<ProfilePage />} />
+						<Route path='/error' element={<ErrorPage />} />
+					</Routes>
+				</Router>
+			</SearchProvider>
 		</ApolloProvider>
 	)
 }
