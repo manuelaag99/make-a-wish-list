@@ -2,7 +2,7 @@ import { useState } from "react";
 import AddButtonSection from "../Components/AddButtonSection";
 import LargeCard from "../Components/LargeCard";
 import AddOrUpdateContentModal from "../Components/Modals/AddOrUpdateContentModal";
-import ListWindowModal from "../Components/Modals/ListWindowModal";
+import ListWindowModal from "../Components/Modals/ListOrPostModal";
 import SmallCard from "../Components/SmallCard";
 import TopBar from "../Components/TopBar";
 
@@ -23,6 +23,7 @@ export default function ProfilePage () {
 		setIsAddContentModalVisible(true);
 	}
 
+	console.log(idOfList)
 	let userid = "6660935f2e128966078f032c";
 
     return (

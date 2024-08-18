@@ -5,7 +5,7 @@ import { GET_USER_POSTS } from "../queries/PostQueries";
 import { DELETE_POST } from "../mutations/PostMutations";
 import { useMutation } from "@apollo/client";
 
-export default function PostBox ({ post, userDisplayName }) {
+export default function PostBox ({ onClickBox, post, userDisplayName }) {
 	const [deletePostFromDataBase] = useMutation(DELETE_POST, {
 		variables: { id: post.id },
 		// refetchQueries: [{ query: GET_USER_POSTS }]
@@ -37,7 +37,7 @@ export default function PostBox ({ post, userDisplayName }) {
 	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
 
     return (
-        <div className="flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative ">
+        <div className="flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative " onClick={onClickBox}>
 			<div className="flex flex-col w-9/10 justify-center items-center relative ">
 				<div className="flex w-full py-0.5">
 					<p className="text-black font-bold">

@@ -37,6 +37,10 @@ const GET_USER_LISTS = gql`
 			listName
 			listDescription
 			listPrivacy
+			creator {
+				id
+				displayName
+			}
 		}
 	}
 `

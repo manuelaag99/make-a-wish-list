@@ -4,11 +4,16 @@ import { useQuery } from "@apollo/client";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 import { useState } from "react";
 
-export default function PostsSection ({ userId }) {
+export default function PostsSection ({ selectPost, userId }) {
 	const { loading, error, data } = useQuery(GET_USER_POSTS, {
 		variables: { creatorId: userId }
 	});
 	const [isAddOrUpdateContentModalVisible, setIsAddOrUpdateContentModalVisible] = useState(false);
+
+	function clickBoxHandleFunction (post) {
+		console.log(post)
+		selectPost(post)
+	}
 
 	return (
 		<div className="flex flex-col w-full">
@@ -23,7 +28,7 @@ export default function PostsSection ({ userId }) {
 			</button>}
 
 			{data && (data.postsByCreator) && (data.postsByCreator.length > 0) && data.postsByCreator.map((post, index) => {
-				return <PostBox key={index} post={post} postBody="Contenido de la publicacion" userDisplayName="Nombre e usuario" />
+				return <PostBox onClickBox={() => clickBoxHandleFunction(post)} key={index} post={post} postBody="Contenido de la publicacion" userDisplayName="Nombre e usuario" />
 			})}
 
 			{isAddOrUpdateContentModalVisible && <AddOrUpdateContentModal isAdd={true} contentToUpdate={null} typeOfContent="post" onClose={() => setIsAddOrUpdateContentModalVisible(false)} userId={userId} />}

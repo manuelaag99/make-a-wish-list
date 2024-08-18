@@ -4,16 +4,15 @@ import { useState } from "react";
 import { GET_USER_LISTS } from "../queries/ListQueries";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
-export default function ListsSection ({ selectList  }) {
+export default function ListsSection ({ selectList, userId }) {
 	const { loading, error, data } = useQuery(GET_USER_LISTS, {
 		variables: { creatorId: "6660935f2e128966078f032c" }
 	});
 	const [isAddOrUpdateContentModalVisible, setIsAddOrUpdateContentModalVisible] = useState(false);
-	const [selectedListId, setSelectedListId] = useState(null);
 
 	function clickBoxHandleFunction (list) {
-		setSelectedListId(list.id)
-		selectList(list.id)
+		console.log(list)
+		selectList(list)
 	}
 
 	let userid = "6660935f2e128966078f032c";
