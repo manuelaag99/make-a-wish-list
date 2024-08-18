@@ -11,10 +11,11 @@ export default function ListWindowModal ({ listId, onClose }) {
         { variables: { id: listId } }
     );
 
+    console.log(listId)
     return (
         <>
             <div className="fixed top-0 left-o w-full h-screen bg-black opacity-35 z-40" onClick={onClose}></div>
-            <div className='flex flex-col items-start bg-white h-[80%] shadow-2xl rounded-md md:px-12 px-5 py-8 z-50 md:w-5/10 w-95 fixed top-[10%] left-[2.5%] md:left-[25%]'>
+            <div className='flex flex-col items-start bg-white h-[80%] shadow-2xl rounded-md md:px-12 px-5 py-8 z-50 md:w-5/10 w-95 fixed top-[12%] left-[2.5%] md:left-[25%]'>
                 {(error) && <p>Error</p>}
 
                 {(!error && !data && loading) && <p>Cargando...</p>}
@@ -34,11 +35,11 @@ export default function ListWindowModal ({ listId, onClose }) {
                     </button>
                 </div>}
 
-                <div className="flex flex-col w-full justify-center items-center py-6 px-6">
+                {(!error && !loading && data) && <div className="flex flex-col w-full justify-center items-center py-4 px-6">
                     <p className="text-left">
                         {data.list.listDescription}
                     </p>
-                </div>
+                </div>}
                     
                 <ListOfItems listId={listId} />
             </div>
