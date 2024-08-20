@@ -28,7 +28,7 @@ export default function ProfilePage () {
 
     return (
         <>
-            <div className='flex md:h-screen h-full w-full justify-center items-start bg-var-1 inter-font pt-24 pb-36'>
+            <div className='flex md:h-screen h-full w-full justify-center items-start bg-var-1 inter-font pt-40 pb-36'>
 					<TopBar />
 					<div className='flex flex-col md:flex-row justify-between items-start w-9/10 md:w-6/10 md:p-10'>
 						<SmallCard userId={userid} />
