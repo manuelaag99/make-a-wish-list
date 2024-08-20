@@ -56,7 +56,7 @@ export default function EditProfileModal ({ onClose, userId, userInfo }) {
     return (
         <>
             <div className="flex fixed top-0 left-0 w-full h-full bg-black opacity-35 z-20" onClick={onClose}></div>
-            <div className="flex flex-col md:w-7/10 w-95 h-fit justify-center items-center p-5 fixed top-[12%] md:left-[15%] left-[2.5%] bg-white rounded-md shadow-2xl z-50 ">
+            <div className="flex flex-col md:w-7/10 w-95 h-fit justify-center items-center p-5 fixed top-[12%] md:left-[15%] left-[2.5%] bg-white rounded-md shadow-2xl z-105 ">
                 {!userInfo && <p className="text-center mx-auto my-10">No se encontró información sobre este perfil; intenta de nuevo.</p>}
 
                 {userInfo && <div className="flex flex-col justify-center items-center w-full">

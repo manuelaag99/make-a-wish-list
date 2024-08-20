@@ -5,7 +5,7 @@ export default function PopUpWindowModal ({ onButtonClick, onClose, textForActio
     return (
         <div>
             <div className="fixed top-0 left-0 w-full h-full bg-black opacity-35 z-40" onClick={onClose}></div>
-            <div className="flex flex-col justify-center md:w-4/10 w-95 h-fit md:px-14 px-3 bg-white fixed top-[30%] left-[2.5%] md:left-[30%] z-70 rounded-md shadow-2xl">
+            <div className="flex flex-col justify-center md:w-4/10 w-95 h-fit md:px-14 px-3 bg-white fixed top-[30%] left-[2.5%] md:left-[30%] z-110 rounded-md shadow-2xl">
                 <div className="flex justify-center items-center w-full md:mt-8 mt-5 mb-2 ">
                     <p className="text-black text-center">{textForPopUp}</p>
                 </div>
