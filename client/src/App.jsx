@@ -6,6 +6,7 @@ import ErrorPage from './pages/ErrorPage';
 import SignInSignUpPage from './pages/SignInSignUpPage';
 import FeedPage from './pages/FeedPage';
 import { SearchProvider } from './Context/SearchQueryContext';
+import SearchResultsPage from './pages/SearchResultsPage';
 
 const cache = new InMemoryCache();
 
@@ -25,6 +26,7 @@ export default function App () {
 						<Route path='feed' element={<FeedPage />} />
 						<Route path='/profile' element={<ProfilePage />} />
 						<Route path='/error' element={<ErrorPage />} />
+						<Route path='/searchresults' element={<SearchResultsPage />} />
 					</Routes>
 				</Router>
 			</SearchProvider>

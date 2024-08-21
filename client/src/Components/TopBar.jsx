@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useSearch } from "../Context/SearchQueryContext";
 
@@ -11,6 +11,7 @@ import { useState } from "react";
 
 
 export default function TopBar ({}) {
+    const navigate = useNavigate();
     const [isSearchInputVisible, setIsSearchInputVisible] = useState(false)
 
 
@@ -18,6 +19,8 @@ export default function TopBar ({}) {
     function searchButtonFunction () {
         if (!isSearchInputVisible) {
             setIsSearchInputVisible(!isSearchInputVisible)
+        } else {
+            navigate("/searchresults")
         }
     }
 
@@ -27,12 +30,6 @@ export default function TopBar ({}) {
         // setSearchQueryState(event.target.value);
         setSearchQuery(e.target.value);
     }
-
-    function submitSearchHandle (e) {
-        e.preventDefault();
-        navigate("/searchresults");
-    }
-    console.log(searchQuery)
 
     return (
         <div className='flex flex-row w-full justify-between items-center fixed bg-var-2 shadow-2xl h-fit py-4 top-0 z-100 px-4'>
