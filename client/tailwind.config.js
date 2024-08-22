@@ -17,9 +17,16 @@ export default {
         "var-2": "#FF5372",
         "var-2-hovered": "#FF7594",
         "var-2-disabled": "#FFA3B3",
+        "var-3": "#306642",
       },
       fontSize: {
         "date": "0.7rem",
+        "smAndUpTitle": "1.5rem",
+        "smAndUpText": "1.2rem",
+        "smAndUpSmallText": "0.8rem",
+        "mobileTitle": "1.0rem",
+        "mobileText": "0.8rem",
+        "mobileSmallText": "0.6rem"
       },
       width: {
         "1/10": "10%",

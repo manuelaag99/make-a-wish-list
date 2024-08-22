@@ -47,13 +47,13 @@ export default function TopBar ({}) {
 
                 <div className={"flex flex-col sm:flex-row items-center justify-center " + " w-full"}>
                     {isSearchInputVisible && <input className={"py-2 px-2 rounded-md w-full outline-none ml-0 md:ml-6 "} onChange={(e) => inputChangeHandle(e)} placeholder="Buscar..." />}
-                    <div className="flex flex-row justify-between md:justify-center items-center w-full sm:w-fit mt-4 sm:mt-0">
+                    <div className={"flex flex-row justify-between md:justify-center items-center w-full sm:w-fit sm:mt-0 " + (isSearchInputVisible && "mt-4")}>
                         {isSearchInputVisible && <button className="flex ml-2" onClick={() => setIsSearchInputVisible(false)}>
                             <p className="text-white hover:text-gray-400 duration-200 cursor-pointer">
                                 <IoMdArrowRoundBack fontSize={40} />
                             </p>
                         </button>}
-                        <button className="flex mx-2 md:mx-6" onClick={searchButtonFunction}>
+                        <button className="flex justify-center items-center mx-2 md:mx-6" onClick={searchButtonFunction}>
                             <p className="text-white hover:text-gray-400 duration-200 cursor-pointer">
                                 <FaSearch fontSize={30} />
                             </p>
