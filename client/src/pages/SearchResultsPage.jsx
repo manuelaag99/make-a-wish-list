@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ListOfUsers from "../Components/ListOfUsers";
 import TopBar from "../Components/TopBar";
+import ListOfLists from "../Components/ListOfLists";
+import ListOfPosts from "../Components/ListOfPosts";
 
 export default function SearchResultsPage ({}) {
     const [selectedTab, setSelectedTab] = useState("users");
@@ -22,6 +24,8 @@ export default function SearchResultsPage ({}) {
             </div>
 
             {(selectedTab === "users") && <ListOfUsers />}
+            {(selectedTab === "lists") && <ListOfLists />}
+            {(selectedTab === "posts") && <ListOfPosts />}
         </div>
     )
 }

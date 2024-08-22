@@ -22,7 +22,7 @@ export default {
       fontSize: {
         "date": "0.7rem",
         "smAndUpTitle": "1.5rem",
-        "smAndUpText": "1.2rem",
+        "smAndUpText": "1.0rem",
         "smAndUpSmallText": "0.8rem",
         "mobileTitle": "1.0rem",
         "mobileText": "0.8rem",

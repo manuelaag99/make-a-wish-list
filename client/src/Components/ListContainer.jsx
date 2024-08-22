@@ -2,10 +2,9 @@ import { IoMdClose } from "react-icons/io";
 import ListOfItems from "./ListOfItems";
 
 export default function ListContainer ({ list, onClose }) {
-
     if (list) return (
         <>
-            {list && <div className='flex flex-col w-full justify-center'>
+            <div className='flex flex-col w-full justify-center'>
                 <p className="text-black text-3xl concert-font text-center mb-3">
                     {list.listName}
                 </p>
@@ -18,15 +17,15 @@ export default function ListContainer ({ list, onClose }) {
                 <button className="absolute top-2 right-2 text-black hover:text-gray-300 duration-200" onClick={onClose}>
                     <IoMdClose fontSize={18} />
                 </button>
-            </div>}
+            </div>
 
-            {list && <div className="flex flex-col w-full justify-center items-center py-4 px-6">
+            <div className="flex flex-col w-full justify-center items-center py-4 px-6">
                 <p className="text-left">
                     {list.listDescription}
                 </p>
-            </div>}
+            </div>
                 
-            {list && <ListOfItems listId={list.id} />}
+            <ListOfItems listId={list.id} />
         </>
     )
 }
