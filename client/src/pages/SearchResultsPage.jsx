@@ -23,6 +23,10 @@ export default function SearchResultsPage ({}) {
                 </button>
             </div>
 
+            <div className="flex flex-col w-full justify-center items-center py-16">
+                <div className=" bg-var-3 w-full h-[1px] opacity-40"></div>
+            </div>
+
             {(selectedTab === "users") && <ListOfUsers />}
             {(selectedTab === "lists") && <ListOfLists />}
             {(selectedTab === "posts") && <ListOfPosts />}

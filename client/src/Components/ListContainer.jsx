@@ -2,6 +2,7 @@ import { IoMdClose } from "react-icons/io";
 import ListOfItems from "./ListOfItems";
 
 export default function ListContainer ({ list, onClose }) {
+    console.log(list)
     if (list) return (
         <>
             <div className='flex flex-col w-full justify-center'>
@@ -24,7 +25,7 @@ export default function ListContainer ({ list, onClose }) {
                     {list.listDescription}
                 </p>
             </div>
-                
+                yeah
             <ListOfItems listId={list.id} />
         </>
     )

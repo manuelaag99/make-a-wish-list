@@ -24,6 +24,10 @@ const GET_LISTS = gql`
 			listName
 			listDescription
 			listPrivacy
+			creator {
+				displayName
+				id
+			}
 		}
 	}
 `

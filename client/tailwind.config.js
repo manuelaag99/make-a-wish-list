@@ -11,6 +11,7 @@ export default {
         "var-2": "#FF5372",
         "var-2-hovered": "#FF7594",
         "var-2-disabled": "#FFA3B3",
+        "var-3": "#306642",
       },
       textColor: {
         "var-1": "#E1FFE4",

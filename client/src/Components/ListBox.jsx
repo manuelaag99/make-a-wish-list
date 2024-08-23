@@ -5,7 +5,7 @@ import { GET_USER_LISTS } from "../queries/ListQueries";
 import { DELETE_LIST } from "../mutations/ListMutations";
 import AddOrUpdateContentModal from "./Modals/AddOrUpdateContentModal";
 
-export default function ListBox ({ list, onClickBox }) {
+export default function ListBox ({ additionalClassnamesForBox, isOnProfilePage, list, onClickBox }) {
 	const [deleteListFromDataBase] = useMutation(DELETE_LIST, {
         variables: { id: list.id },
         refetchQueries: [{ query: GET_USER_LISTS }]
@@ -32,7 +32,7 @@ export default function ListBox ({ list, onClickBox }) {
 
     return (
 		<>
-			<div className="flex flex-row w-full px-6 cursor-pointer bg-white hover:bg-gray-300 duration-200 relative" >
+			<div className={"flex flex-row w-full px-6 cursor-pointer bg-white hover:bg-gray-300 duration-200 relative " + additionalClassnamesForBox}>
 				<div className="flex flex-col w-9/10 py-4 pr-3" onClick={onClickBox}>
 					<div>
 						<p className="text-left text-black font-bold overflow-hidden">
@@ -45,19 +45,24 @@ export default function ListBox ({ list, onClickBox }) {
 						</p>
 					</div>
 					<div>
-						{(list.listPrivacy === "private") && <p className="text-left text-gray-500 overflow-hidden">
+						<p className="text-left overflow-hidden text-gray-600">
+							lista de {list.creator.displayName}
+						</p>
+					</div>
+					<div>
+						{(list.listPrivacy === "private") && <p className="text-left text-gray-400 overflow-hidden">
 							Lista Privada
 						</p>}
-						{(list.listPrivacy === "public") && <p className="text-left text-gray-500 overflow-hidden">
+						{(list.listPrivacy === "public") && <p className="text-left text-gray-400 overflow-hidden">
 							Lista Publica
 						</p>}
 					</div>
 				</div>
-				<div className="flex w-1/10 justify-center items-center text-black hover:text-white" onClick={onClickThreeDots}>
+				{isOnProfilePage && <div className="flex w-1/10 justify-center items-center text-black hover:text-white" onClick={onClickThreeDots}>
 					<button className="flex w-full justify-center items-center ">
 						<BsThreeDotsVertical />
 					</button>
-				</div>
+				</div>}
 				{areThreeDotsClicked && <div className="absolute flex flex-col bg-white w-24 h-fit right-0 top-[60%] shadow-2xl z-20">
 					<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-400 text-center " onClick={onUpdateList}>
 						Editar
