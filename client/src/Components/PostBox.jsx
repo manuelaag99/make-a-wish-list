@@ -5,7 +5,7 @@ import { GET_USER_POSTS } from "../queries/PostQueries";
 import { DELETE_POST } from "../mutations/PostMutations";
 import { useMutation } from "@apollo/client";
 
-export default function PostBox ({ onClickBox, post, userDisplayName }) {
+export default function PostBox ({ additionalClassnamesForBox, isOnProfilePage, onClickBox, post }) {
 	const [deletePostFromDataBase] = useMutation(DELETE_POST, {
 		variables: { id: post.id },
 		// refetchQueries: [{ query: GET_USER_POSTS }]
@@ -37,11 +37,11 @@ export default function PostBox ({ onClickBox, post, userDisplayName }) {
 	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
 
     return (
-        <div className="flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative " onClick={onClickBox}>
+        <div className={"flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative " + additionalClassnamesForBox} onClick={onClickBox}>
 			<div className="flex flex-col w-9/10 justify-center items-center relative ">
 				<div className="flex w-full py-0.5">
 					<p className="text-black font-bold">
-						{userDisplayName}
+						{post.creator.displayName}
 					</p>
 				</div>
 				<div className="flex w-full py-0.5">
@@ -51,11 +51,11 @@ export default function PostBox ({ onClickBox, post, userDisplayName }) {
 				</div>
 			</div>
 			
-			<div className="flex w-1/10 justify-center items-center relative text-black hover:text-white" onClick={onClickThreeDots}>
+			{isOnProfilePage && <div className="flex w-1/10 justify-center items-center relative text-black hover:text-white" onClick={onClickThreeDots}>
 				<button className="flex w-full justify-center items-center ">
 					<BsThreeDotsVertical />
 				</button>
-			</div>
+			</div>}
 			{areThreeDotsClicked && <div className="absolute flex flex-col bg-white w-24 h-fit right-0 top-[60%] shadow-2xl z-20">
 				<div className="flex justify-center items-center w-full p-1 bg-white hover:bg-gray-400 text-center " onClick={onUpdatePost}>
 					Editar

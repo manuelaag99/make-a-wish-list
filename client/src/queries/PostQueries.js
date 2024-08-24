@@ -7,6 +7,10 @@ const GET_POST = gql`
             postTitle
             postBody
             creationDate
+            creator {
+                displayName
+                id
+            }
         }
     }
 `
@@ -18,6 +22,10 @@ const GET_POSTS = gql`
             postTitle
             postBody
             creationDate
+            creator {
+                displayName
+                id
+            }
         }
     }
 `
@@ -29,6 +37,10 @@ const GET_USER_POSTS = gql`
             postTitle
             postBody
             creationDate
+            creator {
+                displayName
+                id
+            }
         }
     }
 `
