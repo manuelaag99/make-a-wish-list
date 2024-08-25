@@ -1,6 +1,6 @@
-export default function UserContainer ({ user, onClose }) {
+export default function UserBox ({ additionalClassnamesForBox, user, onClose }) {
     if (user) return (
-        <div className="flex flex-row items-center w-full bg-white shadow-2xl rounded-md p-2 sm:p-4">
+        <div className={"flex flex-row items-center w-full bg-white shadow-2xl rounded-md p-2 sm:p-4 " + additionalClassnamesForBox}>
             <div className="flex justify-center items-center h-fit w-2/10 sm:w-1/10 max-w-12 sm:max-w-18">
                 <img src="https://via.placeholder.com/150" alt="placeholder" className=" rounded-full object-cover" />
             </div>

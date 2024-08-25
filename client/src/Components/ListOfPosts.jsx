@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import PostContainer from "./PostContainer";
 import { GET_POSTS } from "../queries/PostQueries";
 import PostBox from "./PostBox";
 
