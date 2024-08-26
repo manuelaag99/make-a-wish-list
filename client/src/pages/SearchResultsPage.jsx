@@ -3,9 +3,12 @@ import ListOfUsers from "../Components/ListOfUsers";
 import TopBar from "../Components/TopBar";
 import ListOfLists from "../Components/ListOfLists";
 import ListOfPosts from "../Components/ListOfPosts";
+import { useSearch } from "../Context/SearchQueryContext";
 
 export default function SearchResultsPage ({}) {
     const [selectedTab, setSelectedTab] = useState("users");
+
+    const { searchQuery, setSearchQuery } = useSearch();
     
     return (
         <div className="flex flex-col w-full justify-center">
@@ -27,9 +30,9 @@ export default function SearchResultsPage ({}) {
                 <div className=" bg-var-3 w-full h-[1px] opacity-40"></div>
             </div>
 
-            {(selectedTab === "users") && <ListOfUsers />}
-            {(selectedTab === "lists") && <ListOfLists />}
-            {(selectedTab === "posts") && <ListOfPosts />}
+            {(selectedTab === "users") && <ListOfUsers isSearchResultsPage={true} searchQuery={searchQuery} />}
+            {(selectedTab === "lists") && <ListOfLists isSearchResultsPage={true} searchQuery={searchQuery} />}
+            {(selectedTab === "posts") && <ListOfPosts isSearchResultsPage={true} searchQuery={searchQuery} />}
         </div>
     )
 }
