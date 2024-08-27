@@ -26,9 +26,13 @@ export default function TopBar ({}) {
 
     const { searchQuery, setSearchQuery } = useSearch();
 
-    function inputChangeHandle (e) {
-        // setSearchQueryState(event.target.value);
-        setSearchQuery(e.target.value);
+    function inputChangeHandle (event) {
+        console.log(event)
+        if (event.key !== "Enter") {
+            setSearchQuery(event.target.value);
+        } else if (event.key === "Enter") {
+            navigate("/searchresults")
+        }        
     }
 
     return (
@@ -46,7 +50,7 @@ export default function TopBar ({}) {
                 </Link>}
 
                 <div className={"flex flex-col sm:flex-row items-center justify-center " + " w-full"}>
-                    {isSearchInputVisible && <input className={"py-2 px-2 rounded-md w-full outline-none ml-0 md:ml-6 "} onChange={(e) => inputChangeHandle(e)} placeholder="Buscar..." />}
+                    {isSearchInputVisible && <input className={"py-2 px-2 rounded-md w-full outline-none ml-0 md:ml-6 "} onChange={(event) => inputChangeHandle(event)} onKeyDown={(e) => inputChangeHandle(e)} placeholder="Buscar..." />}
                     <div className={"flex flex-row justify-between md:justify-center items-center w-full sm:w-fit sm:mt-0 " + (isSearchInputVisible && "mt-4")}>
                         {isSearchInputVisible && <button className="flex ml-2" onClick={() => setIsSearchInputVisible(false)}>
                             <p className="text-white hover:text-gray-400 duration-200 cursor-pointer">
