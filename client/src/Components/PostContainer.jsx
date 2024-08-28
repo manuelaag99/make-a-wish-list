@@ -1,8 +1,8 @@
 import { IoMdClose } from "react-icons/io";
 
-export default function PostContainer ({ post, onClose }) {
+export default function PostContainer ({ additionalClassnamesForContainer, post, onClose }) {
     if (post) return (
-        <div className="flex flex-row w-full justify-center items-center px-2">
+        <div className={"flex flex-row w-full justify-center items-center px-2 " + additionalClassnamesForContainer}>
             <div className="flex w-1/10 items-start">
                 <img src="https://via.placeholder.com/150" alt="profile" className="w-full rounded-full" />
             </div>
