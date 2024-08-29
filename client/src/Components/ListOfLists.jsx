@@ -4,7 +4,7 @@ import { GET_LISTS } from "../queries/ListQueries";
 import ListBox from "./ListBox";
 import { useEffect, useState } from "react";
 
-export default function ListOfLists ({ lists, searchQuery, isSearchResultsPage }) {
+export default function ListOfLists ({ isSearchResultsPage, lists, searchQuery }) {
     const { loading, error, data } = useQuery(GET_LISTS);
     const [listsToDisplay, setListsToDisplay] = useState(null);
 
