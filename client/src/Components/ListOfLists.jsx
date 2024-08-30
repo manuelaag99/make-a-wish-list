@@ -10,7 +10,15 @@ export default function ListOfLists ({ isSearchResultsPage, lists, searchQuery }
 
     useEffect(() => {
         if (isSearchResultsPage && data) {
-            setListsToDisplay(data.lists.filter((list) => list.listName.toLowerCase().includes(searchQuery.toLowerCase())));
+            setListsToDisplay(data.lists.filter((list) => {
+                if (list.listName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    return list;
+                } else if (list.listDescription.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    return list;
+                } else if (list.creator.displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    return list;
+                }
+            }));
         }
     }, [searchQuery, data, isSearchResultsPage]);
 
