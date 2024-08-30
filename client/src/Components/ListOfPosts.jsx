@@ -9,7 +9,15 @@ export default function ListOfPosts ({ isSearchResultsPage, posts, searchQuery }
 
     useEffect(() => {
         if (isSearchResultsPage && data) {
-            setPostsToDisplay(data.posts.filter((post) => post.postTitle.toLowerCase().includes(searchQuery.toLowerCase())));
+            setPostsToDisplay(data.posts.filter((post) => {
+                if (post.postTitle.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    return post;
+                } else if (post.postBody.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    return post;
+                } else if (post.creator.displayName.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    return post;
+                }
+            }))
         }
     }, [searchQuery, data, isSearchResultsPage]);
 
