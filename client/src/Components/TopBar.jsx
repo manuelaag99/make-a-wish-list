@@ -50,7 +50,7 @@ export default function TopBar ({}) {
                 </Link>}
 
                 <div className={"flex flex-col sm:flex-row items-center justify-center " + " w-full"}>
-                    {isSearchInputVisible && <input className={"py-2 px-2 rounded-md w-full outline-none ml-0 md:ml-6 "} onChange={(event) => inputChangeHandle(event)} onKeyDown={(e) => inputChangeHandle(e)} placeholder="Buscar..." />}
+                    {isSearchInputVisible && <input className={"py-2 px-2 rounded-md w-full outline-none ml-0 md:ml-6 "} onChange={(event) => inputChangeHandle(event)} onKeyDown={(e) => inputChangeHandle(e)} placeholder="Buscar..." value={searchQuery} />}
                     <div className={"flex flex-row justify-between md:justify-center items-center w-full sm:w-fit sm:mt-0 " + (isSearchInputVisible && "mt-4")}>
                         {isSearchInputVisible && <button className="flex ml-2" onClick={() => setIsSearchInputVisible(false)}>
                             <p className="text-white hover:text-gray-400 duration-200 cursor-pointer">
