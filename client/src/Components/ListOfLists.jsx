@@ -30,7 +30,7 @@ export default function ListOfLists ({ isSearchResultsPage, lists, searchQuery }
         return (
             <div className="flex flex-col w-full mt-2 mx-auto px-4 sm:px-20">
                 {(listsToDisplay && listsToDisplay.length && (listsToDisplay.length > 0)) ? listsToDisplay.map((list, index) => {
-                    return <ListBox additionalClassnamesForBox="my-3" isOnProfilePage={false} key={index} list={list} />
+                    return <ListBox additionalClassnamesForBox="my-3 shadow-md" isOnProfilePage={false} key={index} list={list} />
                 }) : null }
                 {(listsToDisplay && (listsToDisplay.length < 1)) ? <div>
                     <p className="mx-auto my-8 text-var-3 text-center">No se encontraron resultados</p>

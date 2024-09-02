@@ -37,7 +37,7 @@ export default function PostBox ({ additionalClassnamesForBox, isOnProfilePage, 
 	const [areThreeDotsClicked, setAreThreeDotsClicked] = useState(false);
 
     return (
-        <div className={"flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative shadow-md " + additionalClassnamesForBox} onClick={onClickBox}>
+        <div className={"flex flex-row w-full p-5 bg-white hover:bg-gray-300 cursor-pointer duration-200 relative " + additionalClassnamesForBox} onClick={onClickBox}>
 			<div className="flex flex-col w-9/10 justify-center items-center relative ">
 				<div className="flex w-full py-0.5">
 					<p className="text-black font-bold">

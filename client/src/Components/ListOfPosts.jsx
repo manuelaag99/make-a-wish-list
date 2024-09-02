@@ -29,7 +29,7 @@ export default function ListOfPosts ({ isSearchResultsPage, posts, searchQuery }
         return (
             <div className="flex flex-col w-full mt-2 mx-auto px-4 sm:px-20">
                 {(postsToDisplay && postsToDisplay.length && (postsToDisplay.length > 0)) ? postsToDisplay.map((post, index) => {
-                    return <PostBox additionalClassnamesForBox="my-3" isOnProfilePage={false} key={index} post={post} />
+                    return <PostBox additionalClassnamesForBox="my-3 shadow-md" isOnProfilePage={false} key={index} post={post} />
                 }) : null}
 
                 {(postsToDisplay && (postsToDisplay.length < 1)) ? <div>

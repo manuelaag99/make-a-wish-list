@@ -21,7 +21,7 @@ export default function ListOfUsers ({ isSearchResultsPage, searchQuery, users }
         return (
             <div className="flex flex-col w-full mt-2 mx-auto px-4 sm:px-20">
                 {(usersToDisplay && usersToDisplay.length && (usersToDisplay.length > 0)) ? usersToDisplay.map((user, index) => {
-                    return <UserBox additionalClassnamesForBox="my-3" key={index} user={user} />
+                    return <UserBox additionalClassnamesForBox="my-3 shadow-md" key={index} user={user} />
                 }) : null }
                 {(usersToDisplay && (usersToDisplay.length < 1)) ? <div>
                     <p className="mx-auto my-8 text-var-3 text-center">No se encontraron resultados</p>
