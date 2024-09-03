@@ -7,13 +7,15 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { HiLogout } from "react-icons/hi";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMdPerson } from "react-icons/io";
-import { useState } from "react";
-
+import { useContext, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function TopBar ({}) {
+    const auth = useContext(AuthContext);
     const navigate = useNavigate();
     const [isSearchInputVisible, setIsSearchInputVisible] = useState(false)
 
+    console.log(auth)
 
 
     function searchButtonFunction () {
@@ -43,7 +45,7 @@ export default function TopBar ({}) {
                     <GiHamburgerMenu fontSize={30} />
                     </p>
                 </button>}
-                {!isSearchInputVisible && <Link className="hidden md:flex mx-2 md:mx-6" to="/profile" onClick={() => console.log("df") }>
+                {auth.token && !isSearchInputVisible && <Link className="hidden md:flex mx-2 md:mx-6" to="/profile" onClick={() => console.log("df") }>
                     <p className="text-white hover:text-gray-400 duration-200 cursor-pointer">
                         <IoMdPerson fontSize={30} />
                     </p>
@@ -65,7 +67,7 @@ export default function TopBar ({}) {
                     </div>
                 </div>
 
-                {!isSearchInputVisible && <button className="hidden md:flex mx-2 md:mx-6" onClick={() => console.log("df") }>
+                {auth.token && !isSearchInputVisible && <button className="hidden md:flex mx-2 md:mx-6" onClick={() => console.log("df") }>
                     <p className="text-white hover:text-gray-400 duration-200 cursor-pointer">
                         <HiLogout fontSize={30} />
                     </p>
