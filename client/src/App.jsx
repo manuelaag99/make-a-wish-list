@@ -63,6 +63,7 @@ export default function App () {
 							<Routes>
 								<Route path='/*' element={<SignInSignUpPage />} />
 								<Route path='/error' element={<ErrorPage />} />
+								<Route path='/searchresults' element={<SearchResultsPage />} />
 							</Routes>
 						</Router>
 					</SearchProvider>

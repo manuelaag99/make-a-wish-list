@@ -105,17 +105,12 @@ export default function SignInSignUpPage ({}) {
                             <ActionButton additionalClassNames="text-2xl disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={isButtonDisabled} onClickButtonFunction="" textForActionButton={isSignUp ? "Registrarse" : "Iniciar sesión"} />
                         </div>
 
-                        <div className="flex flex-row w-full justify-center items-center px-5 my-2">
+                        <button className="flex flex-row w-full justify-center items-center px-5 my-2 hover:text-var-2 duration-300" onClick={toggleSignUp}>
                             <p>
-                                {isSignUp && "o, si ya tienes cuenta, "}
-                                {!isSignUp && "o, si no tienes cuenta, "}
+                                {isSignUp && "o, si ya tienes cuenta, inicia sesión"}
+                                {!isSignUp && "o, si no tienes cuenta, registrate"}
                             </p>
-                            <button className="font-bold text-var-2 hover:text-var-2-hovered duration-200 ml-1.5" onClick={toggleSignUp}>
-                                {isSignUp && "inicia sesión"}
-                                {!isSignUp && "registrate"}
-                            </button>
-                        </div>
-
+                        </button>
                     </div>
 			</div>
         </>
