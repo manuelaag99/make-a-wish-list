@@ -24,3 +24,14 @@ const DELETE_USER = gql`
 
 export { DELETE_USER }
 
+const ADD_USER = gql`
+    mutation addUser($username: String!, $email: String!, $displayName: String!, $password: String!, $profilePhotoUrl: String, $shortBio: String) {
+        addUser(username: $username, email: $email, displayName: $displayName, password: $password, profilePhotoUrl: $profilePhotoUrl, shortBio: $shortBio) {
+            id
+            username
+            email
+        }
+    }
+`
+
+export { ADD_USER }
