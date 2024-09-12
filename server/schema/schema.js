@@ -188,8 +188,8 @@ const mutation = new GraphQLObjectType({
                 username: { type: GraphQLNonNull(GraphQLString) },
                 email: { type: GraphQLNonNull(GraphQLString) },
                 password: { type: GraphQLNonNull(GraphQLString) },
-                creationDate: { type: GraphQLNonNull(GraphQLString) },
-                birthDate: { type: GraphQLNonNull(GraphQLString) },
+                creationDate: { type: GraphQLString },
+                birthDate: { type: GraphQLString },
                 profilePhotoUrl: { type: GraphQLString },
                 shortBio: { type: GraphQLString }
             },

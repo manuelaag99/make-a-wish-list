@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MdOutlineVisibility } from "react-icons/md";
 import { MdOutlineVisibilityOff } from "react-icons/md";
 import ActionButton from "../Components/ActionButton";
 import TopBar from "../Components/TopBar";
+import { ADD_USER } from "../mutations/UserMutations";
+import { useMutation } from "@apollo/client";
+import { GET_USERS } from "../queries/UserQueries";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function SignInSignUpPage ({}) {
+    const auth = useContext(AuthContext);
     const [isSignUp, setIsSignUp] = useState(true);
     function toggleSignUp () {
         setIsSignUp(!isSignUp);
@@ -57,6 +62,27 @@ export default function SignInSignUpPage ({}) {
         }
     }, [updateProfileFormState, isSignUp]);
 
+    function registerAndSignIn () {
+        if (isSignUp) {
+            addUser({ username: updateProfileFormState.username, email: updateProfileFormState.email, displayName: updateProfileFormState.displayName, password: updateProfileFormState.password });
+            auth.login();
+        } else if (!isSignUp) {
+            // sign in user
+        }
+    }
+
+    console.log(auth)
+
+    const [addUser] = useMutation(ADD_USER, {
+        variables: {
+            username: updateProfileFormState.username,
+            email: updateProfileFormState.email,
+            displayName: updateProfileFormState.displayName,
+            password: updateProfileFormState.password
+        },
+        refetchQueries: [{ query: GET_USERS }]
+    });
+
     return (
         <>
             <div className='flex md:h-screen h-full w-full justify-center items-start bg-var-1 inter-font pt-24 pb-36'>
@@ -102,7 +128,7 @@ export default function SignInSignUpPage ({}) {
                         </div>
 
                         <div className="flex w-9/10 my-3">
-                            <ActionButton additionalClassNames="text-2xl disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={isButtonDisabled} onClickButtonFunction="" textForActionButton={isSignUp ? "Registrarse" : "Iniciar sesión"} />
+                            <ActionButton additionalClassNames="text-2xl disabled:bg-var-2-disabled  bg-var-2 hover:bg-var-2-hovered " isButtonDisabled={isButtonDisabled} onClickButtonFunction={registerAndSignIn} textForActionButton={isSignUp ? "Registrarse" : "Iniciar sesión"} />
                         </div>
 
                         <button className="flex flex-row w-full justify-center items-center px-5 my-2 hover:text-var-2 duration-300" onClick={toggleSignUp}>
